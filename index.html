@@ -153,7 +153,6 @@
     body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); }
     body.sd-mode .overlay-menu a:hover { color: var(--sd-accent2); }
 
-    /* Stagger reveal */
     .overlay-menu.active li:nth-child(1) a { transition-delay: 0.05s; }
     .overlay-menu.active li:nth-child(2) a { transition-delay: 0.12s; }
     .overlay-menu.active li:nth-child(3) a { transition-delay: 0.19s; }
@@ -213,7 +212,6 @@
 
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 110%;
-      /* Placeholder background for hero, can be replaced */
       background-image: url('https://images.unsplash.com/photo-1512413914633-b5043f4041ea?q=80&w=2000&auto=format&fit=crop');
       background-size: cover; background-position: center;
       z-index: -2;
@@ -269,6 +267,7 @@
       font-size: 0.85rem;
     }
 
+    /* CARRUSEL GENERAL */
     .swiper { width: 100%; padding: 1rem 0 2rem; }
     .swiper-slide {
       background: white;
@@ -278,18 +277,48 @@
     }
     .slide-img { height: 360px; width: 100%; object-fit: cover; display: block; }
     .slide-info { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
-    .slide-info h3 {
-      font-family: 'Lato', sans-serif;
-      font-weight: 400;
-      font-size: 1.05rem;
+    .slide-info h3 { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.05rem; }
+    .slide-info p { color: var(--gold-accent); font-size: 0.78rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
+
+    /* CARRUSEL 3D "PASARELA" */
+    .showcase-container {
+      padding: 0 0 3rem;
+      text-align: center;
+      overflow: hidden;
     }
-    .slide-info p {
-      color: var(--gold-accent);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      margin-top: 6px;
-      letter-spacing: 2px;
+    .showcase-container h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
     }
+    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
+    
+    .swiper-3d-container {
+      width: 100%;
+      padding-top: 20px;
+      padding-bottom: 40px;
+    }
+    .swiper-slide-3d {
+      background-position: center;
+      background-size: cover;
+      width: 280px; /* Ancho tarjeta 3d */
+      height: 420px; /* Alto tarjeta 3d */
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      background-color: #fff;
+      overflow: hidden;
+    }
+    .swiper-slide-3d img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    body.sd-mode .swiper-slide-3d {
+      box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
 
     /* --- Promos --- */
     .promo-grid {
@@ -647,7 +676,6 @@
       content:"";
       position:absolute;
       inset:0;
-      /* Background sutil para estudio */
       background-image:url('https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=2070&auto=format&fit=crop');
       background-size:cover;
       background-position:center;
@@ -741,6 +769,7 @@
       .hero-wrapper { margin: 0.8rem; }
       .rent-cta { margin: 1.6rem 0.8rem 0; }
       .sd-hero { margin: 0.8rem; }
+      .swiper-slide-3d { width: 220px; height: 350px; }
     }
   </style>
 </head>
@@ -936,6 +965,24 @@
         <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
       </div>
 
+      <div class="showcase-container">
+        <h3>Galería: Ropones Desmontables</h3>
+        <p style="color:#777; margin-bottom:10px;">Desliza para ver la colección</p>
+        
+        <div class="swiper swiper-3d-container" id="roponesSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable.jpeg" alt="Ropón 1"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable2.jpeg" alt="Ropón 2"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable3.jpeg" alt="Ropón 3"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable4.jpeg" alt="Ropón 4"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable5.jpeg" alt="Ropón 5"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="tools-bar">
         <div class="search-wrap">
           <label for="searchNina">Buscar</label>
@@ -946,7 +993,6 @@
           <label>Filtrar por</label>
           <div class="chips" id="chipsNina">
             <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)">Todo</div>
-            <div class="chip" onclick="setFilter('nina','Ropones', this)">Ropones</div>
             <div class="chip" onclick="setFilter('nina','Batitas', this)">Batitas</div>
             <div class="chip" onclick="setFilter('nina','Exclusivos', this)">Exclusivos</div>
             <div class="chip" onclick="setFilter('nina','Española', this)">Línea Española</div>
@@ -958,86 +1004,6 @@
 
       <div class="products-grid" id="gridNina">
         
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Clásico">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón Desmontable" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable 01</h3>
-            <p>Ropones</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Detalle">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón Desmontable 2" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable 02</h3>
-            <p>Ropones</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Encaje">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón Desmontable 3" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable 03</h3>
-            <p>Ropones</p>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Fino">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón Desmontable 4" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable 04</h3>
-            <p>Ropones</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Tradicional">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón Desmontable 5" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable 05</h3>
-            <p>Ropones</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo Premium">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Exclusivo</h3>
-            <p>Exclusivos</p>
-          </div>
-        </article>
-
-         <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo 2">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Exclusivo II</h3>
-            <p>Exclusivos</p>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo 3">
-          <div class="img-container">
-            <img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Exclusivo III</h3>
-            <p>Exclusivos</p>
-          </div>
-        </article>
-
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 1">
           <div class="img-container">
             <img loading="lazy" src="batita1.jpeg" alt="Batita 1" />
@@ -1121,9 +1087,6 @@
             <div class="chip" onclick="setFilter('nino','Bautizo', this)">Bautizo</div>
             <div class="chip" onclick="setFilter('nino','Comunión', this)">Comunión</div>
             <div class="chip" onclick="setFilter('nino','Ceremonia', this)">Ceremonia</div>
-            <div class="chip" onclick="setFilter('nino','Joyería', this)">Joyería</div>
-            <div class="chip" onclick="setFilter('nino','Calzado', this)">Calzado</div>
-            <div class="chip" onclick="setFilter('nino','Tradicional', this)">Tradicional</div>
           </div>
         </div>
       </div>
@@ -1191,9 +1154,25 @@
         </div>
       </header>
 
+      <div class="showcase-container" style="padding-top:2rem;">
+        <h3>Tendencias de Gala</h3>
+        <p style="color:var(--sd-muted); margin-bottom:10px;">Favoritos de la temporada</p>
+        
+        <div class="swiper swiper-3d-container" id="studioSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-3d"><img src="vestido negro.jpeg" alt="Gala Negro"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="vestidoazul.jpeg" alt="Gala Azul"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="vestidorojo.jpeg" alt="Gala Rojo"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="vestidonegroresaltar.jpeg" alt="Gala Negro 2"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="vestidoazuloscuro.jpeg" alt="Gala Azul Oscuro"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="vestidoblanco.jpeg" alt="Gala Blanco"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="home-section" id="studioCatalog">
         <div class="section-title" style="padding-top: 1rem;">
-          <p>Catálogo</p>
+          <p>Catálogo Completo</p>
           <h2>Vestidos en renta</h2>
         </div>
 
@@ -1536,7 +1515,8 @@
     }
 
     // ----- SWIPER INIT -----
-    const swiper = new Swiper('#homeSwiper', {
+    // 1. Carrusel Inicio (Normal)
+    const swiperHome = new Swiper('#homeSwiper', {
       loop: true,
       spaceBetween: 16,
       slidesPerView: 1,
@@ -1546,6 +1526,39 @@
         768: { slidesPerView: 2 },
         1100: { slidesPerView: 3 }
       }
+    });
+
+    // 2. Carrusel Ropones (3D Effect)
+    const swiperRopones = new Swiper('#roponesSwiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      initialSlide: 2,
+      coverflowEffect: {
+        rotate: 30,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: false,
+    });
+
+    // 3. Carrusel Studio (3D Effect)
+    const swiperStudio = new Swiper('#studioSwiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      initialSlide: 1,
+      coverflowEffect: {
+        rotate: 20,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: true,
+      },
     });
 
     // Initial state
