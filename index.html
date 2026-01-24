@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Bello Ropón | Boutique Infantil</title>
 
-  <!-- Fonts + Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Swiper (Carrusel) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <style>
@@ -215,7 +213,8 @@
 
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 110%;
-      background-image: url('niñaenvestido.jpg')
+      /* Placeholder background for hero, can be replaced */
+      background-image: url('https://images.unsplash.com/photo-1512413914633-b5043f4041ea?q=80&w=2000&auto=format&fit=crop');
       background-size: cover; background-position: center;
       z-index: -2;
       filter: brightness(0.96);
@@ -224,12 +223,12 @@
 
     .hero-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(253, 252, 248, 0.22);
+      background: rgba(253, 252, 248, 0.4);
       z-index: -1;
     }
 
     .hero-content {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
       padding: 3rem;
       max-width: 680px;
@@ -648,6 +647,7 @@
       content:"";
       position:absolute;
       inset:0;
+      /* Background sutil para estudio */
       background-image:url('https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=2070&auto=format&fit=crop');
       background-size:cover;
       background-position:center;
@@ -747,7 +747,6 @@
 
 <body>
 
-  <!-- Overlay Menu -->
   <div class="overlay-menu" id="overlayMenu" role="menu" aria-hidden="true">
     <ul>
       <li><a role="menuitem" data-nav="inicio" onclick="navigateTo('inicio')">Inicio</a></li>
@@ -764,7 +763,6 @@
     </ul>
   </div>
 
-  <!-- Nav -->
   <nav>
     <div class="logo" onclick="navigateTo('inicio')">Mi Bello Ropón</div>
 
@@ -782,16 +780,17 @@
     </button>
   </nav>
 
-  <!-- Main SPA -->
   <main class="main-container">
 
-    <!-- INICIO -->
     <section id="view-inicio" class="view-section active-view">
       <header class="hero-wrapper">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
+          <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón" 
+               style="max-width: 180px; margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+
           <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
             Guadalupe, Nuevo León
           </p>
@@ -811,10 +810,8 @@
         </div>
       </header>
 
-      <!-- Home content -->
       <div class="home-section">
 
-        <!-- Carrusel -->
         <div class="section-title">
           <p>Destacados</p>
           <h2>Lo más buscado</h2>
@@ -851,22 +848,10 @@
                 <p>Accesorios · Niña</p>
               </div>
             </div>
-
-            <div class="swiper-slide">
-              <img class="slide-img" loading="lazy"
-                   src="https://images.unsplash.com/photo-1514917951167-9c84964177b8?q=80&w=1200&auto=format&fit=crop"
-                   alt="Mocasín Ceremonia - Calzado (Niño)" />
-              <div class="slide-info">
-                <h3>Mocasín Ceremonia</h3>
-                <p>Calzado · Niño</p>
-              </div>
-            </div>
           </div>
-
           <div class="swiper-pagination"></div>
         </div>
 
-        <!-- Promociones -->
         <div class="section-title" style="padding-top: 2rem;">
           <p>Promociones</p>
           <h2>Atención Exclusiva</h2>
@@ -895,7 +880,6 @@
           </div>
         </div>
 
-        <!-- Testimonios -->
         <div class="section-title" style="padding-top: 3rem;">
           <p>Opiniones</p>
           <h2>Clientes felices</h2>
@@ -929,7 +913,6 @@
           </div>
         </div>
 
-        <!-- CTA inferior: Renta de vestidos -->
         <div class="rent-cta">
           <div>
             <h3>¿Buscas renta de vestidos?</h3>
@@ -946,29 +929,27 @@
       </div>
     </section>
 
-    <!-- NIÑA -->
     <section id="view-nina" class="view-section">
       <div class="category-header">
         <p>Delicadeza y Gracia</p>
-        <h2>Mundo Niña</h2>
+        <h2>Colección Niña</h2>
         <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
       </div>
 
       <div class="tools-bar">
         <div class="search-wrap">
           <label for="searchNina">Buscar</label>
-          <input id="searchNina" class="search-input" type="text" placeholder="Ej: ropón, comunión, tocado..." oninput="applyFilters('nina')" />
+          <input id="searchNina" class="search-input" type="text" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
         </div>
 
         <div class="filter-wrap">
           <label>Filtrar por</label>
           <div class="chips" id="chipsNina">
             <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)">Todo</div>
-            <div class="chip" onclick="setFilter('nina','Bautizo', this)">Bautizo</div>
-            <div class="chip" onclick="setFilter('nina','Comunión', this)">Comunión</div>
-            <div class="chip" onclick="setFilter('nina','Accesorios', this)">Accesorios</div>
-            <div class="chip" onclick="setFilter('nina','Calzado', this)">Calzado</div>
-            <div class="chip" onclick="setFilter('nina','Ceremonia', this)">Ceremonia</div>
+            <div class="chip" onclick="setFilter('nina','Ropones', this)">Ropones</div>
+            <div class="chip" onclick="setFilter('nina','Batitas', this)">Batitas</div>
+            <div class="chip" onclick="setFilter('nina','Exclusivos', this)">Exclusivos</div>
+            <div class="chip" onclick="setFilter('nina','Española', this)">Línea Española</div>
           </div>
         </div>
       </div>
@@ -976,75 +957,150 @@
       <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda/filtro.</div>
 
       <div class="products-grid" id="gridNina">
-        <article class="product-card" data-category="Comunión" data-name="Vestido Seda Real">
+        
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Clásico">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1512413914633-b5043f4041ea?q=80&w=800&auto=format&fit=crop"
-                 alt="Vestido Seda Real - Comunión para niña" />
+            <img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón Desmontable" />
           </div>
           <div class="product-info">
-            <h3>Vestido Seda Real</h3>
-            <p>Comunión</p>
+            <h3>Ropón Desmontable 01</h3>
+            <p>Ropones</p>
           </div>
         </article>
 
-        <article class="product-card" data-category="Bautizo" data-name="Ropón Princesa">
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Detalle">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?q=80&w=800&auto=format&fit=crop"
-                 alt="Ropón Princesa - Bautizo para niña" />
+            <img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón Desmontable 2" />
           </div>
           <div class="product-info">
-            <h3>Ropón Princesa</h3>
-            <p>Bautizo</p>
+            <h3>Ropón Desmontable 02</h3>
+            <p>Ropones</p>
           </div>
         </article>
 
-        <article class="product-card" data-category="Accesorios" data-name="Tocado Floral">
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Encaje">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1544265432-1c66289b7b9f?q=80&w=800&auto=format&fit=crop"
-                 alt="Tocado Floral - Accesorios para niña" />
+            <img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón Desmontable 3" />
           </div>
           <div class="product-info">
-            <h3>Tocado Floral</h3>
-            <p>Accesorios</p>
+            <h3>Ropón Desmontable 03</h3>
+            <p>Ropones</p>
+          </div>
+        </article>
+        
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Fino">
+          <div class="img-container">
+            <img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón Desmontable 4" />
+          </div>
+          <div class="product-info">
+            <h3>Ropón Desmontable 04</h3>
+            <p>Ropones</p>
           </div>
         </article>
 
-        <article class="product-card" data-category="Alta Costura" data-name="Modelo Sofía">
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable Tradicional">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop"
-                 alt="Modelo Sofía - Alta Costura para niña" />
+            <img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón Desmontable 5" />
           </div>
           <div class="product-info">
-            <h3>Modelo 'Sofía'</h3>
-            <p>Alta Costura</p>
+            <h3>Ropón Desmontable 05</h3>
+            <p>Ropones</p>
           </div>
         </article>
 
-        <article class="product-card" data-category="Calzado" data-name="Zapatitos Perla">
+        <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo Premium">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1618485232675-8f6df7103dfc?q=80&w=800&auto=format&fit=crop"
-                 alt="Zapatitos Perla - Calzado para niña" />
+            <img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
           </div>
           <div class="product-info">
-            <h3>Zapatitos Perla</h3>
-            <p>Calzado</p>
+            <h3>Ropón Exclusivo</h3>
+            <p>Exclusivos</p>
           </div>
         </article>
 
-        <article class="product-card" data-category="Ceremonia" data-name="Set de Velas">
+         <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo 2">
           <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?q=80&w=800&auto=format&fit=crop"
-                 alt="Set de Velas - Ceremonia" />
+            <img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" />
           </div>
           <div class="product-info">
-            <h3>Set de Velas</h3>
-            <p>Ceremonia</p>
+            <h3>Ropón Exclusivo II</h3>
+            <p>Exclusivos</p>
           </div>
         </article>
+        
+        <article class="product-card" data-category="Exclusivos" data-name="Ropón Exclusivo 3">
+          <div class="img-container">
+            <img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" />
+          </div>
+          <div class="product-info">
+            <h3>Ropón Exclusivo III</h3>
+            <p>Exclusivos</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 1">
+          <div class="img-container">
+            <img loading="lazy" src="batita1.jpeg" alt="Batita 1" />
+          </div>
+          <div class="product-info">
+            <h3>Batita Ceremonia 01</h3>
+            <p>Batitas</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 2">
+          <div class="img-container">
+            <img loading="lazy" src="batita2.jpeg" alt="Batita 2" />
+          </div>
+          <div class="product-info">
+            <h3>Batita Ceremonia 02</h3>
+            <p>Batitas</p>
+          </div>
+        </article>
+        
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 3">
+          <div class="img-container">
+            <img loading="lazy" src="batita3.jpeg" alt="Batita 3" />
+          </div>
+          <div class="product-info">
+            <h3>Batita Ceremonia 03</h3>
+            <p>Batitas</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva">
+          <div class="img-container">
+            <img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" />
+          </div>
+          <div class="product-info">
+            <h3>Batita Exclusiva</h3>
+            <p>Exclusivos</p>
+          </div>
+        </article>
+        
+        <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva 2">
+          <div class="img-container">
+            <img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" />
+          </div>
+          <div class="product-info">
+            <h3>Batita Exclusiva II</h3>
+            <p>Exclusivos</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
+          <div class="img-container">
+            <img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" />
+          </div>
+          <div class="product-info">
+            <h3>Vestido Importación</h3>
+            <p>Línea Española</p>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- NIÑO -->
     <section id="view-nino" class="view-section">
       <div class="category-header">
         <p>Elegancia y Carácter</p>
@@ -1107,59 +1163,26 @@
             <p>Ceremonia</p>
           </div>
         </article>
-
-        <article class="product-card" data-category="Joyería" data-name="Cadena y Cruz">
-          <div class="img-container">
-            <img loading="lazy" src="https://plus.unsplash.com/premium_photo-1682089874618-9c5952d76378?q=80&w=800&auto=format&fit=crop"
-                 alt="Cadena y Cruz - Joyería" />
-          </div>
-          <div class="product-info">
-            <h3>Cadena y Cruz</h3>
-            <p>Joyería</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Calzado" data-name="Mocasín Ceremonia">
-          <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1514917951167-9c84964177b8?q=80&w=800&auto=format&fit=crop"
-                 alt="Mocasín Ceremonia - Calzado para niño" />
-          </div>
-          <div class="product-info">
-            <h3>Mocasín Ceremonia</h3>
-            <p>Calzado</p>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="Tradicional" data-name="Kit Bautizo Completo">
-          <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1605518216938-7f31b709d043?q=80&w=800&auto=format&fit=crop"
-                 alt="Kit Bautizo Completo - Tradicional" />
-          </div>
-          <div class="product-info">
-            <h3>Kit Bautizo Completo</h3>
-            <p>Tradicional</p>
-          </div>
-        </article>
       </div>
     </section>
 
-    <!-- STUDIO DOMINGUEZ (Night theme + Catalog) -->
     <section id="view-studio" class="view-section">
       <header class="sd-hero">
         <div class="sd-hero-content">
-          <div class="sd-pill"><i class="fa-solid fa-moon"></i> Renta de Vestidos</div>
-          <h1>Studio Dominguez</h1>
+          <img src="Rentadevestidoslogo.png" alt="Studio Dominguez Logo" 
+               style="max-width: 220px; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
+          
+          <h1 style="font-size: 2.5rem; margin-top:0.5rem;">Studio Dominguez</h1>
           <p>
-            Una vibra más nocturna, elegante y moderna. Catálogo de vestidos para eventos y ocasiones especiales.
-            Agenda tu cita y vive la experiencia.
+            Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.
           </p>
 
           <div class="sd-actions">
             <button class="btn-sd primary" onclick="document.getElementById('studioCatalog').scrollIntoView({behavior:'smooth'})">
-              <i class="fa-solid fa-shirt"></i> Ver catálogo
+              <i class="fa-solid fa-shirt"></i> Ver vestidos
             </button>
             <a class="btn-sd" href="https://wa.me/528180932362" target="_blank" style="text-decoration:none;">
-              <i class="fab fa-whatsapp"></i> Agendar cita
+              <i class="fab fa-whatsapp"></i> Agendar Cita
             </a>
             <button class="btn-sd" onclick="navigateTo('inicio')">
               <i class="fa-solid fa-arrow-left"></i> Volver
@@ -1177,18 +1200,17 @@
         <div class="tools-bar">
           <div class="search-wrap">
             <label for="searchStudio">Buscar</label>
-            <input id="searchStudio" class="search-input" type="text" placeholder="Ej: satín, negro, gala..." oninput="applyFilters('studio')" />
+            <input id="searchStudio" class="search-input" type="text" placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
           </div>
 
           <div class="filter-wrap">
-            <label>Filtrar por</label>
+            <label>Filtrar por Color</label>
             <div class="chips" id="chipsStudio">
               <div class="chip active" onclick="setFilter('studio','all', this)">Todo</div>
-              <div class="chip" onclick="setFilter('studio','Gala', this)">Gala</div>
-              <div class="chip" onclick="setFilter('studio','Coctel', this)">Cóctel</div>
-              <div class="chip" onclick="setFilter('studio','Fiesta', this)">Fiesta</div>
               <div class="chip" onclick="setFilter('studio','Negro', this)">Negro</div>
-              <div class="chip" onclick="setFilter('studio','Brillos', this)">Brillos</div>
+              <div class="chip" onclick="setFilter('studio','Azul', this)">Azul</div>
+              <div class="chip" onclick="setFilter('studio','Rojo', this)">Rojo</div>
+              <div class="chip" onclick="setFilter('studio','Claros', this)">Claros/Beige</div>
             </div>
           </div>
         </div>
@@ -1196,78 +1218,113 @@
         <div class="empty-state" id="emptyStudio">No encontramos vestidos con esa búsqueda/filtro.</div>
 
         <div class="products-grid" id="gridStudio">
-          <article class="product-card" data-category="Gala" data-name="Satin Midnight">
+          
+          <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
             <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Satin Midnight - Gala" />
+              <img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" />
             </div>
             <div class="product-info">
-              <h3>Satin Midnight</h3>
-              <p>Gala</p>
-            </div>
-          </article>
-
-          <article class="product-card" data-category="Coctel" data-name="Velvet Aura">
-            <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975674760-b5c6f12f4d3f?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Velvet Aura - Cóctel" />
-            </div>
-            <div class="product-info">
-              <h3>Velvet Aura</h3>
-              <p>Cóctel</p>
-            </div>
-          </article>
-
-          <article class="product-card" data-category="Fiesta" data-name="Neon Starlight">
-            <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975492864-9a64cf2b4df5?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Neon Starlight - Fiesta" />
-            </div>
-            <div class="product-info">
-              <h3>Neon Starlight</h3>
-              <p>Fiesta</p>
-            </div>
-          </article>
-
-          <article class="product-card" data-category="Negro" data-name="Black Icon">
-            <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975474020-90d1a4d7d0ae?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Black Icon - Negro" />
-            </div>
-            <div class="product-info">
-              <h3>Black Icon</h3>
+              <h3>Modelo Noche Profunda</h3>
               <p>Negro</p>
             </div>
           </article>
 
-          <article class="product-card" data-category="Brillos" data-name="Crystal Night">
+          <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
             <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975758461-6b442b33cdb9?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Crystal Night - Brillos" />
+              <img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" />
             </div>
             <div class="product-info">
-              <h3>Crystal Night</h3>
-              <p>Brillos</p>
+              <h3>Modelo Gala Dark</h3>
+              <p>Negro</p>
             </div>
           </article>
 
-          <article class="product-card" data-category="Gala" data-name="Blue Hour">
+          <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
             <div class="img-container">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1520975773310-6e3c5f0a2a7c?q=80&w=1000&auto=format&fit=crop"
-                   alt="Vestido Blue Hour - Gala" />
+              <img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" />
             </div>
             <div class="product-info">
-              <h3>Blue Hour</h3>
-              <p>Gala</p>
+              <h3>Modelo Azul Real</h3>
+              <p>Azul</p>
             </div>
           </article>
+
+          <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
+            <div class="img-container">
+              <img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Midnight Blue</h3>
+              <p>Azul</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
+            <div class="img-container">
+              <img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Carmesí</h3>
+              <p>Rojo</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Pasión">
+            <div class="img-container">
+              <img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Scarlet</h3>
+              <p>Rojo</p>
+            </div>
+          </article>
+          
+           <article class="product-card" data-category="Rojo" data-name="Vestido Rojo 3">
+            <div class="img-container">
+              <img loading="lazy" src="vestidorojo3.jpeg" alt="Vestido Rojo 3" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Rojo Intenso</h3>
+              <p>Rojo</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="Claros" data-name="Vestido Beige">
+            <div class="img-container">
+              <img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Champagne</h3>
+              <p>Claros</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
+            <div class="img-container">
+              <img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo White Gala</h3>
+              <p>Claros</p>
+            </div>
+          </article>
+
+           <article class="product-card" data-category="Claros" data-name="Vestido Crema">
+            <div class="img-container">
+              <img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" />
+            </div>
+            <div class="product-info">
+              <h3>Modelo Crema Suave</h3>
+              <p>Claros</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
   <footer id="contacto" class="contact-footer">
     <div class="footer-grid">
       <div class="footer-info">
@@ -1297,7 +1354,6 @@
           </div>
         </div>
 
-        <!-- Redes: Instagram cambiado a Studio Dominguez -->
         <div class="social-links">
           <a href="https://www.instagram.com/studio.vdominguez?igsh=bXNwZGtlNml2dG4w" target="_blank" class="social-btn" aria-label="Instagram Studio Dominguez">
             <i class="fab fa-instagram"></i>
@@ -1308,7 +1364,6 @@
         </div>
       </div>
 
-      <!-- MISMO MAPA -->
       <div style="border-radius: 20px; overflow: hidden; height: 350px; box-shadow: var(--shadow-card);">
         <iframe
           width="100%"
@@ -1327,12 +1382,10 @@
     </div>
   </footer>
 
-  <!-- Floating WhatsApp -->
   <a class="float-wa" href="https://wa.me/528180932362" target="_blank" aria-label="WhatsApp">
     <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
   </a>
 
-  <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
