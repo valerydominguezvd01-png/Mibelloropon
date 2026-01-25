@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <style>
-    /* --- CONFIGURACIÓN BASE & PALETA (Mi Bello Ropón) --- */
+    /* --- CONFIGURACIÓN BASE & PALETA --- */
     :root {
       --bg-body: #fdfcf8;
       --bg-card: #ffffff;
@@ -53,65 +53,28 @@
 
     /* --- NAVEGACIÓN --- */
     nav {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      padding: 1.2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 3000;
-      background: rgba(253, 252, 248, 0.90);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      transition: background 0.35s ease, border-color 0.35s ease;
+      position: fixed; top: 0; left: 0; width: 100%; padding: 1.2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center; z-index: 3000;
+      background: rgba(253, 252, 248, 0.90); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.05); transition: background 0.35s ease, border-color 0.35s ease;
     }
-
-    body.sd-mode nav {
-      background: rgba(11, 13, 20, 0.85);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-    }
+    body.sd-mode nav { background: rgba(11, 13, 20, 0.85); border-bottom: 1px solid rgba(255,255,255,0.10); }
     body.sd-mode .burger-line { background: rgba(255,255,255,0.88); }
     body.sd-mode .logo { color: rgba(255,255,255,0.92); }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.35s ease;
+      font-size: 1.5rem; font-weight: 600; color: var(--text-dark);
+      text-transform: uppercase; letter-spacing: 3px; cursor: pointer; user-select: none;
     }
 
-    .burger-btn {
-      cursor: pointer;
-      width: 40px; height: 28px;
-      position: relative;
-      z-index: 3001;
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    .burger-btn:focus-visible {
-      outline: 2px solid var(--gold-accent);
-      outline-offset: 6px;
-      border-radius: 10px;
-    }
-    body.sd-mode .burger-btn:focus-visible { outline-color: var(--sd-accent); }
-
+    .burger-btn { cursor: pointer; width: 40px; height: 28px; position: relative; z-index: 3001; background: transparent; border: none; padding: 0; }
     .burger-line {
-      display: block;
-      width: 100%; height: 2px;
-      background: var(--text-dark);
-      position: absolute;
-      transition: var(--transition-slow);
-      border-radius: 2px;
+      display: block; width: 100%; height: 2px; background: var(--text-dark);
+      position: absolute; transition: var(--transition-slow); border-radius: 2px;
     }
     .burger-line:nth-child(1) { top: 0; }
     .burger-line:nth-child(2) { top: 13px; width: 70%; right: 0; }
     .burger-line:nth-child(3) { top: 26px; }
-
     .burger-btn.open .burger-line:nth-child(1) { transform: rotate(45deg); top: 13px; background: var(--gold-accent); }
     .burger-btn.open .burger-line:nth-child(2) { opacity: 0; }
     .burger-btn.open .burger-line:nth-child(3) { transform: rotate(-45deg); top: 13px; background: var(--gold-accent); }
@@ -120,272 +83,66 @@
 
     /* --- MENÚ OVERLAY --- */
     .overlay-menu {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100vh;
-      background: var(--overlay-bg);
-      z-index: 2999;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.5s ease, background 0.35s ease;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: var(--overlay-bg); z-index: 2999;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.5s ease, background 0.35s ease;
     }
     .overlay-menu.active { opacity: 1; pointer-events: all; }
     body.sd-mode .overlay-menu { background: rgba(11, 13, 20, 0.96); }
-
     .overlay-menu li { margin: 1.2rem 0; overflow: hidden; text-align: center; }
     .overlay-menu a {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      color: var(--text-dark);
-      display: inline-block;
-      transform: translateY(120%);
-      transition: transform 0.6s ease, color 0.25s ease;
+      font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-dark);
+      display: inline-block; transform: translateY(120%); transition: transform 0.6s ease, color 0.25s ease;
     }
     body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); }
-    body.sd-mode .overlay-menu a:hover { color: var(--sd-accent2); }
-
-    .overlay-menu.active li:nth-child(1) a { transition-delay: 0.05s; }
-    .overlay-menu.active li:nth-child(2) a { transition-delay: 0.12s; }
-    .overlay-menu.active li:nth-child(3) a { transition-delay: 0.19s; }
-    .overlay-menu.active li:nth-child(4) a { transition-delay: 0.26s; }
-    .overlay-menu.active li:nth-child(5) a { transition-delay: 0.33s; }
-    .overlay-menu.active li:nth-child(6) a { transition-delay: 0.40s; }
     .overlay-menu.active a { transform: translateY(0); }
-    .overlay-menu a:hover { color: var(--gold-accent); }
-    .overlay-menu a.active-link { color: var(--gold-accent); position: relative; }
+    .overlay-menu a.active-link { color: var(--gold-accent); }
     body.sd-mode .overlay-menu a.active-link { color: var(--sd-accent2); }
 
     /* --- CONTENEDOR PRINCIPAL (SPA) --- */
-    .main-container {
-      position: relative;
-      min-height: 100vh;
-      padding-top: 82px;
-    }
+    .main-container { position: relative; min-height: 100vh; padding-top: 82px; }
     .view-section { display: none; opacity: 0; animation: fadeView 0.8s ease forwards; }
     .view-section.active-view { display: block; }
     @keyframes fadeView { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     /* --- VISTA: INICIO (HERO) --- */
     .hero-wrapper {
-      height: calc(100vh - 82px);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      margin: 0 1rem 1rem 1rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-soft);
+      height: calc(100vh - 82px); position: relative; display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden; margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);
     }
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 110%;
-      background-image: url('ropondesmontable.jpeg'); /* IMAGEN DE FONDO */
-      background-size: cover; background-position: center 20%;
-      z-index: -2;
-      filter: brightness(0.96);
-      transform: scale(1.03);
+      background-image: url('ropondesmontable.jpeg'); /* IMAGEN PORTADA */
+      background-size: cover; background-position: top center;
+      z-index: -2; filter: brightness(0.96); transform: scale(1.03);
     }
     .hero-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(253, 252, 248, 0.55); /* Más claridad para leer */
-      z-index: -1;
+      background: rgba(253, 252, 248, 0.55); z-index: -1;
     }
     .hero-content {
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(12px);
-      padding: 3rem;
-      max-width: 680px;
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px);
+      padding: 3rem; max-width: 680px; border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12); border-radius: 16px;
     }
     .hero-content h1 { font-size: 2.8rem; margin-bottom: 0.9rem; color: var(--text-dark); }
-    .hero-content p { line-height: 1.6; }
-
+    
     .location-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-dark);
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      border: 1px solid #ddd;
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      background: white;
+      display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text-dark); margin-bottom: 1.5rem; font-weight: 700;
+      border: 1px solid #ddd; padding: 0.4rem 1rem; border-radius: 999px; background: white;
     }
 
     .btn-main {
-      padding: 1rem 2.5rem;
-      background: var(--text-dark);
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.8rem;
-      margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: 0.25s ease;
-      border-radius: 999px;
+      padding: 1rem 2.5rem; background: var(--text-dark); color: white; text-transform: uppercase;
+      letter-spacing: 2px; font-size: 0.8rem; margin-top: 1rem; display: inline-flex;
+      align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid transparent;
+      cursor: pointer; transition: 0.25s ease; border-radius: 999px;
     }
     .btn-main:hover { background: var(--gold-accent); border-color: var(--gold-accent); }
 
-    /* --- CARRUSELES --- */
-    .home-section { padding: 0 5% 2.5rem; }
-    .section-title { text-align: center; padding: 3rem 1rem 1.5rem; }
-    .section-title h2 { font-size: 2.3rem; margin-bottom: 0.4rem; }
-    .section-title p {
-      color: var(--gold-accent);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.85rem;
-    }
-
-    .swiper { width: 100%; padding: 1rem 0 2rem; }
-    .swiper-slide {
-      background: white;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-    .slide-img { height: 380px; width: 100%; object-fit: cover; display: block; }
-    .slide-info { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
-    .slide-info h3 { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.05rem; }
-    .slide-info p { color: var(--gold-accent); font-size: 0.78rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
-
-    /* CARRUSEL 3D (Boy/Girl/Studio Coverflow) */
-    .showcase-container {
-      padding: 0 0 3rem;
-      text-align: center;
-      overflow: hidden;
-    }
-    .showcase-container h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark); }
-    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
-    
-    .swiper-3d-container { width: 100%; padding-top: 20px; padding-bottom: 40px; }
-    .swiper-slide-3d {
-      background-position: center;
-      background-size: cover;
-      width: 280px; height: 420px;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      background-color: #fff;
-      overflow: hidden;
-    }
-    .swiper-slide-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    body.sd-mode .swiper-slide-3d {
-      box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* --- Promos & Testimonios --- */
-    .promo-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
-    .promo-card {
-      background: white; border-radius: var(--radius-lg); padding: 1.5rem;
-      box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.05);
-      position: relative; overflow: hidden;
-    }
-    .promo-badge {
-      position: absolute; top: 14px; right: 14px; font-size: 0.75rem; letter-spacing: 2px;
-      text-transform: uppercase; color: white; background: var(--text-dark);
-      padding: 0.35rem 0.6rem; border-radius: 999px;
-    }
-    .promo-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .promo-card p { color: #666; line-height: 1.5; }
-    .promo-card a {
-      display: inline-block; margin-top: 1rem; color: var(--gold-accent);
-      text-decoration: underline; text-underline-offset: 4px;
-    }
-
-    .testimonials {
-      margin-top: 2rem; background: rgba(230, 218, 202, 0.35);
-      border-radius: var(--radius-lg); padding: 2rem; border: 1px solid rgba(0,0,0,0.04);
-    }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
-    .quote { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-card); }
-    .quote p { color: #555; font-style: italic; line-height: 1.6; }
-    .quote .who { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; color: #777; font-size: 0.9rem; }
-    .stars { color: var(--gold-accent); letter-spacing: 2px; }
-
-    /* --- Renta CTA --- */
-    .rent-cta {
-      margin: 2.2rem 1rem 0;
-      border-radius: var(--radius-lg); overflow: hidden; position: relative;
-      box-shadow: var(--shadow-soft);
-      background: linear-gradient(135deg, rgba(58,58,58,0.95), rgba(197,160,89,0.65));
-      color: white; padding: 2rem; display: flex; align-items: center; justify-content: space-between;
-      gap: 1.5rem; flex-wrap: wrap;
-    }
-    .rent-cta h3 { font-size: 1.6rem; margin-bottom: 0.35rem; }
-    .rent-cta p { opacity: 0.92; max-width: 520px; line-height: 1.55; }
-    .btn-rent {
-      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35);
-      color: white; padding: 0.95rem 1.5rem; border-radius: 999px; cursor: pointer;
-      letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem;
-      display: inline-flex; align-items: center; gap: 0.55rem; transition: 0.25s ease;
-    }
-    .btn-rent:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
-
-    /* --- GLOBAL SHIPPING BANNER --- */
-    .shipping-banner {
-      background: #f4f1ea;
-      text-align: center;
-      padding: 0.8rem;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      color: #555;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-top: 2rem;
-      border-radius: 12px;
-    }
-    .shipping-banner i { color: var(--gold-accent); font-size: 1.1rem; }
-
-    /* --- VISTAS: GRID & TOOLS --- */
-    .category-header { text-align: center; padding: 3.5rem 1rem 1.5rem; }
-    .category-header h2 { font-size: 3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
-    .category-header p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; }
-
-    .tools-bar { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; padding: 0 5% 1.2rem; align-items: end; }
-    .search-wrap label, .filter-wrap label {
-      font-size: 0.85rem; color: #777; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 0.45rem;
-    }
-    body.sd-mode .search-wrap label, body.sd-mode .filter-wrap label { color: var(--sd-muted); }
-
-    .search-input {
-      width: 100%; padding: 0.95rem 1rem; border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.9);
-      outline: none; transition: 0.25s ease;
-    }
-    .search-input:focus { border-color: var(--gold-accent); box-shadow: 0 0 0 4px rgba(197,160,89,0.18); }
-    body.sd-mode .search-input { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--sd-text); }
-    body.sd-mode .search-input::placeholder { color: rgba(255,255,255,0.45); }
-    body.sd-mode .search-input:focus { border-color: var(--sd-accent2); box-shadow: 0 0 0 4px rgba(0,212,255,0.18); }
-
-    .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .chip {
-      border: 1px solid rgba(0,0,0,0.12); padding: 0.6rem 0.9rem; border-radius: 999px;
-      cursor: pointer; background: rgba(255,255,255,0.95); transition: 0.2s ease;
-      font-size: 0.85rem; user-select: none;
-    }
-    .chip:hover { transform: translateY(-2px); }
-    .chip.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
-    body.sd-mode .chip { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); }
-    body.sd-mode .chip.active {
-      background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7));
-      border-color: rgba(255,255,255,0.10); box-shadow: var(--sd-glow); color: #0b0d14; font-weight: 700;
-    }
-
+    /* --- PRODUCT CARDS (CORRECCIÓN DE IMAGEN COMPLETA) --- */
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 0 5% 4rem; }
     .product-card {
       background: var(--bg-card); transition: var(--transition-slow); cursor: pointer;
@@ -393,119 +150,112 @@
       border: 1px solid rgba(0,0,0,0.04); opacity: 0; transform: translateY(14px);
     }
     body.sd-mode .product-card { background: var(--sd-card); border-color: var(--sd-border); box-shadow: var(--sd-shadow); }
-    body.sd-mode .product-info h3 { color: rgba(255,255,255,0.92); }
-    body.sd-mode .product-info p { color: var(--sd-accent2); }
-
-    .view-section.active-view .product-card { animation: fadeInUp 0.55s ease forwards; }
-    .view-section.active-view .product-card:nth-child(1) { animation-delay: 0.08s; }
-    .view-section.active-view .product-card:nth-child(2) { animation-delay: 0.14s; }
-    .view-section.active-view .product-card:nth-child(3) { animation-delay: 0.20s; }
-    .view-section.active-view .product-card:nth-child(4) { animation-delay: 0.26s; }
-    .view-section.active-view .product-card:nth-child(5) { animation-delay: 0.32s; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-
-    .product-card:hover { transform: translateY(-8px); }
-    .img-container { height: 400px; overflow: hidden; position: relative; }
-    .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; display: block; }
-    .product-card:hover .img-container img { transform: scale(1.05); }
+    
+    .img-container {
+      /* AUMENTO DE ALTURA PARA QUE QUEPA LA FOTO VERTICAL */
+      height: 500px; 
+      overflow: hidden; position: relative;
+    }
+    .img-container img {
+      width: 100%; height: 100%; 
+      /* ESTO HACE QUE SE VEA DESDE ARRIBA HACIA ABAJO (CARA Y CUERPO) */
+      object-fit: cover; 
+      object-position: top center; 
+      transition: transform 1s ease; display: block;
+    }
+    .product-card:hover .img-container img { transform: scale(1.02); }
 
     .product-info { padding: 1.1rem 0 1.4rem; text-align: center; }
     .product-info h3 { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.08rem; }
     .product-info p { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
 
-    .back-link {
-      background: none; border: none; border-bottom: 1px solid var(--gold-accent); cursor: pointer;
-      color: #999; margin-top: 1rem; padding-bottom: 0.25rem;
+    /* --- CARRUSELES --- */
+    .section-title { text-align: center; padding: 3rem 1rem 1.5rem; }
+    .section-title h2 { font-size: 2.3rem; margin-bottom: 0.4rem; }
+    .section-title p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; }
+
+    .swiper { width: 100%; padding: 1rem 0 2rem; }
+    .swiper-slide { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
+    /* Ajuste imagenes carrusel tambien */
+    .slide-img { height: 450px; width: 100%; object-fit: cover; object-position: top center; display: block; }
+    .slide-info { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
+
+    /* --- CARRUSEL 3D --- */
+    .showcase-container { padding: 0 0 3rem; text-align: center; overflow: hidden; }
+    .showcase-container h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark); }
+    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
+    
+    .swiper-3d-container { width: 100%; padding-top: 20px; padding-bottom: 40px; }
+    .swiper-slide-3d {
+      background-position: center; background-size: cover; width: 280px; height: 450px; /* Mas alto */
+      border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); background-color: #fff; overflow: hidden;
     }
+    .swiper-slide-3d img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    body.sd-mode .swiper-slide-3d { box-shadow: 0 15px 50px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
+
+    /* --- OTROS COMPONENTES --- */
+    .promo-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+    .promo-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-card); position: relative; overflow: hidden; }
+    .promo-badge { position: absolute; top: 14px; right: 14px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: white; background: var(--text-dark); padding: 0.35rem 0.6rem; border-radius: 999px; }
+    
+    .rent-cta { margin: 2.2rem 1rem 0; border-radius: var(--radius-lg); overflow: hidden; position: relative; box-shadow: var(--shadow-soft); background: linear-gradient(135deg, rgba(58,58,58,0.95), rgba(197,160,89,0.65)); color: white; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .rent-cta h3 { font-size: 1.6rem; }
+    .btn-rent { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); color: white; padding: 0.95rem 1.5rem; border-radius: 999px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.55rem; transition: 0.25s ease; }
+    .btn-rent:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+    .shipping-banner { background: #f4f1ea; text-align: center; padding: 0.8rem; font-size: 0.9rem; letter-spacing: 1px; color: #555; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 2rem; border-radius: 12px; }
+    
+    .category-header { text-align: center; padding: 3.5rem 1rem 1.5rem; }
+    .category-header h2 { font-size: 3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .category-header p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; }
+
+    .tools-bar { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; padding: 0 5% 1.2rem; align-items: end; }
+    .search-input { width: 100%; padding: 0.95rem 1rem; border-radius: 999px; border: 1px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.9); outline: none; transition: 0.25s ease; }
+    .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .chip { border: 1px solid rgba(0,0,0,0.12); padding: 0.6rem 0.9rem; border-radius: 999px; cursor: pointer; background: rgba(255,255,255,0.95); transition: 0.2s ease; font-size: 0.85rem; user-select: none; }
+    .chip.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
+    body.sd-mode .chip { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); }
+    body.sd-mode .chip.active { background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7)); border-color: rgba(255,255,255,0.10); color: #0b0d14; font-weight: 700; }
+
+    .back-link { background: none; border: none; border-bottom: 1px solid var(--gold-accent); cursor: pointer; color: #999; margin-top: 1rem; padding-bottom: 0.25rem; }
     body.sd-mode .back-link { border-bottom-color: var(--sd-accent2); color: rgba(255,255,255,0.65); }
-    .empty-state { padding: 1rem 5% 3rem; color: #777; text-align: center; display: none; }
-    body.sd-mode .empty-state { color: rgba(255,255,255,0.70); }
+    .view-section.active-view .product-card { animation: fadeInUp 0.55s ease forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- FOOTER & CONTACTO --- */
-    .contact-footer {
-      background: #fff; padding: 4rem 5% 2rem; border-top: 1px solid #eee;
-      margin-top: 2rem; transition: background 0.35s ease, border-color 0.35s ease;
-    }
-    body.sd-mode .contact-footer {
-      background: #080a10; border-top: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.88);
-    }
-    body.sd-mode .contact-footer p, body.sd-mode .contact-footer strong { color: rgba(255,255,255,0.86) !important; }
-
+    /* Footer */
+    .contact-footer { background: #fff; padding: 4rem 5% 2rem; border-top: 1px solid #eee; margin-top: 2rem; transition: background 0.35s ease; }
+    body.sd-mode .contact-footer { background: #080a10; border-top: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.88); }
     .footer-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
     .contact-row { display: flex; margin-bottom: 1.5rem; align-items: flex-start; gap: 0.8rem; }
     .contact-row i { color: var(--gold-accent); width: 30px; font-size: 1.2rem; margin-top: 4px; }
-    body.sd-mode .contact-row i { color: var(--sd-accent2); }
-
-    .social-links { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
-    .social-btn {
-      width: 45px; height: 45px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; color: var(--text-dark); transition: 0.25s ease;
-    }
+    .social-btn { width: 45px; height: 45px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-dark); transition: 0.25s ease; }
     .social-btn:hover { background: var(--gold-accent); color: white; border-color: var(--gold-accent); }
-    body.sd-mode .social-btn { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.88); }
-    body.sd-mode .social-btn:hover {
-      background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7));
-      border-color: rgba(255,255,255,0.10); color: #0b0d14;
-    }
-
-    /* Floating WhatsApp */
-    .float-wa {
-      position: fixed; right: 18px; bottom: 18px; width: 56px; height: 56px;
-      border-radius: 50%; background: #25D366; color: white;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18); z-index: 3500; transition: 0.25s ease;
-    }
+    .float-wa { position: fixed; right: 18px; bottom: 18px; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px rgba(0,0,0,0.18); z-index: 3500; transition: 0.25s ease; }
     .float-wa:hover { transform: translateY(-4px); }
-    body.sd-mode .float-wa { box-shadow: 0 14px 36px rgba(0,0,0,0.45); }
 
-    /* Studio Dominguez view wrapper */
-    .sd-hero {
-      margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); overflow: hidden;
-      box-shadow: var(--sd-shadow); position: relative; min-height: 60vh;
-      display: flex; align-items: center; justify-content: center; text-align: center;
-      background: radial-gradient(800px 400px at 20% 10%, rgba(138,92,255,0.35), transparent 60%),
-                  radial-gradient(700px 380px at 80% 20%, rgba(0,212,255,0.25), transparent 55%),
-                  linear-gradient(180deg, rgba(11,13,20,1), rgba(7,8,12,1));
-    }
-    .sd-hero::after{
-      content:""; position:absolute; inset:0;
-      background-image:url('vestidonegroresaltar.jpeg'); /* Fondo studio */
-      background-size:cover; background-position:center; opacity:0.30;
-      mix-blend-mode: screen; pointer-events:none;
-    }
+    /* Studio Header */
+    .sd-hero { margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--sd-shadow); position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(800px 400px at 20% 10%, rgba(138,92,255,0.35), transparent 60%), linear-gradient(180deg, rgba(11,13,20,1), rgba(7,8,12,1)); }
+    .sd-hero::after{ content:""; position:absolute; inset:0; background-image:url('vestidonegroresaltar.jpeg'); background-size:cover; background-position:center; opacity:0.30; mix-blend-mode: screen; pointer-events:none; }
     .sd-hero-content{ position:relative; padding: 3rem 1.8rem; max-width: 760px; color: var(--sd-text); z-index:1; }
-    .sd-hero-content h1{ font-size: 3.1rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
-    .sd-hero-content p{ color: var(--sd-muted); line-height: 1.65; max-width: 620px; margin: 0 auto; }
     .sd-actions{ display:flex; gap: 0.9rem; justify-content:center; flex-wrap:wrap; margin-top: 1.6rem; }
-    .btn-sd{
-      padding: 0.95rem 1.45rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06); color: var(--sd-text); cursor:pointer;
-      letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; transition: 0.25s ease;
-      display:inline-flex; gap:.55rem; align-items:center; box-shadow: var(--sd-shadow);
-    }
+    .btn-sd{ padding: 0.95rem 1.45rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--sd-text); cursor:pointer; letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; transition: 0.25s ease; display:inline-flex; gap:.55rem; align-items:center; box-shadow: var(--sd-shadow); }
     .btn-sd:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.26); box-shadow: var(--sd-glow); }
-    .btn-sd.primary{
-      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color: #0b0d14; border-color: rgba(255,255,255,0.08); font-weight: 800;
-    }
-    body.sd-mode .section-title p { color: var(--sd-accent2); }
-    body.sd-mode .section-title h2 { color: var(--sd-text); }
+    .btn-sd.primary{ background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75)); color: #0b0d14; border-color: rgba(255,255,255,0.08); font-weight: 800; }
 
     @media (max-width: 980px) {
-      .promo-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .promo-grid { grid-template-columns: 1fr; }
       .tools-bar { grid-template-columns: 1fr; }
-      .slide-img { height: 280px; }
-      .sd-hero-content h1 { font-size: 2.2rem; }
+      .slide-img { height: 350px; }
+      .hero-content h1 { font-size: 2.2rem; }
     }
     @media (max-width: 768px) {
-      .hero-content h1 { font-size: 2rem; }
       .footer-grid { grid-template-columns: 1fr; }
-      .img-container { height: 300px; }
+      .img-container { height: 380px; }
       nav { padding: 1rem 1.3rem; }
       .hero-wrapper { margin: 0.8rem; }
       .rent-cta { margin: 1.6rem 0.8rem 0; }
       .sd-hero { margin: 0.8rem; }
-      .swiper-slide-3d { width: 220px; height: 350px; }
+      .swiper-slide-3d { width: 240px; height: 380px; }
     }
   </style>
 </head>
@@ -530,7 +280,6 @@
 
   <nav>
     <div class="logo" onclick="navigateTo('inicio')">Mi Bello Ropón</div>
-
     <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal">
       <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
     </button>
@@ -583,17 +332,17 @@
           <div class="swiper-wrapper">
             
             <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="ropondesmontable.jpeg" alt="Ropón Destacado" />
+              <img class="slide-img" loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
               <div class="slide-info">
-                <h3>Ropón Desmontable</h3>
+                <h3>Ropón Desmontable Exclusivo</h3>
                 <p>Bautizo · Niña</p>
               </div>
             </div>
 
             <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="traje_bautizo.jpeg" alt="Traje Niño Destacado" />
+              <img class="slide-img" loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Niño" />
               <div class="slide-info">
-                <h3>Traje Ceremonia</h3>
+                <h3>Bombacho Ceremonia</h3>
                 <p>Bautizo · Niño</p>
               </div>
             </div>
@@ -607,10 +356,10 @@
             </div>
 
              <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" />
+              <img class="slide-img" loading="lazy" src="principe.jpeg" alt="Traje Príncipe" />
               <div class="slide-info">
-                <h3>Batita Exclusiva</h3>
-                <p>Ceremonia · Niña</p>
+                <h3>Traje Príncipe</h3>
+                <p>Ceremonia · Niño</p>
               </div>
             </div>
 
@@ -621,11 +370,6 @@
         <div class="shipping-banner">
           <i class="fas fa-globe-americas"></i>
           <span><strong>Worldwide Shipping:</strong> Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
-        </div>
-
-        <div class="section-title" style="padding-top: 2rem;">
-          <p>Promociones</p>
-          <h2>Atención Exclusiva</h2>
         </div>
 
         <div class="promo-grid">
@@ -699,8 +443,8 @@
           <label>Filtrar por</label>
           <div class="chips" id="chipsNina">
             <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)">Todo</div>
+            <div class="chip" onclick="setFilter('nina','Ropones', this)">Ropones</div>
             <div class="chip" onclick="setFilter('nina','Batitas', this)">Batitas</div>
-            <div class="chip" onclick="setFilter('nina','Exclusivos', this)">Exclusivos</div>
             <div class="chip" onclick="setFilter('nina','Española', this)">Línea Española</div>
           </div>
         </div>
@@ -709,26 +453,91 @@
       <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda/filtro.</div>
 
       <div class="products-grid" id="gridNina">
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 1">
+        
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón 1" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 01</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón 2" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 02</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón 3" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 03</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón 4" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 04</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón 5" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 05</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable6.jpeg" alt="Ropón 6" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 06</h3><p>Ropones</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <div class="img-container"><img loading="lazy" src="ropondesmontable7.jpeg" alt="Ropón 7" /></div>
+          <div class="product-info"><h3>Ropón Desmontable 07</h3><p>Ropones</p></div>
+        </article>
+
+        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo 01</h3><p>Exclusivos</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo 02</h3><p>Exclusivos</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo 03</h3><p>Exclusivos</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo4.jpeg" alt="Ropón Exclusivo 4" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo 04</h3><p>Exclusivos</p></div>
+        </article>
+        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontablexclusivo5.jpeg" alt="Ropón Exclusivo 5" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo 05</h3><p>Exclusivos</p></div>
+        </article>
+
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
           <div class="img-container"><img loading="lazy" src="batita1.jpeg" alt="Batita 1" /></div>
           <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
         </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 2">
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
           <div class="img-container"><img loading="lazy" src="batita2.jpeg" alt="Batita 2" /></div>
           <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
         </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 3">
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
           <div class="img-container"><img loading="lazy" src="batita3.jpeg" alt="Batita 3" /></div>
           <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
         </article>
-        <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva">
+        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+          <div class="img-container"><img loading="lazy" src="batita4.jpeg" alt="Batita 4" /></div>
+          <div class="product-info"><h3>Batita Ceremonia 04</h3><p>Batitas</p></div>
+        </article>
+
+        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
           <div class="img-container"><img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
-          <div class="product-info"><h3>Batita Exclusiva</h3><p>Exclusivos</p></div>
+          <div class="product-info"><h3>Batita Exclusiva 01</h3><p>Exclusivos</p></div>
         </article>
-        <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva 2">
+        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
           <div class="img-container"><img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
-          <div class="product-info"><h3>Batita Exclusiva II</h3><p>Exclusivos</p></div>
+          <div class="product-info"><h3>Batita Exclusiva 02</h3><p>Exclusivos</p></div>
         </article>
+        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <div class="img-container"><img loading="lazy" src="batitaexclusiva3.jpeg" alt="Batita Exclusiva 3" /></div>
+          <div class="product-info"><h3>Batita Exclusiva 03</h3><p>Exclusivos</p></div>
+        </article>
+        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <div class="img-container"><img loading="lazy" src="batitaexclusiva4.jpeg" alt="Batita Exclusiva 4" /></div>
+          <div class="product-info"><h3>Batita Exclusiva 04</h3><p>Exclusivos</p></div>
+        </article>
+
         <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
           <div class="img-container"><img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" /></div>
           <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
@@ -743,30 +552,19 @@
         <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
       </div>
 
-      <div class="showcase-container">
-        <h3>Tendencias Bautizo</h3>
-        <p style="color:#777; margin-bottom:10px;">Trajes y Guayaberas</p>
-        <div class="swiper swiper-3d-container" id="ninoSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-slide-3d"><img src="traje_bautizo.jpeg" alt="Traje 1"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="traje_lino.jpeg" alt="Traje 2"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="guayabera_fina.jpeg" alt="Guayabera"></div>
-          </div>
-        </div>
-      </div>
-
       <div class="tools-bar">
         <div class="search-wrap">
           <label for="searchNino">Buscar</label>
-          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bautizo, lino..." oninput="applyFilters('nino')" />
+          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
         </div>
         <div class="filter-wrap">
           <label>Filtrar por</label>
           <div class="chips" id="chipsNino">
             <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)">Todo</div>
-            <div class="chip" onclick="setFilter('nino','Bautizo', this)">Bautizo</div>
-            <div class="chip" onclick="setFilter('nino','Ceremonia', this)">Ceremonia</div>
-            <div class="chip" onclick="setFilter('nino','Accesorios', this)">Accesorios</div>
+            <div class="chip" onclick="setFilter('nino','Ropón', this)">Ropón</div>
+            <div class="chip" onclick="setFilter('nino','Bombacho', this)">Bombacho</div>
+            <div class="chip" onclick="setFilter('nino','Príncipe', this)">Príncipe</div>
+            <div class="chip" onclick="setFilter('nino','Traje', this)">Trajes</div>
           </div>
         </div>
       </div>
@@ -774,30 +572,91 @@
       <div class="empty-state" id="emptyNino">No encontramos productos con esa búsqueda/filtro.</div>
 
       <div class="products-grid" id="gridNino">
-        <article class="product-card" data-category="Bautizo" data-name="Traje Bautizo Completo">
-          <div class="img-container"><img loading="lazy" src="traje_bautizo.jpeg" alt="Traje Bautizo" /></div>
-          <div class="product-info"><h3>Traje Bautizo</h3><p>Bautizo</p></div>
+        
+        <article class="product-card" data-category="Ropón" data-name="Ropón Desmontable Niño">
+          <div class="img-container"><img loading="lazy" src="Ropon%20desmontable%20Niño.jpeg" alt="Ropón Niño" /></div>
+          <div class="product-info"><h3>Ropón Desmontable Niño</h3><p>Ropón</p></div>
         </article>
 
-        <article class="product-card" data-category="Ceremonia" data-name="Traje Lino Fino">
-          <div class="img-container"><img loading="lazy" src="traje_lino.jpeg" alt="Traje Lino" /></div>
-          <div class="product-info"><h3>Traje Lino Italiano</h3><p>Ceremonia</p></div>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
+          <div class="img-container"><img loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Resaltar" /></div>
+          <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bombacho</p></div>
+        </article>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <div class="img-container"><img loading="lazy" src="bombachoniño.jpeg" alt="Bombacho 1" /></div>
+          <div class="product-info"><h3>Bombacho Clásico 01</h3><p>Bombacho</p></div>
+        </article>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <div class="img-container"><img loading="lazy" src="bombachoniño2.jpeg" alt="Bombacho 2" /></div>
+          <div class="product-info"><h3>Bombacho Clásico 02</h3><p>Bombacho</p></div>
+        </article>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <div class="img-container"><img loading="lazy" src="bombachoniño3.jpeg" alt="Bombacho 3" /></div>
+          <div class="product-info"><h3>Bombacho Clásico 03</h3><p>Bombacho</p></div>
+        </article>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <div class="img-container"><img loading="lazy" src="bombachoniño4.jpeg" alt="Bombacho 4" /></div>
+          <div class="product-info"><h3>Bombacho Clásico 04</h3><p>Bombacho</p></div>
+        </article>
+        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <div class="img-container"><img loading="lazy" src="bombachoniño5.jpeg" alt="Bombacho 5" /></div>
+          <div class="product-info"><h3>Bombacho Clásico 05</h3><p>Bombacho</p></div>
         </article>
 
-        <article class="product-card" data-category="Ceremonia" data-name="Guayabera Ceremonia">
-          <div class="img-container"><img loading="lazy" src="guayabera_fina.jpeg" alt="Guayabera" /></div>
-          <div class="product-info"><h3>Guayabera Premium</h3><p>Ceremonia</p></div>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe.jpeg" alt="Príncipe 1" /></div>
+          <div class="product-info"><h3>Traje Príncipe 01</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe2.jpeg" alt="Príncipe 2" /></div>
+          <div class="product-info"><h3>Traje Príncipe 02</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe3.jpeg" alt="Príncipe 3" /></div>
+          <div class="product-info"><h3>Traje Príncipe 03</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe4.jpeg" alt="Príncipe 4" /></div>
+          <div class="product-info"><h3>Traje Príncipe 04</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe5.jpeg" alt="Príncipe 5" /></div>
+          <div class="product-info"><h3>Traje Príncipe 05</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe6.jpeg" alt="Príncipe 6" /></div>
+          <div class="product-info"><h3>Traje Príncipe 06</h3><p>Príncipe</p></div>
+        </article>
+        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <div class="img-container"><img loading="lazy" src="principe7.jpeg" alt="Príncipe 7" /></div>
+          <div class="product-info"><h3>Traje Príncipe 07</h3><p>Príncipe</p></div>
         </article>
 
-        <article class="product-card" data-category="Accesorios" data-name="Set de Vela">
-          <div class="img-container"><img loading="lazy" src="set_vela.jpeg" alt="Set Vela" /></div>
-          <div class="product-info"><h3>Set de Vela</h3><p>Accesorios</p></div>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño.jpeg" alt="Traje 1" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 01</h3><p>Traje</p></div>
+        </article>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño2.jpeg" alt="Traje 2" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 02</h3><p>Traje</p></div>
+        </article>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño3.jpeg" alt="Traje 3" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 03</h3><p>Traje</p></div>
+        </article>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño4.jpeg" alt="Traje 4" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 04</h3><p>Traje</p></div>
+        </article>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño5.jpeg" alt="Traje 5" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 05</h3><p>Traje</p></div>
+        </article>
+        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño6.jpeg" alt="Traje 6" /></div>
+          <div class="product-info"><h3>Traje Ceremonia 06</h3><p>Traje</p></div>
         </article>
 
-        <article class="product-card" data-category="Accesorios" data-name="Zapatos Niño">
-          <div class="img-container"><img loading="lazy" src="zapatonino.jpeg" alt="Zapatos" /></div>
-          <div class="product-info"><h3>Calzado Ceremonia</h3><p>Accesorios</p></div>
-        </article>
       </div>
     </section>
 
@@ -823,21 +682,6 @@
           </div>
         </div>
       </header>
-
-      <div class="showcase-container" style="padding-top:2rem;">
-        <h3>Tendencias de Gala</h3>
-        <p style="color:var(--sd-muted); margin-bottom:10px;">Favoritos de la temporada</p>
-        <div class="swiper swiper-3d-container" id="studioSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-slide-3d"><img src="vestido negro.jpeg" alt="Gala Negro"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="vestidoazul.jpeg" alt="Gala Azul"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="vestidorojo.jpeg" alt="Gala Rojo"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="vestidonegroresaltar.jpeg" alt="Gala Negro 2"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="vestidoazuloscuro.jpeg" alt="Gala Azul Oscuro"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="vestidoblanco.jpeg" alt="Gala Blanco"></div>
-          </div>
-        </div>
-      </div>
 
       <div class="home-section" id="studioCatalog">
         <div class="section-title" style="padding-top: 1rem;">
@@ -885,9 +729,21 @@
             <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
             <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
           </article>
+           <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Scarlet">
+            <div class="img-container"><img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
+            <div class="product-info"><h3>Modelo Scarlet</h3><p>Rojo</p></div>
+          </article>
           <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
             <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
             <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
+          </article>
+          <article class="product-card" data-category="Claros" data-name="Vestido Beige">
+            <div class="img-container"><img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
+            <div class="product-info"><h3>Modelo Champagne</h3><p>Claros</p></div>
+          </article>
+          <article class="product-card" data-category="Claros" data-name="Vestido Crema">
+            <div class="img-container"><img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
+            <div class="product-info"><h3>Modelo Crema Suave</h3><p>Claros</p></div>
           </article>
         </div>
       </div>
@@ -963,7 +819,7 @@
     // ----- STATE -----
     const state = { currentView: 'inicio', filters: { nina: 'all', nino: 'all', studio: 'all' } };
 
-    // ----- MENU (ACCESSIBLE) -----
+    // ----- MENU -----
     function toggleMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
@@ -1061,9 +917,7 @@
       pagination: false,
     };
     new Swiper('#roponesSwiper', { ...common3dProps, initialSlide: 2 });
-    new Swiper('#ninoSwiper', { ...common3dProps, initialSlide: 1 });
-    new Swiper('#studioSwiper', { ...common3dProps, initialSlide: 1, coverflowEffect: { rotate: 20, stretch: 0, depth: 200, modifier: 1, slideShadows: true } });
-
+    
     // Initial state
     setActiveMenuLink('inicio');
     setThemeForView('inicio');
