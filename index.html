@@ -3,259 +3,390 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Bello Ropón | Monterrey & San Antonio</title>
+  <title>Mi Bello Ropón | Boutique & Renta</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <style>
-    /* --- CONFIGURACIÓN BASE & PALETA --- */
+    /* --- CONFIGURACIÓN BASE & PALETA PREMIUM --- */
     :root {
-      --bg-body: #fdfcf8;
+      --bg-body: #faf9f6; /* Off-white más cálido */
       --bg-card: #ffffff;
       --gold-accent: #c5a059;
-      --gold-light: #e6dace;
-      --text-dark: #3a3a3a;
-      --text-light: #777777;
-      --overlay-bg: rgba(253, 252, 248, 0.98);
-      --shadow-card: 0 15px 35px rgba(197, 160, 89, 0.15);
-      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
-      --transition-slow: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-      --radius-lg: 20px;
+      --gold-gradient: linear-gradient(135deg, #c5a059 0%, #e6dace 50%, #c5a059 100%);
+      --text-dark: #1a1a1a;
+      --text-gray: #666666;
+      
+      --overlay-bg: rgba(250, 249, 246, 0.95);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+      
+      --shadow-premium: 0 20px 40px rgba(197, 160, 89, 0.08);
+      --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+      
+      --transition-smooth: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Movimiento muy suave */
+      --radius-lg: 12px; /* Bordes menos redondos, más elegantes */
 
       /* Studio Dominguez (Night theme) */
-      --sd-bg: #0b0d14;
-      --sd-card: rgba(255,255,255,0.06);
-      --sd-border: rgba(255,255,255,0.10);
-      --sd-text: rgba(255,255,255,0.92);
-      --sd-muted: rgba(255,255,255,0.62);
-      --sd-accent: #8a5cff;
+      --sd-bg: #050505;
+      --sd-card: rgba(255,255,255,0.03);
+      --sd-border: rgba(255,255,255,0.08);
+      --sd-text: #f0f0f0;
+      --sd-muted: #888;
+      --sd-accent: #a980ff;
       --sd-accent2: #00d4ff;
-      --sd-glow: 0 18px 60px rgba(138,92,255,0.18);
-      --sd-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      --sd-glow: 0 0 30px rgba(138,92,255,0.15);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: 'Lato', sans-serif;
       background-color: var(--bg-body);
       color: var(--text-dark);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
-    a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
-    button { font-family: inherit; }
+
+    h1, h2, h3 { 
+      font-family: 'Cinzel', serif; 
+      font-weight: 500;
+      letter-spacing: 2px; /* Más espacio entre letras = Más elegancia */
+    }
+
+    /* Tipografía secundaria elegante */
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+    a { text-decoration: none; color: inherit; transition: 0.4s; cursor: pointer; }
+    button { font-family: inherit; border: none; background: none; }
     ul { list-style: none; }
 
-    /* --- NAVEGACIÓN --- */
-    nav {
-      position: fixed; top: 0; left: 0; width: 100%; padding: 1.2rem 3rem;
-      display: flex; justify-content: space-between; align-items: center; z-index: 3000;
-      background: rgba(253, 252, 248, 0.90); backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.05); transition: background 0.35s ease, border-color 0.35s ease;
+    /* --- ANIMACIONES DE SCROLL (REVEAL) --- */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 1, 0.3, 1);
     }
-    body.sd-mode nav { background: rgba(11, 13, 20, 0.85); border-bottom: 1px solid rgba(255,255,255,0.10); }
-    body.sd-mode .burger-line { background: rgba(255,255,255,0.88); }
-    body.sd-mode .logo { color: rgba(255,255,255,0.92); }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- NAVEGACIÓN (Glassmorphism) --- */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; 
+      padding: 1.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center; 
+      z-index: 3000;
+      background: rgba(253, 252, 248, 0.7); /* Más transparente */
+      backdrop-filter: blur(15px); /* Más borroso */
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      transition: padding 0.4s ease, background 0.4s ease;
+    }
+    nav.scrolled { padding: 1rem 4rem; background: rgba(253, 252, 248, 0.95); }
+
+    body.sd-mode nav { 
+      background: rgba(5, 5, 5, 0.7); 
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+    }
+    body.sd-mode .burger-line { background: #fff; }
+    body.sd-mode .logo { color: #fff; }
 
     .logo {
-      font-size: 1.5rem; font-weight: 600; color: var(--text-dark);
-      text-transform: uppercase; letter-spacing: 3px; cursor: pointer; user-select: none;
+      font-size: 1.4rem; 
+      font-weight: 600; 
+      color: var(--text-dark);
+      text-transform: uppercase; 
+      letter-spacing: 4px; /* Mucho espacio */
+      cursor: pointer;
     }
 
-    .burger-btn { cursor: pointer; width: 40px; height: 28px; position: relative; z-index: 3001; background: transparent; border: none; padding: 0; }
+    /* Burger Menu */
+    .burger-btn { cursor: pointer; width: 35px; height: 24px; position: relative; z-index: 3001; }
     .burger-line {
       display: block; width: 100%; height: 2px; background: var(--text-dark);
-      position: absolute; transition: var(--transition-slow); border-radius: 2px;
+      position: absolute; transition: var(--transition-smooth);
     }
     .burger-line:nth-child(1) { top: 0; }
-    .burger-line:nth-child(2) { top: 13px; width: 70%; right: 0; }
-    .burger-line:nth-child(3) { top: 26px; }
-    .burger-btn.open .burger-line:nth-child(1) { transform: rotate(45deg); top: 13px; background: var(--gold-accent); }
-    .burger-btn.open .burger-line:nth-child(2) { opacity: 0; }
-    .burger-btn.open .burger-line:nth-child(3) { transform: rotate(-45deg); top: 13px; background: var(--gold-accent); }
-    body.sd-mode .burger-btn.open .burger-line:nth-child(1),
-    body.sd-mode .burger-btn.open .burger-line:nth-child(3) { background: var(--sd-accent); }
+    .burger-line:nth-child(2) { top: 11px; width: 70%; right: 0; }
+    .burger-line:nth-child(3) { top: 22px; }
+    
+    .burger-btn:hover .burger-line:nth-child(2) { width: 100%; } /* Hover effect */
 
-    /* --- MENÚ OVERLAY --- */
+    .burger-btn.open .burger-line:nth-child(1) { transform: rotate(45deg); top: 11px; background: var(--gold-accent); }
+    .burger-btn.open .burger-line:nth-child(2) { opacity: 0; }
+    .burger-btn.open .burger-line:nth-child(3) { transform: rotate(-45deg); top: 11px; background: var(--gold-accent); }
+
+    /* Overlay Menu */
     .overlay-menu {
       position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: var(--overlay-bg); z-index: 2999;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.5s ease, background 0.35s ease;
+      opacity: 0; pointer-events: none; transition: 0.6s cubic-bezier(0.7, 0, 0.3, 1);
     }
     .overlay-menu.active { opacity: 1; pointer-events: all; }
-    body.sd-mode .overlay-menu { background: rgba(11, 13, 20, 0.96); }
-    .overlay-menu li { margin: 1.2rem 0; overflow: hidden; text-align: center; }
+    body.sd-mode .overlay-menu { background: rgba(5,5,5, 0.98); }
+    
     .overlay-menu a {
-      font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-dark);
-      display: inline-block; transform: translateY(120%); transition: transform 0.6s ease, color 0.25s ease;
+      font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--text-dark);
+      margin: 1rem 0; display: inline-block; position: relative;
+      transform: translateY(30px); opacity: 0; transition: 0.5s ease;
     }
-    body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); }
-    .overlay-menu.active a { transform: translateY(0); }
-    .overlay-menu a.active-link { color: var(--gold-accent); }
-    body.sd-mode .overlay-menu a.active-link { color: var(--sd-accent2); }
+    body.sd-mode .overlay-menu a { color: #f0f0f0; }
+    
+    .overlay-menu.active a { transform: translateY(0); opacity: 1; }
+    /* Delay escalonado para items del menu */
+    .overlay-menu.active li:nth-child(1) a { transition-delay: 0.1s; }
+    .overlay-menu.active li:nth-child(2) a { transition-delay: 0.2s; }
+    .overlay-menu.active li:nth-child(3) a { transition-delay: 0.3s; }
+    .overlay-menu.active li:nth-child(4) a { transition-delay: 0.4s; }
+    .overlay-menu.active li:nth-child(5) a { transition-delay: 0.5s; }
 
-    /* --- CONTENEDOR PRINCIPAL (SPA) --- */
-    .main-container { position: relative; min-height: 100vh; padding-top: 82px; }
-    .view-section { display: none; opacity: 0; animation: fadeView 0.8s ease forwards; }
-    .view-section.active-view { display: block; }
-    @keyframes fadeView { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    /* --- CONTENEDOR PRINCIPAL --- */
+    .main-container { padding-top: 0; } /* Hero ocupa todo */
+    .view-section { display: none; opacity: 0; }
+    .view-section.active-view { display: block; animation: fadeInPage 1s ease forwards; }
+    @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
-    /* --- VISTA: INICIO (HERO) --- */
+    /* --- HERO SECTION --- */
     .hero-wrapper {
-      height: calc(100vh - 82px); position: relative; display: flex; align-items: center; justify-content: center;
-      text-align: center; overflow: hidden; margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);
+      height: 100vh; /* Pantalla completa */
+      position: relative; display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
     }
     .hero-bg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 110%;
-      background-image: url('ropondesmontable.jpeg'); /* IMAGEN PORTADA */
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('ropondesmontable.jpeg');
       background-size: cover; background-position: top center;
-      z-index: -2; filter: brightness(0.96); transform: scale(1.03);
+      z-index: -2; 
+      animation: breathZoom 20s infinite alternate ease-in-out; /* Efecto vivo */
     }
+    @keyframes breathZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
     .hero-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(253, 252, 248, 0.55); z-index: -1;
+      background: linear-gradient(to bottom, rgba(253, 252, 248, 0.4), rgba(253, 252, 248, 0.7));
+      z-index: -1;
     }
+
     .hero-content {
-      background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px);
-      padding: 3rem; max-width: 680px; border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12); border-radius: 16px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      padding: 4rem 3rem; 
+      max-width: 750px; 
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.05); 
+      border-radius: 2px; /* Cuadrado elegante */
+      position: relative;
+      margin-top: 40px;
     }
-    .hero-content h1 { font-size: 2.8rem; margin-bottom: 0.9rem; color: var(--text-dark); }
-    
+    /* Marco dorado decorativo */
+    .hero-content::after {
+      content: ""; position: absolute; inset: 10px; border: 1px solid rgba(197, 160, 89, 0.3); pointer-events: none;
+    }
+
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--text-dark); line-height: 1.1; }
+    .hero-content p { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: #444; }
+
     .location-badge {
-      display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-dark); margin-bottom: 1.5rem; font-weight: 700;
-      border: 1px solid #ddd; padding: 0.4rem 1rem; border-radius: 999px; background: white;
+      display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--text-gray); margin-bottom: 2rem;
+      border-bottom: 1px solid var(--gold-accent); padding-bottom: 5px;
     }
 
+    /* BOTONES PREMIUM */
     .btn-main {
-      padding: 1rem 2.5rem; background: var(--text-dark); color: white; text-transform: uppercase;
-      letter-spacing: 2px; font-size: 0.8rem; margin-top: 1rem; display: inline-flex;
-      align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid transparent;
-      cursor: pointer; transition: 0.25s ease; border-radius: 999px;
+      padding: 1.2rem 3rem; 
+      background: #111; 
+      color: white; 
+      text-transform: uppercase;
+      letter-spacing: 3px; 
+      font-size: 0.75rem; 
+      margin-top: 1.5rem; 
+      cursor: pointer; 
+      transition: all 0.4s ease;
+      position: relative; 
+      overflow: hidden;
+      border: 1px solid #111;
     }
-    .btn-main:hover { background: var(--gold-accent); border-color: var(--gold-accent); }
+    .btn-main::before {
+      content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    .btn-main:hover::before { left: 100%; }
+    .btn-main:hover { 
+      background: #fff; color: #111; 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    }
 
-    /* --- PRODUCT CARDS (CORRECCIÓN DE IMAGEN COMPLETA) --- */
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 0 5% 4rem; }
-    .product-card {
-      background: var(--bg-card); transition: var(--transition-slow); cursor: pointer;
-      border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      border: 1px solid rgba(0,0,0,0.04); opacity: 0; transform: translateY(14px);
-    }
-    body.sd-mode .product-card { background: var(--sd-card); border-color: var(--sd-border); box-shadow: var(--sd-shadow); }
+    /* --- SECCIONES & ESPACIADO --- */
+    .home-section, .products-grid { padding: 4rem 8%; } /* Más márgenes laterales */
     
-    .img-container {
-      /* AUMENTO DE ALTURA PARA QUE QUEPA LA FOTO VERTICAL */
-      height: 500px; 
-      overflow: hidden; position: relative;
+    .section-title { text-align: center; margin: 5rem 0 3rem; }
+    .section-title h2 { font-size: 2.8rem; margin-bottom: 0.5rem; }
+    .section-title p { color: var(--gold-accent); font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; }
+
+    /* --- CARDS & GRID (ESTILO REVISTA) --- */
+    .products-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Tarjetas más anchas */
+      gap: 3rem; /* Mucho más espacio entre tarjetas */
     }
+
+    .product-card {
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+    }
+    /* Quitamos bordes y sombras a la card contenedor para estilo minimalista */
+    body.sd-mode .product-card { background: transparent; }
+
+    .img-container {
+      height: 550px; /* Fotos muy altas y elegantes */
+      width: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+      background: #f0f0f0;
+    }
+    
     .img-container img {
       width: 100%; height: 100%; 
-      /* ESTO HACE QUE SE VEA DESDE ARRIBA HACIA ABAJO (CARA Y CUERPO) */
-      object-fit: cover; 
-      object-position: top center; 
-      transition: transform 1s ease; display: block;
+      object-fit: cover; object-position: top center;
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Zoom lento cinematográfico */
     }
-    .product-card:hover .img-container img { transform: scale(1.02); }
+    .product-card:hover .img-container img { transform: scale(1.08); }
 
-    .product-info { padding: 1.1rem 0 1.4rem; text-align: center; }
-    .product-info h3 { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.08rem; }
-    .product-info p { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
+    /* Overlay oscuro al hover en la imagen */
+    .img-container::after {
+      content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.0); transition: 0.4s;
+    }
+    .product-card:hover .img-container::after { background: rgba(0,0,0,0.1); }
 
-    /* --- CARRUSELES --- */
-    .section-title { text-align: center; padding: 3rem 1rem 1.5rem; }
-    .section-title h2 { font-size: 2.3rem; margin-bottom: 0.4rem; }
-    .section-title p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; }
+    .product-info { padding: 1.5rem 0; text-align: center; }
+    .product-info h3 { 
+      font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--text-dark); 
+      margin-bottom: 0.3rem; transition: 0.3s;
+    }
+    .product-card:hover .product-info h3 { color: var(--gold-accent); }
+    .product-info p { 
+      font-family: 'Lato', sans-serif; font-size: 0.75rem; letter-spacing: 2px; 
+      color: #888; text-transform: uppercase; 
+    }
+    body.sd-mode .product-info h3 { color: #eee; }
+    body.sd-mode .product-info p { color: var(--sd-accent2); }
 
-    .swiper { width: 100%; padding: 1rem 0 2rem; }
-    .swiper-slide { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
-    /* Ajuste imagenes carrusel tambien */
-    .slide-img { height: 450px; width: 100%; object-fit: cover; object-position: top center; display: block; }
-    .slide-info { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
-
-    /* --- CARRUSEL 3D --- */
-    .showcase-container { padding: 0 0 3rem; text-align: center; overflow: hidden; }
-    .showcase-container h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark); }
-    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
-    
-    .swiper-3d-container { width: 100%; padding-top: 20px; padding-bottom: 40px; }
+    /* --- CARRUSEL 3D (COVERFLOW) --- */
+    .showcase-container { margin: 2rem 0 5rem; padding: 0; overflow: visible; }
+    .swiper-3d-container { padding: 30px 0 60px; }
     .swiper-slide-3d {
-      background-position: center; background-size: cover; width: 280px; height: 450px; /* Mas alto */
-      border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); background-color: #fff; overflow: hidden;
+      width: 300px; height: 480px;
+      border-radius: 8px;
+      /* Sombra más realista */
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      filter: brightness(0.9); transition: 0.4s;
     }
-    .swiper-slide-3d img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-    body.sd-mode .swiper-slide-3d { box-shadow: 0 15px 50px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
+    .swiper-slide-active { filter: brightness(1); }
+    .swiper-slide-3d img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 8px; }
 
-    /* --- OTROS COMPONENTES --- */
-    .promo-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
-    .promo-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-card); position: relative; overflow: hidden; }
-    .promo-badge { position: absolute; top: 14px; right: 14px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: white; background: var(--text-dark); padding: 0.35rem 0.6rem; border-radius: 999px; }
+    /* --- SWIPER HOME (Minimalista) --- */
+    #homeSwiper .swiper-slide { border-radius: 0; box-shadow: none; }
+    #homeSwiper .slide-img { height: 500px; border-radius: 4px; }
     
-    .rent-cta { margin: 2.2rem 1rem 0; border-radius: var(--radius-lg); overflow: hidden; position: relative; box-shadow: var(--shadow-soft); background: linear-gradient(135deg, rgba(58,58,58,0.95), rgba(197,160,89,0.65)); color: white; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
-    .rent-cta h3 { font-size: 1.6rem; }
-    .btn-rent { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); color: white; padding: 0.95rem 1.5rem; border-radius: 999px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.55rem; transition: 0.25s ease; }
-    .btn-rent:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    /* --- BANNERS & PROMOS --- */
+    .shipping-banner {
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      background: white;
+      padding: 1.5rem; margin: 4rem auto; max-width: 800px;
+      text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+      color: var(--text-dark); letter-spacing: 1px;
+    }
+    .shipping-banner i { color: var(--gold-accent); margin-right: 10px; }
 
-    .shipping-banner { background: #f4f1ea; text-align: center; padding: 0.8rem; font-size: 0.9rem; letter-spacing: 1px; color: #555; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 2rem; border-radius: 12px; }
+    .promo-grid { gap: 2rem; }
+    .promo-card {
+      background: white; padding: 3rem 2rem; text-align: center;
+      border: 1px solid rgba(0,0,0,0.04); transition: 0.4s;
+      box-shadow: none; /* Flat style */
+    }
+    .promo-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-premium); border-color: var(--gold-accent); }
+    .promo-badge {
+      background: white; color: var(--gold-accent); border: 1px solid var(--gold-accent);
+      padding: 0.4rem 1rem; font-size: 0.7rem; top: 20px; right: 20px;
+    }
+
+    /* --- RENTA CTA (Dark Luxury) --- */
+    .rent-cta {
+      background: #0b0d14; color: white;
+      padding: 4rem 3rem; margin: 4rem 5%; border-radius: 4px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      background-image: radial-gradient(circle at 80% 50%, rgba(60,60,60,0.4), transparent);
+    }
+    .btn-rent {
+      background: white; color: black; border: none; padding: 1rem 2rem;
+      font-weight: 700; letter-spacing: 2px; transition: 0.4s;
+    }
+    .btn-rent:hover { background: var(--gold-accent); color: white; transform: scale(1.05); }
+
+    /* --- FILTROS --- */
+    .tools-bar { padding: 0 8% 2rem; }
+    .search-input {
+      background: transparent; border: none; border-bottom: 1px solid #ccc;
+      border-radius: 0; padding: 1rem 0; font-size: 1rem; font-family: 'Cormorant Garamond', serif;
+    }
+    .search-input:focus { box-shadow: none; border-color: var(--gold-accent); }
     
-    .category-header { text-align: center; padding: 3.5rem 1rem 1.5rem; }
-    .category-header h2 { font-size: 3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
-    .category-header p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; }
+    .chip {
+      background: white; border: 1px solid #eee; color: #555;
+      padding: 0.6rem 1.2rem; font-size: 0.8rem; letter-spacing: 1px;
+      transition: 0.3s;
+    }
+    .chip.active {
+      background: var(--gold-accent); color: white; border-color: var(--gold-accent);
+      box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+    }
 
-    .tools-bar { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; padding: 0 5% 1.2rem; align-items: end; }
-    .search-input { width: 100%; padding: 0.95rem 1rem; border-radius: 999px; border: 1px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.9); outline: none; transition: 0.25s ease; }
-    .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .chip { border: 1px solid rgba(0,0,0,0.12); padding: 0.6rem 0.9rem; border-radius: 999px; cursor: pointer; background: rgba(255,255,255,0.95); transition: 0.2s ease; font-size: 0.85rem; user-select: none; }
-    .chip.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
-    body.sd-mode .chip { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); }
-    body.sd-mode .chip.active { background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7)); border-color: rgba(255,255,255,0.10); color: #0b0d14; font-weight: 700; }
+    /* --- STUDIO DOMINGUEZ (DARK MODE OVERRIDES) --- */
+    .sd-hero {
+      background: #000; min-height: 70vh; margin: 0; border-radius: 0;
+    }
+    .sd-hero::after { opacity: 0.4; }
+    .sd-hero-content h1 {
+      font-size: 4rem; background: linear-gradient(to right, #fff, #aaa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    
+    /* --- FOOTER --- */
+    .contact-footer {
+      background: #111; color: #ccc; padding: 6rem 8% 3rem;
+      border-top: 4px solid var(--gold-accent);
+    }
+    .contact-footer h3 { color: white; font-size: 1.5rem; letter-spacing: 3px; }
+    .contact-row i { color: var(--gold-accent); }
+    .social-btn { border-color: #333; color: #fff; }
+    .social-btn:hover { border-color: var(--gold-accent); background: var(--gold-accent); }
 
-    .back-link { background: none; border: none; border-bottom: 1px solid var(--gold-accent); cursor: pointer; color: #999; margin-top: 1rem; padding-bottom: 0.25rem; }
-    body.sd-mode .back-link { border-bottom-color: var(--sd-accent2); color: rgba(255,255,255,0.65); }
-    .view-section.active-view .product-card { animation: fadeInUp 0.55s ease forwards; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Footer */
-    .contact-footer { background: #fff; padding: 4rem 5% 2rem; border-top: 1px solid #eee; margin-top: 2rem; transition: background 0.35s ease; }
-    body.sd-mode .contact-footer { background: #080a10; border-top: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.88); }
-    .footer-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
-    .contact-row { display: flex; margin-bottom: 1.5rem; align-items: flex-start; gap: 0.8rem; }
-    .contact-row i { color: var(--gold-accent); width: 30px; font-size: 1.2rem; margin-top: 4px; }
-    .social-btn { width: 45px; height: 45px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-dark); transition: 0.25s ease; }
-    .social-btn:hover { background: var(--gold-accent); color: white; border-color: var(--gold-accent); }
-    .float-wa { position: fixed; right: 18px; bottom: 18px; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px rgba(0,0,0,0.18); z-index: 3500; transition: 0.25s ease; }
-    .float-wa:hover { transform: translateY(-4px); }
-
-    /* Studio Header */
-    .sd-hero { margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--sd-shadow); position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(800px 400px at 20% 10%, rgba(138,92,255,0.35), transparent 60%), linear-gradient(180deg, rgba(11,13,20,1), rgba(7,8,12,1)); }
-    .sd-hero::after{ content:""; position:absolute; inset:0; background-image:url('vestidonegroresaltar.jpeg'); background-size:cover; background-position:center; opacity:0.30; mix-blend-mode: screen; pointer-events:none; }
-    .sd-hero-content{ position:relative; padding: 3rem 1.8rem; max-width: 760px; color: var(--sd-text); z-index:1; }
-    .sd-actions{ display:flex; gap: 0.9rem; justify-content:center; flex-wrap:wrap; margin-top: 1.6rem; }
-    .btn-sd{ padding: 0.95rem 1.45rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--sd-text); cursor:pointer; letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; transition: 0.25s ease; display:inline-flex; gap:.55rem; align-items:center; box-shadow: var(--sd-shadow); }
-    .btn-sd:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.26); box-shadow: var(--sd-glow); }
-    .btn-sd.primary{ background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75)); color: #0b0d14; border-color: rgba(255,255,255,0.08); font-weight: 800; }
-
+    /* --- RESPONSIVE --- */
     @media (max-width: 980px) {
-      .promo-grid { grid-template-columns: 1fr; }
-      .tools-bar { grid-template-columns: 1fr; }
-      .slide-img { height: 350px; }
-      .hero-content h1 { font-size: 2.2rem; }
+      .hero-content { margin: 0 1rem; padding: 3rem 1.5rem; }
+      .hero-content h1 { font-size: 2.5rem; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 2rem 4%; }
+      .img-container { height: 400px; }
+      .rent-cta { flex-direction: column; text-align: center; gap: 2rem; }
     }
-    @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .img-container { height: 380px; }
-      nav { padding: 1rem 1.3rem; }
-      .hero-wrapper { margin: 0.8rem; }
-      .rent-cta { margin: 1.6rem 0.8rem 0; }
-      .sd-hero { margin: 0.8rem; }
-      .swiper-slide-3d { width: 240px; height: 380px; }
+    @media (max-width: 600px) {
+      .products-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .slide-img { height: 400px; }
     }
   </style>
 </head>
@@ -268,17 +399,16 @@
       <li><a role="menuitem" data-nav="nina" onclick="navigateTo('nina')">Colección Niña</a></li>
       <li><a role="menuitem" data-nav="nino" onclick="navigateTo('nino')">Colección Niño</a></li>
       <li><a role="menuitem" data-nav="studio" onclick="navigateTo('studio')">Studio Dominguez</a></li>
-      <li><a role="menuitem" href="#contacto" onclick="closeMenuAndGoToFooter()">Contacto y Ubicación</a></li>
+      <li><a role="menuitem" href="#contacto" onclick="closeMenuAndGoToFooter()">Contacto</a></li>
       <li>
-        <a role="menuitem" href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()"
-           style="color: var(--gold-accent); font-size: 1.5rem;">
-          <i class="fab fa-whatsapp"></i> Agendar Cita
+        <a role="menuitem" href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()" style="color: var(--gold-accent); font-size: 2rem;">
+          <i class="fab fa-whatsapp"></i>
         </a>
       </li>
     </ul>
   </div>
 
-  <nav>
+  <nav id="navbar">
     <div class="logo" onclick="navigateTo('inicio')">Mi Bello Ropón</div>
     <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal">
       <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
@@ -292,122 +422,85 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
-        <div class="hero-content">
-          <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón" 
-               style="max-width: 180px; margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+        <div class="hero-content reveal-on-scroll">
+          <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón" style="max-width: 160px; margin-bottom: 2rem; display: block; margin-left: auto; margin-right: auto; filter: brightness(0.1);">
 
-          <div class="location-badge">
-            <i class="fas fa-map-marker-alt" style="color:var(--gold-accent);"></i>
-            Monterrey · San Antonio
-          </div>
+          <div class="location-badge">Monterrey · San Antonio</div>
 
           <h1>Momentos que<br />Perduran</h1>
-          <p style="margin-bottom: 1.5rem; color: #555; font-style: italic;">
-            Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.
+          <p style="margin-bottom: 2rem; margin-top: 1rem;">
+            Alta costura infantil para Bautizo y Primera Comunión.
           </p>
 
-          <p style="font-size: 0.85rem; font-weight: 700; color: var(--gold-accent); letter-spacing: 1px; margin-bottom: 1.5rem;">
-            <i class="fas fa-plane"></i> ENTREGAS A TODO EL MUNDO
+          <p style="font-size: 0.75rem; font-weight: 700; color: var(--gold-accent); letter-spacing: 2px; margin-bottom: 2rem; text-transform: uppercase;">
+            <i class="fas fa-plane"></i> Worldwide Shipping
           </p>
 
-          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <button onclick="navigateTo('nina')" class="btn-main" style="background: white; color: var(--text-dark); border: 1px solid rgba(0,0,0,0.08);">
-              Ver Niña
-            </button>
-            <button onclick="navigateTo('nino')" class="btn-main">
-              Ver Niño
-            </button>
+          <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <button onclick="navigateTo('nina')" class="btn-main">Ver Niña</button>
+            <button onclick="navigateTo('nino')" class="btn-main" style="background: white; color: #111;">Ver Niño</button>
           </div>
         </div>
       </header>
 
       <div class="home-section">
-
-        <div class="section-title">
-          <p>Destacados</p>
-          <h2>Lo más buscado</h2>
+        <div class="section-title reveal-on-scroll">
+          <p>Selección Exclusiva</p>
+          <h2>Destacados</h2>
         </div>
 
-        <div class="swiper" id="homeSwiper">
+        <div class="swiper reveal-on-scroll" id="homeSwiper">
           <div class="swiper-wrapper">
-            
             <div class="swiper-slide">
               <img class="slide-img" loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
-              <div class="slide-info">
-                <h3>Ropón Desmontable Exclusivo</h3>
-                <p>Bautizo · Niña</p>
-              </div>
+              <div class="product-info"><h3>Ropón Exclusivo</h3><p>Bautizo · Niña</p></div>
             </div>
-
             <div class="swiper-slide">
               <img class="slide-img" loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Niño" />
-              <div class="slide-info">
-                <h3>Bombacho Ceremonia</h3>
-                <p>Bautizo · Niño</p>
-              </div>
+              <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bautizo · Niño</p></div>
             </div>
-
             <div class="swiper-slide">
               <img class="slide-img" loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
-              <div class="slide-info">
-                <h3>Colección Gala</h3>
-                <p>Renta · Studio</p>
-              </div>
+              <div class="product-info"><h3>Colección Gala</h3><p>Studio Dominguez</p></div>
             </div>
-
              <div class="swiper-slide">
               <img class="slide-img" loading="lazy" src="principe.jpeg" alt="Traje Príncipe" />
-              <div class="slide-info">
-                <h3>Traje Príncipe</h3>
-                <p>Ceremonia · Niño</p>
-              </div>
+              <div class="product-info"><h3>Traje Príncipe</h3><p>Ceremonia · Niño</p></div>
             </div>
-
           </div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-pagination" style="bottom: 0;"></div>
         </div>
 
-        <div class="shipping-banner">
+        <div class="shipping-banner reveal-on-scroll">
           <i class="fas fa-globe-americas"></i>
-          <span><strong>Worldwide Shipping:</strong> Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
+          <span>Envíos internacionales disponibles. Cotiza tu envío directo a casa.</span>
         </div>
 
         <div class="promo-grid">
-          <div class="promo-card">
+          <div class="promo-card reveal-on-scroll">
             <span class="promo-badge">USA & MX</span>
             <h3>Atención Binacional</h3>
             <p>Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.</p>
-            <a href="#contacto">Ver ubicaciones</a>
           </div>
-
-          <div class="promo-card">
+          <div class="promo-card reveal-on-scroll" style="transition-delay: 0.1s;">
             <span class="promo-badge">Sets</span>
             <h3>Kits Completos</h3>
-            <p>Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.</p>
-            <a onclick="navigateTo('nina')">Ver Colección</a>
+            <p>Ropón, vela, zapatos y accesorios coordinados a la perfección.</p>
           </div>
-
-          <div class="promo-card">
+          <div class="promo-card reveal-on-scroll" style="transition-delay: 0.2s;">
             <span class="promo-badge">Nuevo</span>
             <h3>Temporada 2024</h3>
-            <p>Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.</p>
-            <a onclick="navigateTo('nino')">Ver Niño</a>
+            <p>Elegancia atemporal con los textiles más finos.</p>
           </div>
         </div>
 
-        <div class="rent-cta">
+        <div class="rent-cta reveal-on-scroll">
           <div>
-            <h3>¿Buscas renta de vestidos?</h3>
-            <p>
-              Descubre una experiencia más nocturna y sofisticada con catálogo exclusivo en
-              <strong>Studio Dominguez</strong>.
-            </p>
+            <h3 style="font-family: 'Cinzel'; margin-bottom: 0.5rem;">Studio Dominguez</h3>
+            <p style="color: #aaa; max-width: 400px;">Renta de vestidos de noche. La opción inteligente para lucir espectacular en cada evento.</p>
           </div>
-          <button class="btn-rent" onclick="navigateTo('studio')" aria-label="Ir a renta de vestidos - Studio Dominguez">
-            <i class="fa-solid fa-moon"></i> Renta de vestidos
-          </button>
+          <button class="btn-rent" onclick="navigateTo('studio')">Ver Catálogo Renta</button>
         </div>
-
       </div>
     </section>
 
@@ -418,9 +511,9 @@
         <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
       </div>
 
-      <div class="showcase-container">
-        <h3>Galería: Ropones Desmontables</h3>
-        <p style="color:#777; margin-bottom:10px;">Desliza para ver la colección</p>
+      <div class="showcase-container reveal-on-scroll">
+        <h3>Pasarela: Ropones Desmontables</h3>
+        <p style="color:#888; font-style: italic;">Desliza para explorar</p>
         
         <div class="swiper swiper-3d-container" id="roponesSwiper">
           <div class="swiper-wrapper">
@@ -436,11 +529,9 @@
 
       <div class="tools-bar">
         <div class="search-wrap">
-          <label for="searchNina">Buscar</label>
-          <input id="searchNina" class="search-input" type="text" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
+          <input id="searchNina" class="search-input" type="text" placeholder="Buscar por nombre..." oninput="applyFilters('nina')" />
         </div>
-        <div class="filter-wrap">
-          <label>Filtrar por</label>
+        <div class="filter-wrap" style="margin-top: 1rem;">
           <div class="chips" id="chipsNina">
             <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)">Todo</div>
             <div class="chip" onclick="setFilter('nina','Ropones', this)">Ropones</div>
@@ -450,99 +541,30 @@
         </div>
       </div>
 
-      <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda/filtro.</div>
+      <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda.</div>
 
       <div class="products-grid" id="gridNina">
-        
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+        <article class="product-card reveal-on-scroll" data-category="Ropones" data-name="Ropón Desmontable">
           <div class="img-container"><img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón 1" /></div>
           <div class="product-info"><h3>Ropón Desmontable 01</h3><p>Ropones</p></div>
         </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+        <article class="product-card reveal-on-scroll" data-category="Ropones" data-name="Ropón Desmontable">
           <div class="img-container"><img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón 2" /></div>
           <div class="product-info"><h3>Ropón Desmontable 02</h3><p>Ropones</p></div>
         </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <div class="img-container"><img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón 3" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 03</h3><p>Ropones</p></div>
+        <article class="product-card reveal-on-scroll" data-category="Ropones" data-name="Ropón Exclusivo">
+          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Exclusivo" /></div>
+          <div class="product-info"><h3>Ropón Exclusivo</h3><p>Exclusivos</p></div>
         </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <div class="img-container"><img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón 4" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 04</h3><p>Ropones</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <div class="img-container"><img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón 5" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 05</h3><p>Ropones</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <div class="img-container"><img loading="lazy" src="ropondesmontable6.jpeg" alt="Ropón 6" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 06</h3><p>Ropones</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <div class="img-container"><img loading="lazy" src="ropondesmontable7.jpeg" alt="Ropón 7" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 07</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 01</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 02</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 03</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo4.jpeg" alt="Ropón Exclusivo 4" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 04</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <div class="img-container"><img loading="lazy" src="ropondesmontablexclusivo5.jpeg" alt="Ropón Exclusivo 5" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 05</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+        <article class="product-card reveal-on-scroll" data-category="Batitas" data-name="Batita Ceremonia">
           <div class="img-container"><img loading="lazy" src="batita1.jpeg" alt="Batita 1" /></div>
           <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
         </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <div class="img-container"><img loading="lazy" src="batita2.jpeg" alt="Batita 2" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
-        </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <div class="img-container"><img loading="lazy" src="batita3.jpeg" alt="Batita 3" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
-        </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <div class="img-container"><img loading="lazy" src="batita4.jpeg" alt="Batita 4" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 04</h3><p>Batitas</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 01</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 02</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva3.jpeg" alt="Batita Exclusiva 3" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 03</h3><p>Exclusivos</p></div>
-        </article>
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva4.jpeg" alt="Batita Exclusiva 4" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 04</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
+        <article class="product-card reveal-on-scroll" data-category="Española" data-name="Vestido Línea Española">
           <div class="img-container"><img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" /></div>
           <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
         </article>
-      </div>
+        </div>
     </section>
 
     <section id="view-nino" class="view-section">
@@ -554,11 +576,9 @@
 
       <div class="tools-bar">
         <div class="search-wrap">
-          <label for="searchNino">Buscar</label>
-          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
+          <input id="searchNino" class="search-input" type="text" placeholder="Buscar traje, bombacho..." oninput="applyFilters('nino')" />
         </div>
-        <div class="filter-wrap">
-          <label>Filtrar por</label>
+        <div class="filter-wrap" style="margin-top: 1rem;">
           <div class="chips" id="chipsNino">
             <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)">Todo</div>
             <div class="chip" onclick="setFilter('nino','Ropón', this)">Ropón</div>
@@ -569,134 +589,54 @@
         </div>
       </div>
 
-      <div class="empty-state" id="emptyNino">No encontramos productos con esa búsqueda/filtro.</div>
+      <div class="empty-state" id="emptyNino">No encontramos productos.</div>
 
       <div class="products-grid" id="gridNino">
-        
-        <article class="product-card" data-category="Ropón" data-name="Ropón Desmontable Niño">
+        <article class="product-card reveal-on-scroll" data-category="Ropón" data-name="Ropón Desmontable Niño">
           <div class="img-container"><img loading="lazy" src="Ropon%20desmontable%20Niño.jpeg" alt="Ropón Niño" /></div>
           <div class="product-info"><h3>Ropón Desmontable Niño</h3><p>Ropón</p></div>
         </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
+        <article class="product-card reveal-on-scroll" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
           <div class="img-container"><img loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Resaltar" /></div>
           <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bombacho</p></div>
         </article>
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <div class="img-container"><img loading="lazy" src="bombachoniño.jpeg" alt="Bombacho 1" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 01</h3><p>Bombacho</p></div>
-        </article>
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <div class="img-container"><img loading="lazy" src="bombachoniño2.jpeg" alt="Bombacho 2" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 02</h3><p>Bombacho</p></div>
-        </article>
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <div class="img-container"><img loading="lazy" src="bombachoniño3.jpeg" alt="Bombacho 3" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 03</h3><p>Bombacho</p></div>
-        </article>
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <div class="img-container"><img loading="lazy" src="bombachoniño4.jpeg" alt="Bombacho 4" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 04</h3><p>Bombacho</p></div>
-        </article>
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <div class="img-container"><img loading="lazy" src="bombachoniño5.jpeg" alt="Bombacho 5" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 05</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+        <article class="product-card reveal-on-scroll" data-category="Príncipe" data-name="Traje Príncipe">
           <div class="img-container"><img loading="lazy" src="principe.jpeg" alt="Príncipe 1" /></div>
           <div class="product-info"><h3>Traje Príncipe 01</h3><p>Príncipe</p></div>
         </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe2.jpeg" alt="Príncipe 2" /></div>
-          <div class="product-info"><h3>Traje Príncipe 02</h3><p>Príncipe</p></div>
-        </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe3.jpeg" alt="Príncipe 3" /></div>
-          <div class="product-info"><h3>Traje Príncipe 03</h3><p>Príncipe</p></div>
-        </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe4.jpeg" alt="Príncipe 4" /></div>
-          <div class="product-info"><h3>Traje Príncipe 04</h3><p>Príncipe</p></div>
-        </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe5.jpeg" alt="Príncipe 5" /></div>
-          <div class="product-info"><h3>Traje Príncipe 05</h3><p>Príncipe</p></div>
-        </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe6.jpeg" alt="Príncipe 6" /></div>
-          <div class="product-info"><h3>Traje Príncipe 06</h3><p>Príncipe</p></div>
-        </article>
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <div class="img-container"><img loading="lazy" src="principe7.jpeg" alt="Príncipe 7" /></div>
-          <div class="product-info"><h3>Traje Príncipe 07</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+        <article class="product-card reveal-on-scroll" data-category="Traje" data-name="Traje Después de Bautizo">
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño.jpeg" alt="Traje 1" /></div>
           <div class="product-info"><h3>Traje Ceremonia 01</h3><p>Traje</p></div>
         </article>
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño2.jpeg" alt="Traje 2" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 02</h3><p>Traje</p></div>
-        </article>
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño3.jpeg" alt="Traje 3" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 03</h3><p>Traje</p></div>
-        </article>
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño4.jpeg" alt="Traje 4" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 04</h3><p>Traje</p></div>
-        </article>
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño5.jpeg" alt="Traje 5" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 05</h3><p>Traje</p></div>
-        </article>
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño6.jpeg" alt="Traje 6" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 06</h3><p>Traje</p></div>
-        </article>
-
-      </div>
+        </div>
     </section>
 
     <section id="view-studio" class="view-section">
       <header class="sd-hero">
-        <div class="sd-hero-content">
-          <img src="Rentadevestidoslogo.png" alt="Studio Dominguez Logo" 
-               style="max-width: 220px; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
+        <div class="sd-hero-content reveal-on-scroll">
+          <img src="Rentadevestidoslogo.png" alt="Studio Dominguez Logo" style="max-width: 250px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4));">
           
-          <h1 style="font-size: 2.5rem; margin-top:0.5rem;">Studio Dominguez</h1>
-          <p>Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.</p>
+          <h1 style="margin-top:0.5rem;">Studio Dominguez</h1>
+          <p>Catálogo exclusivo de vestidos de noche.</p>
 
           <div class="sd-actions">
-            <button class="btn-sd primary" onclick="document.getElementById('studioCatalog').scrollIntoView({behavior:'smooth'})">
-              <i class="fa-solid fa-shirt"></i> Ver vestidos
-            </button>
-            <a class="btn-sd" href="https://wa.me/528180932362" target="_blank" style="text-decoration:none;">
-              <i class="fab fa-whatsapp"></i> Agendar Cita
-            </a>
-            <button class="btn-sd" onclick="navigateTo('inicio')">
-              <i class="fa-solid fa-arrow-left"></i> Volver
-            </button>
+            <button class="btn-sd primary" onclick="document.getElementById('studioCatalog').scrollIntoView({behavior:'smooth'})">Ver Colección</button>
+            <button class="btn-sd" onclick="navigateTo('inicio')">Volver</button>
           </div>
         </div>
       </header>
 
       <div class="home-section" id="studioCatalog">
-        <div class="section-title" style="padding-top: 1rem;">
-          <p>Catálogo Completo</p>
+        <div class="section-title">
+          <p>Gala & Coctel</p>
           <h2>Vestidos en renta</h2>
         </div>
 
         <div class="tools-bar">
           <div class="search-wrap">
-            <label for="searchStudio">Buscar</label>
-            <input id="searchStudio" class="search-input" type="text" placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
+            <input id="searchStudio" class="search-input" type="text" placeholder="Buscar color, estilo..." oninput="applyFilters('studio')" />
           </div>
-
-          <div class="filter-wrap">
-            <label>Filtrar por Color</label>
+          <div class="filter-wrap" style="margin-top: 1rem;">
             <div class="chips" id="chipsStudio">
               <div class="chip active" onclick="setFilter('studio','all', this)">Todo</div>
               <div class="chip" onclick="setFilter('studio','Negro', this)">Negro</div>
@@ -706,46 +646,21 @@
             </div>
           </div>
         </div>
-        <div class="empty-state" id="emptyStudio">No encontramos vestidos con esa búsqueda/filtro.</div>
 
         <div class="products-grid" id="gridStudio">
-          <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
+          <article class="product-card reveal-on-scroll" data-category="Negro" data-name="Vestido Noche Profunda">
             <div class="img-container"><img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" /></div>
             <div class="product-info"><h3>Modelo Noche Profunda</h3><p>Negro</p></div>
           </article>
-          <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
-            <div class="img-container"><img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
-            <div class="product-info"><h3>Modelo Gala Dark</h3><p>Negro</p></div>
-          </article>
-          <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
-            <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
-            <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
-          </article>
-          <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
-            <div class="img-container"><img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
-            <div class="product-info"><h3>Modelo Midnight Blue</h3><p>Azul</p></div>
-          </article>
-          <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
+          <article class="product-card reveal-on-scroll" data-category="Rojo" data-name="Vestido Carmesí">
             <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
             <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
           </article>
-           <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Scarlet">
-            <div class="img-container"><img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
-            <div class="product-info"><h3>Modelo Scarlet</h3><p>Rojo</p></div>
+          <article class="product-card reveal-on-scroll" data-category="Azul" data-name="Vestido Azul Real">
+            <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
+            <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
           </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
-            <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
-            <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
-          </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Beige">
-            <div class="img-container"><img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
-            <div class="product-info"><h3>Modelo Champagne</h3><p>Claros</p></div>
-          </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Crema">
-            <div class="img-container"><img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
-            <div class="product-info"><h3>Modelo Crema Suave</h3><p>Claros</p></div>
-          </article>
-        </div>
+          </div>
       </div>
     </section>
 
@@ -755,71 +670,71 @@
     <div class="footer-grid">
       <div class="footer-info">
         <h3 style="margin-bottom: 2rem;">Contáctanos</h3>
-
         <div class="contact-row">
           <i class="fas fa-map-marker-alt"></i>
           <div>
             <strong>Monterrey, MX</strong>
-            <p style="color: #666;">Santa Genoveva #1202, Col. La Purísima,<br />Guadalupe, Nuevo León.</p>
+            <p>Santa Genoveva #1202, Col. La Purísima,<br />Guadalupe, Nuevo León.</p>
           </div>
         </div>
-
         <div class="contact-row">
           <i class="fas fa-map-pin"></i>
           <div>
             <strong>San Antonio, TX</strong>
-            <p style="color: #666;">Atención personalizada.</p>
-            <a href="tel:+12107177607" style="color:var(--text-dark); font-weight:700;">+1 (210) 717-7607</a>
+            <p>Atención personalizada.</p>
+            <a href="tel:+12107177607" style="color:#fff; text-decoration: underline;">+1 (210) 717-7607</a>
           </div>
         </div>
-
         <div class="contact-row">
           <i class="fab fa-whatsapp"></i>
           <div>
-            <strong>WhatsApp & Citas</strong>
-            <p><a href="https://wa.me/528180932362" target="_blank" style="text-decoration: underline;">81 80 93 23 62</a></p>
+            <strong>Citas</strong>
+            <p><a href="https://wa.me/528180932362" target="_blank">81 80 93 23 62</a></p>
           </div>
         </div>
-
-        <div class="contact-row">
-          <i class="fas fa-plane"></i>
-          <div>
-            <strong>Worldwide Shipping</strong>
-            <p style="color:#666; font-size:0.9rem;">Envíos a todo el mundo.<br/>Contáctanos para detalles.</p>
-          </div>
-        </div>
-
         <div class="social-links">
-          <a href="https://www.instagram.com/studio.vdominguez?igsh=bXNwZGtlNml2dG4w" target="_blank" class="social-btn" aria-label="Instagram Studio Dominguez">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://wa.me/528180932362" target="_blank" class="social-btn" style="background: #25D366; color: white; border-color: #25D366;" aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
+          <a href="https://www.instagram.com/studio.vdominguez?igsh=bXNwZGtlNml2dG4w" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/528180932362" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-
-      <div style="border-radius: 20px; overflow: hidden; height: 350px; box-shadow: var(--shadow-card);">
+      <div style="border-radius: 8px; overflow: hidden; height: 350px; opacity: 0.8;">
         <iframe width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps?q=Santa+Genoveva+1202+Guadalupe+Nuevo+Leon&output=embed" title="Mapa ubicación"></iframe>
       </div>
     </div>
-
-    <div style="text-align: center; margin-top: 3rem; font-size: 0.8rem; color: #aaa;">
-      © 2024 Mi Bello Ropón / Studio Dominguez. Todos los derechos reservados.
+    <div style="text-align: center; margin-top: 4rem; font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 2px;">
+      © 2024 Mi Bello Ropón / Studio Dominguez.
     </div>
   </footer>
 
   <a class="float-wa" href="https://wa.me/528180932362" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
+    <i class="fab fa-whatsapp" style="font-size: 1.8rem;"></i>
   </a>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
-    // ----- STATE -----
+    /* --- SCROLL REVEAL (Efecto de aparición) --- */
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* --- NAVBAR SCROLL EFFECT --- */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    /* --- LOGICA ORIGINAL (Filtros, Menu, SPA) --- */
     const state = { currentView: 'inicio', filters: { nina: 'all', nino: 'all', studio: 'all' } };
 
-    // ----- MENU -----
     function toggleMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
@@ -827,8 +742,8 @@
       burger.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      if (isOpen) { const firstLink = menu.querySelector('a'); if (firstLink) firstLink.focus(); }
     }
+    
     function closeMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
@@ -837,29 +752,16 @@
         burger.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-hidden', 'true');
       }
     }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const menu = document.getElementById('overlayMenu');
-        if (menu.classList.contains('active')) { closeMenu(); document.getElementById('burgerBtn').focus(); }
-      }
-    });
-    document.getElementById('overlayMenu').addEventListener('click', (e) => { if (e.target.id === 'overlayMenu') closeMenu(); });
+
     function closeMenuAndGoToFooter() { closeMenu(); document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' }); }
-    function setActiveMenuLink(viewName) {
-      const links = document.querySelectorAll('.overlay-menu a[data-nav]');
-      links.forEach(l => l.classList.remove('active-link'));
-      const active = document.querySelector('.overlay-menu a[data-nav="' + viewName + '"]');
-      if (active) active.classList.add('active-link');
-    }
+
     function setThemeForView(viewName) {
       const isStudio = (viewName === 'studio');
       document.body.classList.toggle('sd-mode', isStudio);
       const logo = document.querySelector('.logo');
-      if (!logo) return;
-      logo.textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
+      if (logo) logo.textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
     }
 
-    // ----- SPA NAVIGATION -----
     function navigateTo(viewName) {
       closeMenu();
       const views = document.querySelectorAll('.view-section');
@@ -867,15 +769,12 @@
       const target = document.getElementById('view-' + viewName);
       if (target) {
         target.classList.add('active-view');
-        state.currentView = viewName;
-        setActiveMenuLink(viewName);
         setThemeForView(viewName);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') { applyFilters(viewName); }
       }
     }
 
-    // ----- FILTERS + SEARCH -----
     function setFilter(view, category, el) {
       state.filters[view] = category;
       const chipsWrap = view === 'nina' ? document.getElementById('chipsNina') : view === 'nino' ? document.getElementById('chipsNino') : document.getElementById('chipsStudio');
@@ -883,6 +782,7 @@
       el.classList.add('active');
       applyFilters(view);
     }
+
     function applyFilters(view) {
       const grid = view === 'nina' ? document.getElementById('gridNina') : view === 'nino' ? document.getElementById('gridNino') : document.getElementById('gridStudio');
       const empty = view === 'nina' ? document.getElementById('emptyNina') : view === 'nino' ? document.getElementById('emptyNino') : document.getElementById('emptyStudio');
@@ -903,23 +803,20 @@
       empty.style.display = visibleCount === 0 ? 'block' : 'none';
     }
 
-    // ----- SWIPER INIT -----
     const swiperHome = new Swiper('#homeSwiper', {
-      loop: true, spaceBetween: 16, slidesPerView: 1,
+      loop: true, spaceBetween: 30, slidesPerView: 1,
       pagination: { el: '.swiper-pagination', clickable: true },
-      autoplay: { delay: 3500, disableOnInteraction: false },
+      autoplay: { delay: 4000, disableOnInteraction: false },
       breakpoints: { 768: { slidesPerView: 2 }, 1100: { slidesPerView: 3 } }
     });
 
     const common3dProps = {
       effect: 'coverflow', grabCursor: true, centeredSlides: true,
-      slidesPerView: 'auto', coverflowEffect: { rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: true },
+      slidesPerView: 'auto', coverflowEffect: { rotate: 0, stretch: 0, depth: 150, modifier: 1, slideShadows: true },
       pagination: false,
     };
     new Swiper('#roponesSwiper', { ...common3dProps, initialSlide: 2 });
-    
-    // Initial state
-    setActiveMenuLink('inicio');
+
     setThemeForView('inicio');
   </script>
 </body>
