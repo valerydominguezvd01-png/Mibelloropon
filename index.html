@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Bello Ropón | Boutique Infantil</title>
+  <title>Mi Bello Ropón | Monterrey & San Antonio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,15 +60,14 @@
       justify-content: space-between;
       align-items: center;
       z-index: 3000;
-      background: rgba(253, 252, 248, 0.85);
+      background: rgba(253, 252, 248, 0.90);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(0,0,0,0.05);
       transition: background 0.35s ease, border-color 0.35s ease;
     }
 
-    /* Night nav style when Studio view is active */
     body.sd-mode nav {
-      background: rgba(11, 13, 20, 0.75);
+      background: rgba(11, 13, 20, 0.85);
       border-bottom: 1px solid rgba(255,255,255,0.10);
     }
     body.sd-mode .burger-line { background: rgba(255,255,255,0.88); }
@@ -85,7 +84,6 @@
       transition: color 0.35s ease;
     }
 
-    /* Burger button as real <button> for accessibility */
     .burger-btn {
       cursor: pointer;
       width: 40px; height: 28px;
@@ -100,9 +98,7 @@
       outline-offset: 6px;
       border-radius: 10px;
     }
-    body.sd-mode .burger-btn:focus-visible {
-      outline-color: var(--sd-accent);
-    }
+    body.sd-mode .burger-btn:focus-visible { outline-color: var(--sd-accent); }
 
     .burger-line {
       display: block;
@@ -134,13 +130,9 @@
       transition: opacity 0.5s ease, background 0.35s ease;
     }
     .overlay-menu.active { opacity: 1; pointer-events: all; }
-
-    body.sd-mode .overlay-menu {
-      background: rgba(11, 13, 20, 0.96);
-    }
+    body.sd-mode .overlay-menu { background: rgba(11, 13, 20, 0.96); }
 
     .overlay-menu li { margin: 1.2rem 0; overflow: hidden; text-align: center; }
-
     .overlay-menu a {
       font-family: 'Cinzel', serif;
       font-size: 2rem;
@@ -148,7 +140,6 @@
       display: inline-block;
       transform: translateY(120%);
       transition: transform 0.6s ease, color 0.25s ease;
-      outline: none;
     }
     body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); }
     body.sd-mode .overlay-menu a:hover { color: var(--sd-accent2); }
@@ -160,22 +151,9 @@
     .overlay-menu.active li:nth-child(5) a { transition-delay: 0.33s; }
     .overlay-menu.active li:nth-child(6) a { transition-delay: 0.40s; }
     .overlay-menu.active a { transform: translateY(0); }
-
     .overlay-menu a:hover { color: var(--gold-accent); }
-    .overlay-menu a.active-link {
-      color: var(--gold-accent);
-      position: relative;
-    }
+    .overlay-menu a.active-link { color: var(--gold-accent); position: relative; }
     body.sd-mode .overlay-menu a.active-link { color: var(--sd-accent2); }
-    .overlay-menu a.active-link::after{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      bottom:-10px;
-      height:1px;
-      background: currentColor;
-      opacity: 0.7;
-    }
 
     /* --- CONTENEDOR PRINCIPAL (SPA) --- */
     .main-container {
@@ -183,18 +161,9 @@
       min-height: 100vh;
       padding-top: 82px;
     }
-
-    .view-section {
-      display: none;
-      opacity: 0;
-      animation: fadeView 0.8s ease forwards;
-    }
+    .view-section { display: none; opacity: 0; animation: fadeView 0.8s ease forwards; }
     .view-section.active-view { display: block; }
-
-    @keyframes fadeView {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeView { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     /* --- VISTA: INICIO (HERO) --- */
     .hero-wrapper {
@@ -209,33 +178,46 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
     }
-
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 110%;
-      background-image: url('batitaexclusiva2.jpeg');
-      background-size: cover; background-position: center;
+      background-image: url('ropondesmontable.jpeg'); /* IMAGEN DE FONDO */
+      background-size: cover; background-position: center 20%;
       z-index: -2;
       filter: brightness(0.96);
       transform: scale(1.03);
     }
-
     .hero-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(253, 252, 248, 0.4);
+      background: rgba(253, 252, 248, 0.55); /* Más claridad para leer */
       z-index: -1;
     }
-
     .hero-content {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
       padding: 3rem;
       max-width: 680px;
       border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
       border-radius: 16px;
     }
-    .hero-content h1 { font-size: 3rem; margin-bottom: 0.9rem; color: var(--text-dark); }
+    .hero-content h1 { font-size: 2.8rem; margin-bottom: 0.9rem; color: var(--text-dark); }
     .hero-content p { line-height: 1.6; }
+
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      border: 1px solid #ddd;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: white;
+    }
 
     .btn-main {
       padding: 1rem 2.5rem;
@@ -256,7 +238,7 @@
     }
     .btn-main:hover { background: var(--gold-accent); border-color: var(--gold-accent); }
 
-    /* --- HERO: Carrusel Destacados --- */
+    /* --- CARRUSELES --- */
     .home-section { padding: 0 5% 2.5rem; }
     .section-title { text-align: center; padding: 3rem 1rem 1.5rem; }
     .section-title h2 { font-size: 2.3rem; margin-bottom: 0.4rem; }
@@ -267,7 +249,6 @@
       font-size: 0.85rem;
     }
 
-    /* CARRUSEL GENERAL */
     .swiper { width: 100%; padding: 1rem 0 2rem; }
     .swiper-slide {
       background: white;
@@ -275,261 +256,143 @@
       overflow: hidden;
       box-shadow: var(--shadow-card);
     }
-    .slide-img { height: 360px; width: 100%; object-fit: cover; display: block; }
+    .slide-img { height: 380px; width: 100%; object-fit: cover; display: block; }
     .slide-info { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
     .slide-info h3 { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.05rem; }
     .slide-info p { color: var(--gold-accent); font-size: 0.78rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
 
-    /* CARRUSEL 3D "PASARELA" */
+    /* CARRUSEL 3D (Boy/Girl/Studio Coverflow) */
     .showcase-container {
       padding: 0 0 3rem;
       text-align: center;
       overflow: hidden;
     }
-    .showcase-container h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: var(--text-dark);
-    }
+    .showcase-container h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark); }
     body.sd-mode .showcase-container h3 { color: var(--sd-text); }
     
-    .swiper-3d-container {
-      width: 100%;
-      padding-top: 20px;
-      padding-bottom: 40px;
-    }
+    .swiper-3d-container { width: 100%; padding-top: 20px; padding-bottom: 40px; }
     .swiper-slide-3d {
       background-position: center;
       background-size: cover;
-      width: 280px; /* Ancho tarjeta 3d */
-      height: 420px; /* Alto tarjeta 3d */
+      width: 280px; height: 420px;
       border-radius: 20px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.15);
       background-color: #fff;
       overflow: hidden;
     }
-    .swiper-slide-3d img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .swiper-slide-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
     body.sd-mode .swiper-slide-3d {
       box-shadow: 0 15px 50px rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-
-    /* --- Promos --- */
-    .promo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1.5rem;
-    }
+    /* --- Promos & Testimonios --- */
+    .promo-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
     .promo-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-card);
-      border: 1px solid rgba(0,0,0,0.05);
-      position: relative;
-      overflow: hidden;
+      background: white; border-radius: var(--radius-lg); padding: 1.5rem;
+      box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.05);
+      position: relative; overflow: hidden;
     }
     .promo-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: white;
-      background: var(--text-dark);
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
+      position: absolute; top: 14px; right: 14px; font-size: 0.75rem; letter-spacing: 2px;
+      text-transform: uppercase; color: white; background: var(--text-dark);
+      padding: 0.35rem 0.6rem; border-radius: 999px;
     }
     .promo-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
     .promo-card p { color: #666; line-height: 1.5; }
     .promo-card a {
-      display: inline-block;
-      margin-top: 1rem;
-      color: var(--gold-accent);
-      text-decoration: underline;
-      text-underline-offset: 4px;
+      display: inline-block; margin-top: 1rem; color: var(--gold-accent);
+      text-decoration: underline; text-underline-offset: 4px;
     }
 
-    /* --- Testimonios --- */
     .testimonials {
-      margin-top: 2rem;
-      background: rgba(230, 218, 202, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      border: 1px solid rgba(0,0,0,0.04);
+      margin-top: 2rem; background: rgba(230, 218, 202, 0.35);
+      border-radius: var(--radius-lg); padding: 2rem; border: 1px solid rgba(0,0,0,0.04);
     }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1rem;
-    }
-    .quote {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-card);
-      border: 1px solid rgba(0,0,0,0.05);
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
+    .quote { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-card); }
     .quote p { color: #555; font-style: italic; line-height: 1.6; }
-    .quote .who {
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #777;
-      font-size: 0.9rem;
-    }
+    .quote .who { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; color: #777; font-size: 0.9rem; }
     .stars { color: var(--gold-accent); letter-spacing: 2px; }
 
-    /* --- CTA inferior: Renta de vestidos --- */
+    /* --- Renta CTA --- */
     .rent-cta {
       margin: 2.2rem 1rem 0;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      position: relative;
+      border-radius: var(--radius-lg); overflow: hidden; position: relative;
       box-shadow: var(--shadow-soft);
       background: linear-gradient(135deg, rgba(58,58,58,0.95), rgba(197,160,89,0.65));
-      color: white;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      color: white; padding: 2rem; display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
     }
     .rent-cta h3 { font-size: 1.6rem; margin-bottom: 0.35rem; }
     .rent-cta p { opacity: 0.92; max-width: 520px; line-height: 1.55; }
     .btn-rent {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: white;
-      padding: 0.95rem 1.5rem;
-      border-radius: 999px;
-      cursor: pointer;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      transition: 0.25s ease;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35);
+      color: white; padding: 0.95rem 1.5rem; border-radius: 999px; cursor: pointer;
+      letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem;
+      display: inline-flex; align-items: center; gap: 0.55rem; transition: 0.25s ease;
     }
-    .btn-rent:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateY(-2px);
-    }
+    .btn-rent:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
 
-    /* --- VISTAS: NIÑO / NIÑA (GRID) --- */
+    /* --- GLOBAL SHIPPING BANNER --- */
+    .shipping-banner {
+      background: #f4f1ea;
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      color: #555;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 2rem;
+      border-radius: 12px;
+    }
+    .shipping-banner i { color: var(--gold-accent); font-size: 1.1rem; }
+
+    /* --- VISTAS: GRID & TOOLS --- */
     .category-header { text-align: center; padding: 3.5rem 1rem 1.5rem; }
     .category-header h2 { font-size: 3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
     .category-header p { color: var(--gold-accent); text-transform: uppercase; letter-spacing: 3px; }
 
-    /* Search + Filters */
-    .tools-bar {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1rem;
-      padding: 0 5% 1.2rem;
-      align-items: end;
-    }
+    .tools-bar { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; padding: 0 5% 1.2rem; align-items: end; }
     .search-wrap label, .filter-wrap label {
-      font-size: 0.85rem;
-      color: #777;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 0.45rem;
+      font-size: 0.85rem; color: #777; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 0.45rem;
     }
     body.sd-mode .search-wrap label, body.sd-mode .filter-wrap label { color: var(--sd-muted); }
 
     .search-input {
-      width: 100%;
-      padding: 0.95rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.9);
-      outline: none;
-      transition: 0.25s ease;
+      width: 100%; padding: 0.95rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.9);
+      outline: none; transition: 0.25s ease;
     }
-    .search-input:focus {
-      border-color: var(--gold-accent);
-      box-shadow: 0 0 0 4px rgba(197,160,89,0.18);
-    }
-    body.sd-mode .search-input {
-      border-color: rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--sd-text);
-    }
+    .search-input:focus { border-color: var(--gold-accent); box-shadow: 0 0 0 4px rgba(197,160,89,0.18); }
+    body.sd-mode .search-input { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--sd-text); }
     body.sd-mode .search-input::placeholder { color: rgba(255,255,255,0.45); }
-    body.sd-mode .search-input:focus {
-      border-color: var(--sd-accent2);
-      box-shadow: 0 0 0 4px rgba(0,212,255,0.18);
-    }
+    body.sd-mode .search-input:focus { border-color: var(--sd-accent2); box-shadow: 0 0 0 4px rgba(0,212,255,0.18); }
 
     .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .chip {
-      border: 1px solid rgba(0,0,0,0.12);
-      padding: 0.6rem 0.9rem;
-      border-radius: 999px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.95);
-      transition: 0.2s ease;
-      font-size: 0.85rem;
-      user-select: none;
+      border: 1px solid rgba(0,0,0,0.12); padding: 0.6rem 0.9rem; border-radius: 999px;
+      cursor: pointer; background: rgba(255,255,255,0.95); transition: 0.2s ease;
+      font-size: 0.85rem; user-select: none;
     }
     .chip:hover { transform: translateY(-2px); }
-    .chip.active {
-      background: var(--text-dark);
-      color: white;
-      border-color: var(--text-dark);
-    }
-    body.sd-mode .chip {
-      border-color: rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.88);
-    }
+    .chip.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
+    body.sd-mode .chip { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); }
     body.sd-mode .chip.active {
       background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7));
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-glow);
-      color: #0b0d14;
-      font-weight: 700;
+      border-color: rgba(255,255,255,0.10); box-shadow: var(--sd-glow); color: #0b0d14; font-weight: 700;
     }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 0 5% 4rem;
-    }
-
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 0 5% 4rem; }
     .product-card {
-      background: var(--bg-card);
-      transition: var(--transition-slow);
-      cursor: pointer;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      border: 1px solid rgba(0,0,0,0.04);
-      opacity: 0;
-      transform: translateY(14px);
+      background: var(--bg-card); transition: var(--transition-slow); cursor: pointer;
+      border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04); opacity: 0; transform: translateY(14px);
     }
-
-    /* Studio product cards */
-    body.sd-mode .product-card {
-      background: var(--sd-card);
-      border-color: var(--sd-border);
-      box-shadow: var(--sd-shadow);
-    }
+    body.sd-mode .product-card { background: var(--sd-card); border-color: var(--sd-border); box-shadow: var(--sd-shadow); }
     body.sd-mode .product-info h3 { color: rgba(255,255,255,0.92); }
     body.sd-mode .product-info p { color: var(--sd-accent2); }
 
@@ -539,21 +402,11 @@
     .view-section.active-view .product-card:nth-child(3) { animation-delay: 0.20s; }
     .view-section.active-view .product-card:nth-child(4) { animation-delay: 0.26s; }
     .view-section.active-view .product-card:nth-child(5) { animation-delay: 0.32s; }
-    .view-section.active-view .product-card:nth-child(6) { animation-delay: 0.38s; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
     .product-card:hover { transform: translateY(-8px); }
-
     .img-container { height: 400px; overflow: hidden; position: relative; }
-    .img-container img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1s ease;
-      display: block;
-    }
+    .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; display: block; }
     .product-card:hover .img-container img { transform: scale(1.05); }
 
     .product-info { padding: 1.1rem 0 1.4rem; text-align: center; }
@@ -561,200 +414,83 @@
     .product-info p { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; }
 
     .back-link {
-      background: none;
-      border: none;
-      border-bottom: 1px solid var(--gold-accent);
-      cursor: pointer;
-      color: #999;
-      margin-top: 1rem;
-      padding-bottom: 0.25rem;
+      background: none; border: none; border-bottom: 1px solid var(--gold-accent); cursor: pointer;
+      color: #999; margin-top: 1rem; padding-bottom: 0.25rem;
     }
     body.sd-mode .back-link { border-bottom-color: var(--sd-accent2); color: rgba(255,255,255,0.65); }
-
-    /* Empty state */
-    .empty-state {
-      padding: 1rem 5% 3rem;
-      color: #777;
-      text-align: center;
-      display: none;
-    }
+    .empty-state { padding: 1rem 5% 3rem; color: #777; text-align: center; display: none; }
     body.sd-mode .empty-state { color: rgba(255,255,255,0.70); }
 
     /* --- FOOTER & CONTACTO --- */
     .contact-footer {
-      background: #fff;
-      padding: 4rem 5% 2rem;
-      border-top: 1px solid #eee;
-      margin-top: 2rem;
-      transition: background 0.35s ease, border-color 0.35s ease;
+      background: #fff; padding: 4rem 5% 2rem; border-top: 1px solid #eee;
+      margin-top: 2rem; transition: background 0.35s ease, border-color 0.35s ease;
     }
     body.sd-mode .contact-footer {
-      background: #080a10;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.88);
+      background: #080a10; border-top: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.88);
     }
-    body.sd-mode .contact-footer p,
-    body.sd-mode .contact-footer strong { color: rgba(255,255,255,0.86) !important; }
+    body.sd-mode .contact-footer p, body.sd-mode .contact-footer strong { color: rgba(255,255,255,0.86) !important; }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .contact-row {
-      display: flex;
-      margin-bottom: 1.5rem;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-    .contact-row i {
-      color: var(--gold-accent);
-      width: 30px;
-      font-size: 1.2rem;
-      margin-top: 4px;
-    }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+    .contact-row { display: flex; margin-bottom: 1.5rem; align-items: flex-start; gap: 0.8rem; }
+    .contact-row i { color: var(--gold-accent); width: 30px; font-size: 1.2rem; margin-top: 4px; }
     body.sd-mode .contact-row i { color: var(--sd-accent2); }
 
     .social-links { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
     .social-btn {
-      width: 45px; height: 45px;
-      border: 1px solid #ddd;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; color: var(--text-dark);
-      transition: 0.25s ease;
+      width: 45px; height: 45px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; color: var(--text-dark); transition: 0.25s ease;
     }
     .social-btn:hover { background: var(--gold-accent); color: white; border-color: var(--gold-accent); }
-    body.sd-mode .social-btn {
-      border-color: rgba(255,255,255,0.16);
-      color: rgba(255,255,255,0.88);
-    }
+    body.sd-mode .social-btn { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.88); }
     body.sd-mode .social-btn:hover {
       background: linear-gradient(135deg, rgba(138,92,255,0.9), rgba(0,212,255,0.7));
-      border-color: rgba(255,255,255,0.10);
-      color: #0b0d14;
+      border-color: rgba(255,255,255,0.10); color: #0b0d14;
     }
 
     /* Floating WhatsApp */
     .float-wa {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #25D366;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-      z-index: 3500;
-      transition: 0.25s ease;
+      position: fixed; right: 18px; bottom: 18px; width: 56px; height: 56px;
+      border-radius: 50%; background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18); z-index: 3500; transition: 0.25s ease;
     }
     .float-wa:hover { transform: translateY(-4px); }
-    .float-wa:focus-visible { outline: 3px solid rgba(197,160,89,0.55); outline-offset: 4px; }
     body.sd-mode .float-wa { box-shadow: 0 14px 36px rgba(0,0,0,0.45); }
 
     /* Studio Dominguez view wrapper */
     .sd-hero {
-      margin: 0 1rem 1rem 1rem;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--sd-shadow);
-      position: relative;
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      margin: 0 1rem 1rem 1rem; border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--sd-shadow); position: relative; min-height: 60vh;
+      display: flex; align-items: center; justify-content: center; text-align: center;
       background: radial-gradient(800px 400px at 20% 10%, rgba(138,92,255,0.35), transparent 60%),
                   radial-gradient(700px 380px at 80% 20%, rgba(0,212,255,0.25), transparent 55%),
                   linear-gradient(180deg, rgba(11,13,20,1), rgba(7,8,12,1));
     }
     .sd-hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:url('vestidonegroresaltar.jpeg');
-      background-size:cover;
-      background-position:center;
-      opacity:0.20;
-      mix-blend-mode: screen;
-      pointer-events:none;
+      content:""; position:absolute; inset:0;
+      background-image:url('vestidonegroresaltar.jpeg'); /* Fondo studio */
+      background-size:cover; background-position:center; opacity:0.30;
+      mix-blend-mode: screen; pointer-events:none;
     }
-    .sd-hero-content{
-      position:relative;
-      padding: 3rem 1.8rem;
-      max-width: 760px;
-      color: var(--sd-text);
-      z-index:1;
-    }
-    .sd-hero-content h1{
-      font-size: 3.1rem;
-      margin-bottom: 0.8rem;
-      letter-spacing: 2px;
-    }
-    .sd-hero-content p{
-      color: var(--sd-muted);
-      line-height: 1.65;
-      max-width: 620px;
-      margin: 0 auto;
-    }
-    .sd-pill{
-      display:inline-flex;
-      gap:.6rem;
-      align-items:center;
-      padding: .5rem .9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      box-shadow: var(--sd-glow);
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .sd-actions{
-      display:flex;
-      gap: 0.9rem;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 1.6rem;
-    }
+    .sd-hero-content{ position:relative; padding: 3rem 1.8rem; max-width: 760px; color: var(--sd-text); z-index:1; }
+    .sd-hero-content h1{ font-size: 3.1rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
+    .sd-hero-content p{ color: var(--sd-muted); line-height: 1.65; max-width: 620px; margin: 0 auto; }
+    .sd-actions{ display:flex; gap: 0.9rem; justify-content:center; flex-wrap:wrap; margin-top: 1.6rem; }
     .btn-sd{
-      padding: 0.95rem 1.45rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--sd-text);
-      cursor:pointer;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      transition: 0.25s ease;
-      display:inline-flex;
-      gap:.55rem;
-      align-items:center;
-      box-shadow: var(--sd-shadow);
+      padding: 0.95rem 1.45rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06); color: var(--sd-text); cursor:pointer;
+      letter-spacing: 2px; text-transform: uppercase; font-size: 0.78rem; transition: 0.25s ease;
+      display:inline-flex; gap:.55rem; align-items:center; box-shadow: var(--sd-shadow);
     }
-    .btn-sd:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.26);
-      box-shadow: var(--sd-glow);
-    }
+    .btn-sd:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.26); box-shadow: var(--sd-glow); }
     .btn-sd.primary{
       background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color: #0b0d14;
-      border-color: rgba(255,255,255,0.08);
-      font-weight: 800;
+      color: #0b0d14; border-color: rgba(255,255,255,0.08); font-weight: 800;
     }
-
-    /* Studio section titles */
     body.sd-mode .section-title p { color: var(--sd-accent2); }
     body.sd-mode .section-title h2 { color: var(--sd-text); }
 
-    /* Responsivo */
     @media (max-width: 980px) {
       .promo-grid, .testimonials-grid { grid-template-columns: 1fr; }
       .tools-bar { grid-template-columns: 1fr; }
@@ -795,17 +531,8 @@
   <nav>
     <div class="logo" onclick="navigateTo('inicio')">Mi Bello Ropón</div>
 
-    <button
-      class="burger-btn"
-      onclick="toggleMenu()"
-      id="burgerBtn"
-      aria-label="Menú principal"
-      aria-expanded="false"
-      aria-controls="overlayMenu"
-    >
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
+    <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal">
+      <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
     </button>
   </nav>
 
@@ -820,12 +547,18 @@
           <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón" 
                style="max-width: 180px; margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
 
-          <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
-            Guadalupe, Nuevo León
-          </p>
+          <div class="location-badge">
+            <i class="fas fa-map-marker-alt" style="color:var(--gold-accent);"></i>
+            Monterrey · San Antonio
+          </div>
+
           <h1>Momentos que<br />Perduran</h1>
-          <p style="margin-bottom: 1.8rem; color: #555; font-style: italic;">
-            Especialistas en Bautizo y Primera Comunión.
+          <p style="margin-bottom: 1.5rem; color: #555; font-style: italic;">
+            Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.
+          </p>
+
+          <p style="font-size: 0.85rem; font-weight: 700; color: var(--gold-accent); letter-spacing: 1px; margin-bottom: 1.5rem;">
+            <i class="fas fa-plane"></i> ENTREGAS A TODO EL MUNDO
           </p>
 
           <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -848,37 +581,46 @@
 
         <div class="swiper" id="homeSwiper">
           <div class="swiper-wrapper">
+            
             <div class="swiper-slide">
-              <img class="slide-img" loading="lazy"
-                   src="lineaespañola.jpeg"
-                   alt="Linea Española" />
+              <img class="slide-img" loading="lazy" src="ropondesmontable.jpeg" alt="Ropón Destacado" />
               <div class="slide-info">
-                <h3>Linea Española</h3>
-                <p>Comunión · Niña</p>
+                <h3>Ropón Desmontable</h3>
+                <p>Bautizo · Niña</p>
               </div>
             </div>
 
             <div class="swiper-slide">
-              <img class="slide-img" loading="lazy"
-                   src="batitaexclusiva3"
-                   alt="Batas Exclusivas" />
+              <img class="slide-img" loading="lazy" src="traje_bautizo.jpeg" alt="Traje Niño Destacado" />
               <div class="slide-info">
-                <h3>Traje Lino Italiano</h3>
-                <p>Comunión · Niño</p>
+                <h3>Traje Ceremonia</h3>
+                <p>Bautizo · Niño</p>
               </div>
             </div>
 
             <div class="swiper-slide">
-              <img class="slide-img" loading="lazy"
-                   src="https://images.unsplash.com/photo-1544265432-1c66289b7b9f?q=80&w=1200&auto=format&fit=crop"
-                   alt="Tocado Floral - Accesorios (Niña)" />
+              <img class="slide-img" loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
               <div class="slide-info">
-                <h3>Tocado Floral</h3>
-                <p>Accesorios · Niña</p>
+                <h3>Colección Gala</h3>
+                <p>Renta · Studio</p>
               </div>
             </div>
+
+             <div class="swiper-slide">
+              <img class="slide-img" loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" />
+              <div class="slide-info">
+                <h3>Batita Exclusiva</h3>
+                <p>Ceremonia · Niña</p>
+              </div>
+            </div>
+
           </div>
           <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="shipping-banner">
+          <i class="fas fa-globe-americas"></i>
+          <span><strong>Worldwide Shipping:</strong> Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
         </div>
 
         <div class="section-title" style="padding-top: 2rem;">
@@ -888,57 +630,24 @@
 
         <div class="promo-grid">
           <div class="promo-card">
-            <span class="promo-badge">Cita</span>
-            <h3>Prueba personalizada</h3>
-            <p>Te asesoramos para elegir el look perfecto según el evento y la edad.</p>
-            <a href="https://wa.me/528180932362" target="_blank">Agendar por WhatsApp</a>
+            <span class="promo-badge">USA & MX</span>
+            <h3>Atención Binacional</h3>
+            <p>Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.</p>
+            <a href="#contacto">Ver ubicaciones</a>
           </div>
 
           <div class="promo-card">
-            <span class="promo-badge">Accesorios</span>
-            <h3>Sets completos</h3>
-            <p>Complementa el outfit con tocados, calzado y accesorios seleccionados.</p>
-            <a onclick="navigateTo('nina')">Ver Niña</a>
+            <span class="promo-badge">Sets</span>
+            <h3>Kits Completos</h3>
+            <p>Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.</p>
+            <a onclick="navigateTo('nina')">Ver Colección</a>
           </div>
 
           <div class="promo-card">
             <span class="promo-badge">Nuevo</span>
-            <h3>Colección temporada</h3>
+            <h3>Temporada 2024</h3>
             <p>Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.</p>
             <a onclick="navigateTo('nino')">Ver Niño</a>
-          </div>
-        </div>
-
-        <div class="section-title" style="padding-top: 3rem;">
-          <p>Opiniones</p>
-          <h2>Clientes felices</h2>
-        </div>
-
-        <div class="testimonials">
-          <div class="testimonials-grid">
-            <div class="quote">
-              <p>“La atención fue increíble. Encontramos el ropón perfecto y los accesorios combinaron hermoso.”</p>
-              <div class="who">
-                <span>— Karla G.</span>
-                <span class="stars">★★★★★</span>
-              </div>
-            </div>
-
-            <div class="quote">
-              <p>“Todo muy elegante y de excelente calidad. Nos ayudaron con talla, estilo y detalles.”</p>
-              <div class="who">
-                <span>— Daniel R.</span>
-                <span class="stars">★★★★★</span>
-              </div>
-            </div>
-
-            <div class="quote">
-              <p>“La colección de niño está divina. El traje se veía espectacular en la ceremonia.”</p>
-              <div class="who">
-                <span>— Sofía M.</span>
-                <span class="stars">★★★★★</span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -977,8 +686,6 @@
             <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable4.jpeg" alt="Ropón 4"></div>
             <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable5.jpeg" alt="Ropón 5"></div>
             <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3"></div>
           </div>
         </div>
       </div>
@@ -988,7 +695,6 @@
           <label for="searchNina">Buscar</label>
           <input id="searchNina" class="search-input" type="text" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
         </div>
-
         <div class="filter-wrap">
           <label>Filtrar por</label>
           <div class="chips" id="chipsNina">
@@ -1003,67 +709,30 @@
       <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda/filtro.</div>
 
       <div class="products-grid" id="gridNina">
-        
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 1">
-          <div class="img-container">
-            <img loading="lazy" src="batita1.jpeg" alt="Batita 1" />
-          </div>
-          <div class="product-info">
-            <h3>Batita Ceremonia 01</h3>
-            <p>Batitas</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="batita1.jpeg" alt="Batita 1" /></div>
+          <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
         </article>
-
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 2">
-          <div class="img-container">
-            <img loading="lazy" src="batita2.jpeg" alt="Batita 2" />
-          </div>
-          <div class="product-info">
-            <h3>Batita Ceremonia 02</h3>
-            <p>Batitas</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="batita2.jpeg" alt="Batita 2" /></div>
+          <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
         </article>
-        
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia 3">
-          <div class="img-container">
-            <img loading="lazy" src="batita3.jpeg" alt="Batita 3" />
-          </div>
-          <div class="product-info">
-            <h3>Batita Ceremonia 03</h3>
-            <p>Batitas</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="batita3.jpeg" alt="Batita 3" /></div>
+          <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
         </article>
-
         <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva">
-          <div class="img-container">
-            <img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" />
-          </div>
-          <div class="product-info">
-            <h3>Batita Exclusiva</h3>
-            <p>Exclusivos</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
+          <div class="product-info"><h3>Batita Exclusiva</h3><p>Exclusivos</p></div>
         </article>
-        
         <article class="product-card" data-category="Exclusivos" data-name="Batita Exclusiva 2">
-          <div class="img-container">
-            <img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" />
-          </div>
-          <div class="product-info">
-            <h3>Batita Exclusiva II</h3>
-            <p>Exclusivos</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
+          <div class="product-info"><h3>Batita Exclusiva II</h3><p>Exclusivos</p></div>
         </article>
-
         <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
-          <div class="img-container">
-            <img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" />
-          </div>
-          <div class="product-info">
-            <h3>Vestido Importación</h3>
-            <p>Línea Española</p>
-          </div>
+          <div class="img-container"><img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" /></div>
+          <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
         </article>
-
       </div>
     </section>
 
@@ -1074,19 +743,30 @@
         <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
       </div>
 
+      <div class="showcase-container">
+        <h3>Tendencias Bautizo</h3>
+        <p style="color:#777; margin-bottom:10px;">Trajes y Guayaberas</p>
+        <div class="swiper swiper-3d-container" id="ninoSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-3d"><img src="traje_bautizo.jpeg" alt="Traje 1"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="traje_lino.jpeg" alt="Traje 2"></div>
+            <div class="swiper-slide swiper-slide-3d"><img src="guayabera_fina.jpeg" alt="Guayabera"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="tools-bar">
         <div class="search-wrap">
           <label for="searchNino">Buscar</label>
-          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bautizo, mocasín..." oninput="applyFilters('nino')" />
+          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bautizo, lino..." oninput="applyFilters('nino')" />
         </div>
-
         <div class="filter-wrap">
           <label>Filtrar por</label>
           <div class="chips" id="chipsNino">
             <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)">Todo</div>
             <div class="chip" onclick="setFilter('nino','Bautizo', this)">Bautizo</div>
-            <div class="chip" onclick="setFilter('nino','Comunión', this)">Comunión</div>
             <div class="chip" onclick="setFilter('nino','Ceremonia', this)">Ceremonia</div>
+            <div class="chip" onclick="setFilter('nino','Accesorios', this)">Accesorios</div>
           </div>
         </div>
       </div>
@@ -1094,37 +774,29 @@
       <div class="empty-state" id="emptyNino">No encontramos productos con esa búsqueda/filtro.</div>
 
       <div class="products-grid" id="gridNino">
-        <article class="product-card" data-category="Comunión" data-name="Traje Lino Italiano">
-          <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1519757656972-02484a958e94?q=80&w=800&auto=format&fit=crop"
-                 alt="Traje Lino Italiano - Comunión para niño" />
-          </div>
-          <div class="product-info">
-            <h3>Traje Lino Italiano</h3>
-            <p>Comunión</p>
-          </div>
+        <article class="product-card" data-category="Bautizo" data-name="Traje Bautizo Completo">
+          <div class="img-container"><img loading="lazy" src="traje_bautizo.jpeg" alt="Traje Bautizo" /></div>
+          <div class="product-info"><h3>Traje Bautizo</h3><p>Bautizo</p></div>
         </article>
 
-        <article class="product-card" data-category="Bautizo" data-name="Ropón Desmontable">
-          <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1621404134604-5831613589b9?q=80&w=800&auto=format&fit=crop"
-                 alt="Ropón Desmontable - Bautizo para niño" />
-          </div>
-          <div class="product-info">
-            <h3>Ropón Desmontable</h3>
-            <p>Bautizo</p>
-          </div>
+        <article class="product-card" data-category="Ceremonia" data-name="Traje Lino Fino">
+          <div class="img-container"><img loading="lazy" src="traje_lino.jpeg" alt="Traje Lino" /></div>
+          <div class="product-info"><h3>Traje Lino Italiano</h3><p>Ceremonia</p></div>
         </article>
 
-        <article class="product-card" data-category="Ceremonia" data-name="Guayabera Fina">
-          <div class="img-container">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1507593163158-b643a6d365f5?q=80&w=800&auto=format&fit=crop"
-                 alt="Guayabera Fina - Ceremonia para niño" />
-          </div>
-          <div class="product-info">
-            <h3>Guayabera Fina</h3>
-            <p>Ceremonia</p>
-          </div>
+        <article class="product-card" data-category="Ceremonia" data-name="Guayabera Ceremonia">
+          <div class="img-container"><img loading="lazy" src="guayabera_fina.jpeg" alt="Guayabera" /></div>
+          <div class="product-info"><h3>Guayabera Premium</h3><p>Ceremonia</p></div>
+        </article>
+
+        <article class="product-card" data-category="Accesorios" data-name="Set de Vela">
+          <div class="img-container"><img loading="lazy" src="set_vela.jpeg" alt="Set Vela" /></div>
+          <div class="product-info"><h3>Set de Vela</h3><p>Accesorios</p></div>
+        </article>
+
+        <article class="product-card" data-category="Accesorios" data-name="Zapatos Niño">
+          <div class="img-container"><img loading="lazy" src="zapatonino.jpeg" alt="Zapatos" /></div>
+          <div class="product-info"><h3>Calzado Ceremonia</h3><p>Accesorios</p></div>
         </article>
       </div>
     </section>
@@ -1136,9 +808,7 @@
                style="max-width: 220px; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
           
           <h1 style="font-size: 2.5rem; margin-top:0.5rem;">Studio Dominguez</h1>
-          <p>
-            Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.
-          </p>
+          <p>Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.</p>
 
           <div class="sd-actions">
             <button class="btn-sd primary" onclick="document.getElementById('studioCatalog').scrollIntoView({behavior:'smooth'})">
@@ -1157,7 +827,6 @@
       <div class="showcase-container" style="padding-top:2rem;">
         <h3>Tendencias de Gala</h3>
         <p style="color:var(--sd-muted); margin-bottom:10px;">Favoritos de la temporada</p>
-        
         <div class="swiper swiper-3d-container" id="studioSwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide swiper-slide-3d"><img src="vestido negro.jpeg" alt="Gala Negro"></div>
@@ -1193,111 +862,33 @@
             </div>
           </div>
         </div>
-
         <div class="empty-state" id="emptyStudio">No encontramos vestidos con esa búsqueda/filtro.</div>
 
         <div class="products-grid" id="gridStudio">
-          
           <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
-            <div class="img-container">
-              <img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Noche Profunda</h3>
-              <p>Negro</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" /></div>
+            <div class="product-info"><h3>Modelo Noche Profunda</h3><p>Negro</p></div>
           </article>
-
           <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
-            <div class="img-container">
-              <img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Gala Dark</h3>
-              <p>Negro</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
+            <div class="product-info"><h3>Modelo Gala Dark</h3><p>Negro</p></div>
           </article>
-
           <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
-            <div class="img-container">
-              <img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Azul Real</h3>
-              <p>Azul</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
+            <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
           </article>
-
           <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
-            <div class="img-container">
-              <img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Midnight Blue</h3>
-              <p>Azul</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
+            <div class="product-info"><h3>Modelo Midnight Blue</h3><p>Azul</p></div>
           </article>
-
           <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
-            <div class="img-container">
-              <img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Carmesí</h3>
-              <p>Rojo</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
+            <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
           </article>
-
-          <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Pasión">
-            <div class="img-container">
-              <img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Scarlet</h3>
-              <p>Rojo</p>
-            </div>
-          </article>
-          
-           <article class="product-card" data-category="Rojo" data-name="Vestido Rojo 3">
-            <div class="img-container">
-              <img loading="lazy" src="vestidorojo3.jpeg" alt="Vestido Rojo 3" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Rojo Intenso</h3>
-              <p>Rojo</p>
-            </div>
-          </article>
-
-          <article class="product-card" data-category="Claros" data-name="Vestido Beige">
-            <div class="img-container">
-              <img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Champagne</h3>
-              <p>Claros</p>
-            </div>
-          </article>
-
           <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
-            <div class="img-container">
-              <img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo White Gala</h3>
-              <p>Claros</p>
-            </div>
+            <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
+            <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
           </article>
-
-           <article class="product-card" data-category="Claros" data-name="Vestido Crema">
-            <div class="img-container">
-              <img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" />
-            </div>
-            <div class="product-info">
-              <h3>Modelo Crema Suave</h3>
-              <p>Claros</p>
-            </div>
-          </article>
-
         </div>
       </div>
     </section>
@@ -1312,24 +903,33 @@
         <div class="contact-row">
           <i class="fas fa-map-marker-alt"></i>
           <div>
-            <strong>Ubicación</strong>
+            <strong>Monterrey, MX</strong>
             <p style="color: #666;">Santa Genoveva #1202, Col. La Purísima,<br />Guadalupe, Nuevo León.</p>
           </div>
         </div>
 
         <div class="contact-row">
-          <i class="fas fa-clock"></i>
+          <i class="fas fa-map-pin"></i>
           <div>
-            <strong>Horario</strong>
-            <p style="color: #666;">Lun - Sáb: 9:00am - 8:00pm<br />Dom: 9:00am - 6:00pm</p>
+            <strong>San Antonio, TX</strong>
+            <p style="color: #666;">Atención personalizada.</p>
+            <a href="tel:+12107177607" style="color:var(--text-dark); font-weight:700;">+1 (210) 717-7607</a>
           </div>
         </div>
 
         <div class="contact-row">
           <i class="fab fa-whatsapp"></i>
           <div>
-            <strong>Citas</strong>
+            <strong>WhatsApp & Citas</strong>
             <p><a href="https://wa.me/528180932362" target="_blank" style="text-decoration: underline;">81 80 93 23 62</a></p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <i class="fas fa-plane"></i>
+          <div>
+            <strong>Worldwide Shipping</strong>
+            <p style="color:#666; font-size:0.9rem;">Envíos a todo el mundo.<br/>Contáctanos para detalles.</p>
           </div>
         </div>
 
@@ -1344,15 +944,7 @@
       </div>
 
       <div style="border-radius: 20px; overflow: hidden; height: 350px; box-shadow: var(--shadow-card);">
-        <iframe
-          width="100%"
-          height="100%"
-          style="border:0"
-          loading="lazy"
-          allowfullscreen
-          src="https://www.google.com/maps?q=Santa+Genoveva+1202+Guadalupe+Nuevo+Leon&output=embed"
-          title="Mapa ubicación"
-        ></iframe>
+        <iframe width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps?q=Santa+Genoveva+1202+Guadalupe+Nuevo+Leon&output=embed" title="Mapa ubicación"></iframe>
       </div>
     </div>
 
@@ -1369,72 +961,43 @@
 
   <script>
     // ----- STATE -----
-    const state = {
-      currentView: 'inicio',
-      filters: { nina: 'all', nino: 'all', studio: 'all' }
-    };
+    const state = { currentView: 'inicio', filters: { nina: 'all', nino: 'all', studio: 'all' } };
 
     // ----- MENU (ACCESSIBLE) -----
     function toggleMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
-
       const isOpen = menu.classList.toggle('active');
       burger.classList.toggle('open');
-
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-
-      if (isOpen) {
-        const firstLink = menu.querySelector('a');
-        if (firstLink) firstLink.focus();
-      }
+      if (isOpen) { const firstLink = menu.querySelector('a'); if (firstLink) firstLink.focus(); }
     }
-
     function closeMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
-
       if (menu.classList.contains('active')) {
-        menu.classList.remove('active');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        menu.setAttribute('aria-hidden', 'true');
+        menu.classList.remove('active'); burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-hidden', 'true');
       }
     }
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         const menu = document.getElementById('overlayMenu');
-        if (menu.classList.contains('active')) {
-          closeMenu();
-          document.getElementById('burgerBtn').focus();
-        }
+        if (menu.classList.contains('active')) { closeMenu(); document.getElementById('burgerBtn').focus(); }
       }
     });
-
-    document.getElementById('overlayMenu').addEventListener('click', (e) => {
-      if (e.target.id === 'overlayMenu') closeMenu();
-    });
-
-    function closeMenuAndGoToFooter() {
-      closeMenu();
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-    }
-
+    document.getElementById('overlayMenu').addEventListener('click', (e) => { if (e.target.id === 'overlayMenu') closeMenu(); });
+    function closeMenuAndGoToFooter() { closeMenu(); document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' }); }
     function setActiveMenuLink(viewName) {
       const links = document.querySelectorAll('.overlay-menu a[data-nav]');
       links.forEach(l => l.classList.remove('active-link'));
       const active = document.querySelector('.overlay-menu a[data-nav="' + viewName + '"]');
       if (active) active.classList.add('active-link');
     }
-
-    // Toggle body theme for Studio Dominguez
     function setThemeForView(viewName) {
       const isStudio = (viewName === 'studio');
       document.body.classList.toggle('sd-mode', isStudio);
-
-      // Optional: change logo text while in Studio (keeps same logo element)
       const logo = document.querySelector('.logo');
       if (!logo) return;
       logo.textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
@@ -1443,10 +1006,8 @@
     // ----- SPA NAVIGATION -----
     function navigateTo(viewName) {
       closeMenu();
-
       const views = document.querySelectorAll('.view-section');
       views.forEach(v => v.classList.remove('active-view'));
-
       const target = document.getElementById('view-' + viewName);
       if (target) {
         target.classList.add('active-view');
@@ -1454,112 +1015,54 @@
         setActiveMenuLink(viewName);
         setThemeForView(viewName);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') {
-          applyFilters(viewName);
-        }
+        if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') { applyFilters(viewName); }
       }
     }
 
     // ----- FILTERS + SEARCH -----
     function setFilter(view, category, el) {
       state.filters[view] = category;
-
-      // update chip active style
-      const chipsWrap =
-        view === 'nina' ? document.getElementById('chipsNina')
-        : view === 'nino' ? document.getElementById('chipsNino')
-        : document.getElementById('chipsStudio');
-
+      const chipsWrap = view === 'nina' ? document.getElementById('chipsNina') : view === 'nino' ? document.getElementById('chipsNino') : document.getElementById('chipsStudio');
       chipsWrap.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
-
       applyFilters(view);
     }
-
     function applyFilters(view) {
-      const grid =
-        view === 'nina' ? document.getElementById('gridNina')
-        : view === 'nino' ? document.getElementById('gridNino')
-        : document.getElementById('gridStudio');
-
-      const empty =
-        view === 'nina' ? document.getElementById('emptyNina')
-        : view === 'nino' ? document.getElementById('emptyNino')
-        : document.getElementById('emptyStudio');
-
-      const searchInput =
-        view === 'nina' ? document.getElementById('searchNina')
-        : view === 'nino' ? document.getElementById('searchNino')
-        : document.getElementById('searchStudio');
-
+      const grid = view === 'nina' ? document.getElementById('gridNina') : view === 'nino' ? document.getElementById('gridNino') : document.getElementById('gridStudio');
+      const empty = view === 'nina' ? document.getElementById('emptyNina') : view === 'nino' ? document.getElementById('emptyNino') : document.getElementById('emptyStudio');
+      const searchInput = view === 'nina' ? document.getElementById('searchNina') : view === 'nino' ? document.getElementById('searchNino') : document.getElementById('searchStudio');
       const query = (searchInput.value || '').trim().toLowerCase();
       const selected = state.filters[view];
-
       const cards = Array.from(grid.querySelectorAll('.product-card'));
       let visibleCount = 0;
-
       cards.forEach(card => {
         const name = (card.getAttribute('data-name') || '').toLowerCase();
         const category = (card.getAttribute('data-category') || '');
-
         const matchQuery = !query || name.includes(query) || category.toLowerCase().includes(query);
         const matchFilter = (selected === 'all') || (category === selected);
-
         const show = matchQuery && matchFilter;
         card.style.display = show ? '' : 'none';
         if (show) visibleCount++;
       });
-
       empty.style.display = visibleCount === 0 ? 'block' : 'none';
     }
 
     // ----- SWIPER INIT -----
-    // 1. Carrusel Inicio (Normal)
     const swiperHome = new Swiper('#homeSwiper', {
-      loop: true,
-      spaceBetween: 16,
-      slidesPerView: 1,
+      loop: true, spaceBetween: 16, slidesPerView: 1,
       pagination: { el: '.swiper-pagination', clickable: true },
       autoplay: { delay: 3500, disableOnInteraction: false },
-      breakpoints: {
-        768: { slidesPerView: 2 },
-        1100: { slidesPerView: 3 }
-      }
+      breakpoints: { 768: { slidesPerView: 2 }, 1100: { slidesPerView: 3 } }
     });
 
-    // 2. Carrusel Ropones (3D Effect)
-    const swiperRopones = new Swiper('#roponesSwiper', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      initialSlide: 2,
-      coverflowEffect: {
-        rotate: 30,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true,
-      },
+    const common3dProps = {
+      effect: 'coverflow', grabCursor: true, centeredSlides: true,
+      slidesPerView: 'auto', coverflowEffect: { rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: true },
       pagination: false,
-    });
-
-    // 3. Carrusel Studio (3D Effect)
-    const swiperStudio = new Swiper('#studioSwiper', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      initialSlide: 1,
-      coverflowEffect: {
-        rotate: 20,
-        stretch: 0,
-        depth: 200,
-        modifier: 1,
-        slideShadows: true,
-      },
-    });
+    };
+    new Swiper('#roponesSwiper', { ...common3dProps, initialSlide: 2 });
+    new Swiper('#ninoSwiper', { ...common3dProps, initialSlide: 1 });
+    new Swiper('#studioSwiper', { ...common3dProps, initialSlide: 1, coverflowEffect: { rotate: 20, stretch: 0, depth: 200, modifier: 1, slideShadows: true } });
 
     // Initial state
     setActiveMenuLink('inicio');
