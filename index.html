@@ -3,1242 +3,1758 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0d14" />
   <title>Mi Bello Ropón | Monterrey & San Antonio</title>
 
+  <!-- Fonts + Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <style>
-    /* =======================
-       BASE / PALETA / FX
-    ======================== */
-    :root{
-      --bg-body:#fdfcf8;
-      --bg-card:#ffffff;
-      --gold:#c5a059;
-      --gold-2:#e6dace;
-      --text:#3a3a3a;
-      --muted:#777;
-      --overlay:rgba(253,252,248,0.97);
-      --shadow-1:0 12px 30px rgba(0,0,0,.08);
-      --shadow-2:0 18px 50px rgba(197,160,89,.18);
-      --shadow-3:0 18px 60px rgba(0,0,0,.14);
-      --radius:22px;
-      --radius-sm:14px;
-      --ease:cubic-bezier(.22,1,.36,1);
+    /* ==============================
+      CONFIG BASE & PALETAS
+    ============================== */
+    :root {
+      --bg-body: #fbfaf6;
+      --bg-card: rgba(255,255,255,0.86);
+      --bg-card-solid: #ffffff;
+      --gold-accent: #c5a059;
+      --gold-soft: rgba(197,160,89,0.14);
+      --text-dark: #2f2f2f;
+      --text-mid: #555555;
+      --text-light: #777777;
 
-      /* Studio (night) */
-      --sd-bg:#0b0d14;
-      --sd-card:rgba(255,255,255,0.06);
-      --sd-border:rgba(255,255,255,0.10);
-      --sd-text:rgba(255,255,255,0.92);
-      --sd-muted:rgba(255,255,255,0.62);
-      --sd-accent:#8a5cff;
-      --sd-accent2:#00d4ff;
-      --sd-glow:0 18px 60px rgba(138,92,255,0.18);
-      --sd-shadow:0 18px 60px rgba(0,0,0,0.55);
+      --overlay-bg: rgba(252, 251, 246, 0.96);
+
+      --shadow-card: 0 16px 45px rgba(33, 33, 33, 0.08);
+      --shadow-soft: 0 10px 35px rgba(0, 0, 0, 0.08);
+      --shadow-glow: 0 22px 80px rgba(197, 160, 89, 0.20);
+
+      --transition: 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-slow: 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --max-w: 1200px;
+
+      /* Studio Dominguez (Night theme) */
+      --sd-bg: #070912;
+      --sd-bg2: #05060c;
+      --sd-card: rgba(255,255,255,0.06);
+      --sd-border: rgba(255,255,255,0.10);
+      --sd-text: rgba(255,255,255,0.92);
+      --sd-muted: rgba(255,255,255,0.62);
+      --sd-accent: #8a5cff;
+      --sd-accent2: #00d4ff;
+      --sd-glow: 0 18px 70px rgba(138,92,255,0.20);
+      --sd-shadow: 0 18px 55px rgba(0,0,0,0.55);
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Lato',sans-serif;
-      background:var(--bg-body);
-      color:var(--text);
-      overflow-x:hidden;
-      position:relative;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
 
-    /* textura sutil + grain */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:-2;
+      /* Fondo elegante con textura (SVG noise) + degradados suaves */
       background:
-        radial-gradient(1200px 600px at 18% -10%, rgba(197,160,89,0.12), transparent 62%),
-        radial-gradient(900px 480px at 88% 8%, rgba(197,160,89,0.10), transparent 65%),
-        radial-gradient(800px 520px at 40% 110%, rgba(197,160,89,0.08), transparent 60%);
-      filter:saturate(1.02);
-    }
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:-1;
-      opacity:.085;
-      mix-blend-mode:multiply;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      background-size:200px 200px;
+        radial-gradient(1200px 600px at 15% 10%, rgba(197,160,89,0.16), transparent 55%),
+        radial-gradient(900px 500px at 85% 15%, rgba(197,160,89,0.10), transparent 55%),
+        linear-gradient(180deg, #fbfaf6, #f6f3ea 55%, #fbfaf6 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      background-blend-mode: normal, normal, normal, multiply;
     }
 
-    body.sd-mode{
-      background:linear-gradient(180deg, #0b0d14 0%, #07080d 100%);
-      color:var(--sd-text);
-    }
-    body.sd-mode::before,
-    body.sd-mode::after{display:none}
-
-    h1,h2,h3{font-family:'Cinzel',serif;letter-spacing:1px}
-    a{text-decoration:none;color:inherit;transition:.25s ease;cursor:pointer}
-    ul{list-style:none}
-    button{font-family:inherit}
-
-    /* =======================
-       NAV
-    ======================== */
-    nav{
-      position:fixed;top:0;left:0;width:100%;
-      padding:1.1rem 3rem;
-      display:flex;justify-content:space-between;align-items:center;
-      z-index:3000;
-      background:rgba(253,252,248,.86);
-      backdrop-filter: blur(12px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-      transition:.35s ease;
-    }
-    body.sd-mode nav{
-      background:rgba(11,13,20,.72);
-      border-bottom:1px solid rgba(255,255,255,.10);
-    }
-
-    .logo{
-      font-size:1.45rem;
-      font-weight:700;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      user-select:none;
-    }
-
-    .burger-btn{cursor:pointer;width:40px;height:28px;position:relative;z-index:3001;background:transparent;border:none;padding:0}
-    .burger-line{
-      display:block;width:100%;height:2px;border-radius:2px;
-      background:var(--text);
-      position:absolute;transition:all .55s var(--ease);
-    }
-    body.sd-mode .burger-line{background:rgba(255,255,255,.9)}
-    .burger-line:nth-child(1){top:0}
-    .burger-line:nth-child(2){top:13px;width:70%;right:0}
-    .burger-line:nth-child(3){top:26px}
-    .burger-btn.open .burger-line:nth-child(1){transform:rotate(45deg);top:13px;background:var(--gold)}
-    .burger-btn.open .burger-line:nth-child(2){opacity:0}
-    .burger-btn.open .burger-line:nth-child(3){transform:rotate(-45deg);top:13px;background:var(--gold)}
-    body.sd-mode .burger-btn.open .burger-line:nth-child(1),
-    body.sd-mode .burger-btn.open .burger-line:nth-child(3){background:var(--sd-accent2)}
-
-    /* =======================
-       OVERLAY MENU
-    ======================== */
-    .overlay-menu{
-      position:fixed;inset:0;
-      background:var(--overlay);
-      z-index:2999;
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
-      opacity:0;pointer-events:none;
-      transition:opacity .5s ease, background .35s ease;
-    }
-    .overlay-menu.active{opacity:1;pointer-events:all}
-    body.sd-mode .overlay-menu{background:rgba(11,13,20,.95)}
-    .overlay-menu ul{display:flex;flex-direction:column;gap:1.1rem}
-    .overlay-menu li{overflow:hidden;text-align:center}
-    .overlay-menu a{
-      display:inline-block;
-      font-size:2rem;
-      transform:translateY(120%);
-      transition:transform .6s var(--ease), color .25s ease;
-    }
-    body.sd-mode .overlay-menu a{color:rgba(255,255,255,.92)}
-    .overlay-menu.active a{transform:translateY(0)}
-    .overlay-menu a.active-link{color:var(--gold)}
-    body.sd-mode .overlay-menu a.active-link{color:var(--sd-accent2)}
-    .overlay-menu .menu-cta{
-      margin-top:1.4rem;
-      font-size:1.2rem!important;
-      color:var(--gold)!important;
-    }
-
-    /* =======================
-       LAYOUT SECTIONS
-    ======================== */
-    .main-container{min-height:100vh;padding-top:82px}
-    .view-section{display:none;opacity:0;animation:fadeView .85s var(--ease) forwards}
-    .view-section.active-view{display:block}
-    @keyframes fadeView{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
-    /* separadores bonitos */
-    .section-wrap{
-      padding: 0 0 3.6rem;
-      position:relative;
-    }
-    .section-wrap::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:-18px;
-      width:min(920px, 92%);
-      height:1px;
-      transform:translateX(-50%);
-      background:linear-gradient(90deg, transparent, rgba(197,160,89,.35), transparent);
-    }
-    body.sd-mode .section-wrap::before{
-      background:linear-gradient(90deg, transparent, rgba(0,212,255,.25), transparent);
-    }
-
-    /* =======================
-       HERO (INICIO)
-    ======================== */
-    .hero-wrapper{
-      height:calc(100vh - 82px);
-      position:relative;
-      display:flex;align-items:center;justify-content:center;
-      text-align:center;
-      overflow:hidden;
-      margin:0 1rem 2.2rem;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-1);
-    }
-    .hero-bg{
-      position:absolute;inset:-5% 0 -5% 0;
-      background-image:url('ropondesmontable.jpeg');
-      background-size:cover;background-position:top center;
-      z-index:-3;
-      transform:scale(1.04);
-      filter:contrast(1.02) saturate(1.05) brightness(.98);
-      animation:zoomPan 26s ease-in-out infinite alternate;
-    }
-    @keyframes zoomPan{
-      0%{transform:scale(1.04) translateY(0)}
-      50%{transform:scale(1.08) translateY(-1.2%)}
-      100%{transform:scale(1.04) translateY(0)}
-    }
-    .hero-overlay{
-      position:absolute;inset:0;
+    body.sd-mode {
       background:
-        radial-gradient(900px 500px at 50% 40%, rgba(255,255,255,.62), rgba(253,252,248,.52) 55%, rgba(253,252,248,.70)),
-        linear-gradient(180deg, rgba(253,252,248,.18), rgba(253,252,248,.62));
-      z-index:-2;
-    }
-    .hero-glow{
-      position:absolute;inset:0;pointer-events:none;z-index:-1;
-      background:
-        radial-gradient(420px 240px at 50% 25%, rgba(197,160,89,.22), transparent 65%),
-        radial-gradient(520px 260px at 35% 78%, rgba(197,160,89,.14), transparent 68%);
-      mix-blend-mode:multiply;
-      opacity:.9;
+        radial-gradient(1100px 650px at 18% 10%, rgba(138,92,255,0.22), transparent 55%),
+        radial-gradient(900px 500px at 85% 15%, rgba(0,212,255,0.14), transparent 55%),
+        linear-gradient(180deg, var(--sd-bg), var(--sd-bg2) 60%, var(--sd-bg)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      background-blend-mode: normal, normal, normal, multiply;
+      color: var(--sd-text);
     }
 
-    .hero-content{
-      background:rgba(255,255,255,.88);
+    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+    a { text-decoration: none; color: inherit; transition: var(--transition); cursor: pointer; }
+    button { font-family: inherit; }
+    ul { list-style: none; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* ==============================
+      TOP PROGRESS BAR
+    ============================== */
+    .top-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      z-index: 4000;
+      background: linear-gradient(90deg, var(--gold-accent), rgba(197,160,89,0.2));
+      box-shadow: 0 6px 20px rgba(197,160,89,0.30);
+      transition: width 0.08s linear;
+    }
+    body.sd-mode .top-progress {
+      background: linear-gradient(90deg, var(--sd-accent), var(--sd-accent2));
+      box-shadow: 0 10px 30px rgba(138,92,255,0.22);
+    }
+
+    /* ==============================
+      NAV
+    ============================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 1.05rem 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3000;
+
+      background: rgba(252, 251, 246, 0.78);
       backdrop-filter: blur(14px);
-      border:1px solid rgba(255,255,255,.72);
-      box-shadow:0 18px 55px rgba(0,0,0,.14);
-      border-radius:18px;
-      padding:3rem 2.6rem;
-      max-width:720px;
-      position:relative;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: background var(--transition), border-color var(--transition);
     }
-    .hero-content::after{
+    body.sd-mode nav {
+      background: rgba(7, 9, 18, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .nav-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo::before{
       content:"";
-      position:absolute;inset:-1px;
-      border-radius:18px;
-      padding:1px;
-      background:linear-gradient(135deg, rgba(197,160,89,.55), rgba(255,255,255,.35), rgba(197,160,89,.25));
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      pointer-events:none;
-      opacity:.75;
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(197,160,89,0.65));
+      box-shadow: 0 10px 25px rgba(197,160,89,0.20);
     }
-    .hero-content h1{font-size:2.85rem;margin-bottom:.9rem}
-    .hero-sub{margin-bottom:1.45rem;color:#555;font-style:italic}
-    .location-badge{
-      display:inline-flex;align-items:center;gap:10px;
-      font-size:.82rem;text-transform:uppercase;letter-spacing:1.8px;
-      font-weight:800;
-      border:1px solid rgba(0,0,0,.10);
-      padding:.46rem 1rem;
-      border-radius:999px;
-      background:rgba(255,255,255,.9);
-      margin-bottom:1.35rem;
-    }
-    .mini-tag{
-      font-size:.83rem;font-weight:800;color:var(--gold);
-      letter-spacing:1.2px;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:.5rem .9rem;
-      border-radius:999px;
-      background:rgba(197,160,89,.09);
-      border:1px solid rgba(197,160,89,.22);
-      margin-bottom:1.35rem;
+    body.sd-mode .logo { color: rgba(255,255,255,0.92); }
+    body.sd-mode .logo::before {
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(0,212,255,0.65));
+      box-shadow: 0 12px 35px rgba(0,212,255,0.18);
     }
 
-    .btn-main{
-      padding:1rem 2.45rem;
-      border-radius:999px;
-      border:1px solid transparent;
-      background:var(--text);
-      color:#fff;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      font-size:.78rem;
-      display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
-      cursor:pointer;
-      transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    .lang-toggle {
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.75);
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
     }
-    .btn-main:hover{transform:translateY(-2px);background:var(--gold);border-color:rgba(0,0,0,.06);box-shadow:0 18px 40px rgba(197,160,89,.22)}
-    .btn-ghost{
-      background:rgba(255,255,255,.95)!important;
-      color:var(--text)!important;
-      border:1px solid rgba(0,0,0,.10)!important;
-      box-shadow:0 12px 26px rgba(0,0,0,.08)!important;
+    .lang-toggle:hover { transform: translateY(-1px); border-color: rgba(197,160,89,0.35); box-shadow: var(--shadow-soft); }
+    body.sd-mode .lang-toggle {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      box-shadow: var(--sd-shadow);
     }
-    .btn-ghost:hover{
-      background:#fff!important;
-      border-color:rgba(197,160,89,.30)!important;
-      box-shadow:0 18px 40px rgba(197,160,89,.20)!important;
-    }
-
-    /* =======================
-       TITLES
-    ======================== */
-    .section-title{
-      text-align:center;
-      padding:3.6rem 1rem 1.7rem;
-    }
-    .section-title p{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-weight:800;
-      font-size:.82rem;
-      margin-bottom:.4rem;
-    }
-    .section-title h2{font-size:2.35rem}
-
-    /* =======================
-       SWIPER (Destacados)
-    ======================== */
-    .swiper{
-      width:100%;
-      padding:1rem 0 2.6rem;
-    }
-    #homeSwiper{
-      padding-bottom:3.2rem;
+    body.sd-mode .lang-toggle:hover {
+      box-shadow: var(--sd-glow);
+      border-color: rgba(0,212,255,0.22);
     }
 
-    .swiper-slide{
-      background:rgba(255,255,255,.95);
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:var(--shadow-2);
-      border:1px solid rgba(0,0,0,.05);
-      transform:translateZ(0);
+    .burger-btn {
+      cursor: pointer;
+      width: 40px;
+      height: 28px;
+      position: relative;
+      z-index: 3001;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
-    body.sd-mode .swiper-slide{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.10);
-      box-shadow:var(--sd-shadow);
+    .burger-line {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text-dark);
+      position: absolute;
+      transition: var(--transition-slow);
+      border-radius: 2px;
     }
+    .burger-line:nth-child(1) { top: 0; }
+    .burger-line:nth-child(2) { top: 13px; width: 70%; right: 0; }
+    .burger-line:nth-child(3) { top: 26px; }
 
-    /* efecto: blur/opacidad en no activos */
-    #homeSwiper .swiper-slide{
-      transition:transform .55s var(--ease), filter .55s var(--ease), opacity .55s var(--ease);
-      opacity:.85;
-      filter:saturate(.98) contrast(.98);
-    }
-    #homeSwiper .swiper-slide.swiper-slide-active{
-      opacity:1;
-      filter:saturate(1.05) contrast(1.02);
-    }
+    body.sd-mode .burger-line { background: rgba(255,255,255,0.90); }
 
-    .slide-img{
-      height:460px;width:100%;
-      object-fit:cover;object-position:top center;
-      display:block;
-      transform:scale(1.02);
-      transition:transform 1.2s var(--ease);
-    }
-    .swiper-slide:hover .slide-img{transform:scale(1.06)}
-    .slide-info{
-      padding:1.25rem 1.2rem 1.55rem;
-      text-align:center;
-    }
-    .slide-info h3{
-      font-family:'Lato',sans-serif;
-      letter-spacing:.2px;
-      font-weight:500;
-      font-size:1.05rem;
-      margin-bottom:.35rem;
-    }
-    .slide-info p{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:2px;
-      font-size:.78rem;
-      font-weight:800;
-    }
+    .burger-btn.open .burger-line:nth-child(1) { transform: rotate(45deg); top: 13px; background: var(--gold-accent); }
+    .burger-btn.open .burger-line:nth-child(2) { opacity: 0; }
+    .burger-btn.open .burger-line:nth-child(3) { transform: rotate(-45deg); top: 13px; background: var(--gold-accent); }
+    body.sd-mode .burger-btn.open .burger-line:nth-child(1),
+    body.sd-mode .burger-btn.open .burger-line:nth-child(3) { background: var(--sd-accent2); }
 
-    /* paginación / flechas */
-    .swiper-pagination-bullet{
-      width:8px;height:8px;
-      background:rgba(0,0,0,.22);
-      opacity:1;
+    /* ==============================
+      OVERLAY MENU (WOW)
+    ============================== */
+    .overlay-menu {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: var(--overlay-bg);
+      z-index: 2999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, background var(--transition);
+      overflow: hidden;
     }
-    .swiper-pagination-bullet-active{background:var(--gold);transform:scale(1.15)}
-    body.sd-mode .swiper-pagination-bullet{background:rgba(255,255,255,.25)}
-    body.sd-mode .swiper-pagination-bullet-active{background:var(--sd-accent2)}
-
-    .swiper-nav{
-      display:flex;justify-content:center;gap:.8rem;
-      margin-top:-1.6rem;
-    }
-    .nav-btn{
-      width:44px;height:44px;border-radius:999px;
-      border:1px solid rgba(0,0,0,.10);
-      background:rgba(255,255,255,.82);
-      backdrop-filter:blur(10px);
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-      box-shadow:0 12px 26px rgba(0,0,0,.10);
-    }
-    .nav-btn:hover{transform:translateY(-2px);border-color:rgba(197,160,89,.35);box-shadow:0 18px 36px rgba(197,160,89,.16)}
-    body.sd-mode .nav-btn{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.14);
-      box-shadow:var(--sd-shadow);
-      color:rgba(255,255,255,.9);
-    }
-    body.sd-mode .nav-btn:hover{box-shadow:var(--sd-glow);border-color:rgba(0,212,255,.25)}
-    .nav-btn i{font-size:1rem}
-
-    /* =======================
-       BANNERS / CARDS
-    ======================== */
-    .shipping-banner{
-      width:min(1080px, 92%);
-      margin:2.4rem auto 0;
-      border-radius:16px;
-      padding:.95rem 1rem;
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      color:#4f4f4f;
-      background:linear-gradient(135deg, rgba(197,160,89,.12), rgba(244,241,234,.9));
-      border:1px solid rgba(197,160,89,.20);
-      box-shadow:0 14px 40px rgba(197,160,89,.10);
-    }
-
-    .promo-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(220px, 1fr));
-      gap:1.25rem;
-      margin:2.8rem auto 0;
-      width:min(1180px, 92%);
-    }
-    .promo-card{
-      background:rgba(255,255,255,.92);
-      border-radius:var(--radius);
-      padding:1.55rem 1.45rem;
-      box-shadow:var(--shadow-2);
-      border:1px solid rgba(0,0,0,.05);
-      position:relative;
-      overflow:hidden;
-      transition:transform .45s var(--ease), box-shadow .45s var(--ease);
-    }
-    .promo-card::before{
+    .overlay-menu::before{
       content:"";
-      position:absolute;inset:-1px;
-      background:radial-gradient(420px 220px at 25% 0%, rgba(197,160,89,.20), transparent 60%);
-      opacity:.9;
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(900px 500px at 20% 30%, rgba(197,160,89,0.20), transparent 60%),
+        radial-gradient(900px 500px at 80% 70%, rgba(197,160,89,0.12), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      transform: rotate(12deg);
       pointer-events:none;
     }
-    .promo-card:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.12)}
-    .promo-badge{
-      position:absolute;top:14px;right:14px;
-      font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
-      color:#fff;background:var(--text);
-      padding:.35rem .6rem;border-radius:999px;
-      z-index:1;
+    body.sd-mode .overlay-menu {
+      background: rgba(7, 9, 18, 0.95);
     }
-    .promo-card h3{font-size:1.2rem;margin-bottom:.55rem;position:relative;z-index:1}
-    .promo-card p{color:#555;line-height:1.55;position:relative;z-index:1}
+    body.sd-mode .overlay-menu::before{
+      background:
+        radial-gradient(900px 500px at 20% 30%, rgba(138,92,255,0.20), transparent 60%),
+        radial-gradient(900px 500px at 80% 70%, rgba(0,212,255,0.12), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+    }
+
+    .overlay-menu.active { opacity: 1; pointer-events: all; }
+
+    .overlay-menu ul { position: relative; z-index: 2; }
+    .overlay-menu li { margin: 1.1rem 0; overflow: hidden; text-align: center; }
+
+    .overlay-menu a {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--text-dark);
+      display: inline-block;
+      transform: translateY(130%);
+      transition: transform 0.65s ease, color 0.25s ease;
+      letter-spacing: 2px;
+      text-shadow: 0 10px 45px rgba(0,0,0,0.08);
+    }
+    body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); text-shadow: 0 16px 55px rgba(0,0,0,0.40); }
+    .overlay-menu.active a { transform: translateY(0); }
+    .overlay-menu a.active-link { color: var(--gold-accent); }
+    body.sd-mode .overlay-menu a.active-link { color: var(--sd-accent2); }
+
+    /* ==============================
+      MAIN (SPA)
+    ============================== */
+    .main-container { position: relative; min-height: 100vh; padding-top: 82px; }
+    .view-section { display: none; opacity: 0; animation: fadeView 0.85s ease forwards; }
+    .view-section.active-view { display: block; }
+    @keyframes fadeView {
+      from { opacity: 0; transform: translateY(18px); filter: blur(2px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    /* Utility container */
+    .wrap {
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto;
+    }
+
+    /* ==============================
+      SECTION SPACING + DIVIDERS
+    ============================== */
+    .band {
+      position: relative;
+      padding: 3.2rem 0;
+    }
+    .band.tight { padding: 2.2rem 0; }
+    .band::before{
+      content:"";
+      position:absolute; left:0; right:0; top:-1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
+    }
+    body.sd-mode .band::before{
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    }
+    .band.alt{
+      background:
+        radial-gradient(900px 450px at 20% 10%, rgba(197,160,89,0.12), transparent 55%),
+        radial-gradient(900px 450px at 80% 40%, rgba(197,160,89,0.08), transparent 60%),
+        rgba(255,255,255,0.38);
+      backdrop-filter: blur(10px);
+    }
+    body.sd-mode .band.alt{
+      background:
+        radial-gradient(900px 450px at 20% 10%, rgba(138,92,255,0.14), transparent 55%),
+        radial-gradient(900px 450px at 80% 40%, rgba(0,212,255,0.10), transparent 60%),
+        rgba(255,255,255,0.02);
+      backdrop-filter: blur(14px);
+    }
+
+    /* ==============================
+      HERO (INICIO) – WOW
+    ============================== */
+    .hero-wrapper {
+      height: calc(100vh - 82px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      margin: 0.9rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute;
+      top: -10%; left: 0;
+      width: 100%;
+      height: 130%;
+      background-image: url('ropondesmontable.jpeg'); /* IMAGEN PORTADA */
+      background-size: cover;
+      background-position: top center;
+      z-index: -3;
+      filter: saturate(1.05) contrast(1.02);
+      transform: scale(1.06);
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(900px 520px at 30% 25%, rgba(255,255,255,0.74), transparent 60%),
+        radial-gradient(900px 520px at 75% 15%, rgba(197,160,89,0.22), transparent 58%),
+        linear-gradient(180deg, rgba(252,251,246,0.65), rgba(252,251,246,0.88) 70%, rgba(252,251,246,0.95));
+      backdrop-filter: blur(2px);
+    }
+    .hero-sparkles{
+      position:absolute; inset:0;
+      z-index:-1;
+      background:
+        radial-gradient(12px 12px at 12% 20%, rgba(197,160,89,0.30), transparent 60%),
+        radial-gradient(10px 10px at 85% 30%, rgba(197,160,89,0.24), transparent 62%),
+        radial-gradient(8px 8px at 65% 78%, rgba(197,160,89,0.22), transparent 65%),
+        radial-gradient(9px 9px at 25% 75%, rgba(197,160,89,0.18), transparent 62%);
+      opacity: 0.85;
+      animation: floatSparkles 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes floatSparkles{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+
+    .hero-content {
+      position: relative;
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(14px);
+      padding: 2.6rem 2.3rem;
+      max-width: 720px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.14);
+    }
+    .hero-content::before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 18px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(197,160,89,0.45), rgba(255,255,255,0.35), rgba(197,160,89,0.25));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.1rem, 4vw, 3.05rem);
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      line-height: 1.05;
+      letter-spacing: 1.5px;
+      animation: riseIn 0.9s var(--transition-slow) both;
+    }
+    @keyframes riseIn {
+      from{ opacity:0; transform: translateY(14px); filter: blur(2px); }
+      to{ opacity:1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+      font-weight: 800;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .btn-main {
+      padding: 0.95rem 2.2rem;
+      background: var(--text-dark);
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: 999px;
+      box-shadow: 0 16px 35px rgba(0,0,0,0.14);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-main::after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.22), transparent 55%);
+      transform: rotate(25deg);
+      transition: var(--transition);
+      opacity: 0;
+    }
+    .btn-main:hover { background: var(--gold-accent); border-color: rgba(197,160,89,0.55); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+    .btn-main:hover::after{ opacity:1; }
+
+    /* ==============================
+      TITLES
+    ============================== */
+    .section-title {
+      text-align: center;
+      padding: 0 1rem 1.2rem;
+    }
+    .section-title .kicker {
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .kicker::before,
+    .section-title .kicker::after{
+      content:"";
+      width: 34px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.9), transparent);
+    }
+    body.sd-mode .section-title .kicker { color: var(--sd-accent2); }
+    body.sd-mode .section-title .kicker::before,
+    body.sd-mode .section-title .kicker::after{
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.55rem);
+      margin-top: 0.55rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 1px;
+    }
+    .section-title p.sub {
+      color: var(--text-mid);
+      max-width: 720px;
+      margin: 0.4rem auto 0;
+      line-height: 1.55;
+      font-size: 0.98rem;
+    }
+    body.sd-mode .section-title p.sub { color: rgba(255,255,255,0.70); }
+
+    /* ==============================
+      SWIPER HOME – EFFECTS + UI
+    ============================== */
+    .swiper { width: 100%; padding: 0.75rem 0 1.1rem; }
+    .home-swiper-wrap{
+      position: relative;
+    }
+    .swiper-slide {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.05);
+      transform: translateZ(0);
+    }
+    body.sd-mode .swiper-slide {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
+    }
+
+    .slide-img {
+      height: 460px;
+      width: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 1.0s ease;
+      filter: saturate(1.05) contrast(1.03);
+    }
+    .swiper-slide:hover .slide-img { transform: scale(1.06); }
+
+    .slide-info {
+      padding: 1.2rem 1.25rem 1.35rem;
+      text-align: center;
+      position: relative;
+    }
+    .slide-info::before{
+      content:"";
+      position:absolute; left: 12%; right: 12%; top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.60), transparent);
+    }
+    body.sd-mode .slide-info::before{
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.55), transparent);
+    }
+    .slide-info h3 { font-family: 'Lato', sans-serif; font-weight: 500; font-size: 1.06rem; }
+    .slide-info p { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; font-weight: 800; }
+    body.sd-mode .slide-info p { color: var(--sd-accent2); }
+
+    .swiper-pagination-bullets .swiper-pagination-bullet{
+      width: 7px; height: 7px;
+      background: rgba(0,0,0,0.25);
+      opacity: 1;
+      transition: var(--transition);
+    }
+    .swiper-pagination-bullets .swiper-pagination-bullet-active{
+      width: 18px;
+      border-radius: 999px;
+      background: var(--gold-accent);
+      box-shadow: 0 10px 26px rgba(197,160,89,0.35);
+    }
+    body.sd-mode .swiper-pagination-bullets .swiper-pagination-bullet{
+      background: rgba(255,255,255,0.22);
+    }
+    body.sd-mode .swiper-pagination-bullets .swiper-pagination-bullet-active{
+      background: linear-gradient(90deg, var(--sd-accent), var(--sd-accent2));
+      box-shadow: 0 12px 30px rgba(0,212,255,0.18);
+    }
+
+    .swiper-nav-btn{
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      z-index: 10;
+      transition: var(--transition);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+    }
+    .swiper-nav-btn:hover{ transform: translateY(-50%) scale(1.04); border-color: rgba(197,160,89,0.35); box-shadow: var(--shadow-glow); }
+    .swiper-nav-btn i{ color: var(--text-dark); font-size: 1.05rem; }
+    body.sd-mode .swiper-nav-btn{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: var(--sd-shadow);
+    }
+    body.sd-mode .swiper-nav-btn i{ color: rgba(255,255,255,0.88); }
+    body.sd-mode .swiper-nav-btn:hover{ box-shadow: var(--sd-glow); border-color: rgba(0,212,255,0.22); }
+
+    .swiper-nav-prev{ left: 10px; }
+    .swiper-nav-next{ right: 10px; }
+
+    /* ==============================
+      SHIPPING + PROMOS + CTA
+    ============================== */
+    .shipping-banner {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.06);
+      text-align: center;
+      padding: 0.95rem 1rem;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: var(--text-mid);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 1.6rem auto 0;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      width: min(var(--max-w), 92vw);
+    }
+    body.sd-mode .shipping-banner{
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.70);
+      box-shadow: var(--sd-shadow);
+    }
+
+    .promo-grid {
+      width: min(var(--max-w), 92vw);
+      margin: 1.7rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 1.1rem;
+    }
+    .promo-card {
+      background: rgba(255,255,255,0.66);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: var(--transition);
+      min-height: 160px;
+    }
+    .promo-card::after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: radial-gradient(circle at 30% 35%, rgba(197,160,89,0.18), transparent 55%);
+      transform: rotate(18deg);
+      opacity: 0.0;
+      transition: var(--transition);
+      pointer-events:none;
+    }
+    .promo-card:hover{
+      transform: translateY(-5px);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.12);
+      border-color: rgba(197,160,89,0.25);
+    }
+    .promo-card:hover::after{ opacity: 1; }
+
+    body.sd-mode .promo-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
+    }
+    body.sd-mode .promo-card:hover{
+      border-color: rgba(0,212,255,0.18);
+      box-shadow: var(--sd-glow);
+    }
+
+    .promo-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: white;
+      background: var(--text-dark);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+    }
+    body.sd-mode .promo-badge{
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      color: #070912;
+      font-weight: 900;
+    }
+
+    .promo-card h3 { font-size: 1.12rem; margin-bottom: 0.5rem; }
+    .promo-card p { color: var(--text-mid); line-height: 1.5; }
+    body.sd-mode .promo-card p { color: rgba(255,255,255,0.70); }
+
     .promo-card a{
-      display:inline-flex;gap:.5rem;align-items:center;
-      margin-top:1rem;
-      font-weight:900;
-      letter-spacing:1px;
-      color:var(--gold);
-      position:relative;z-index:1;
+      display:inline-flex;
+      margin-top: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--gold-accent);
+      gap: 10px;
+      align-items: center;
     }
-    .promo-card a:hover{transform:translateY(-1px)}
+    .promo-card a::after{ content:"→"; transition: var(--transition); }
+    .promo-card a:hover::after{ transform: translateX(4px); }
+    body.sd-mode .promo-card a{ color: var(--sd-accent2); }
 
-    .rent-cta{
-      width:min(1180px, 92%);
-      margin:3.3rem auto 0;
-      border-radius:var(--radius);
-      overflow:hidden;
-      position:relative;
-      box-shadow:var(--shadow-3);
-      background:linear-gradient(135deg, rgba(58,58,58,0.96), rgba(197,160,89,0.70));
-      color:#fff;
-      padding:2.1rem 1.8rem;
-      display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-      flex-wrap:wrap;
+    .rent-cta {
+      width: min(var(--max-w), 92vw);
+      margin: 1.9rem auto 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      background:
+        radial-gradient(800px 450px at 20% 30%, rgba(255,255,255,0.20), transparent 60%),
+        linear-gradient(135deg, rgba(58,58,58,0.96), rgba(197,160,89,0.75));
+      color: white;
+      padding: 2.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,0.16);
     }
-    .rent-cta::after{
-      content:"";
-      position:absolute;inset:0;
-      background:radial-gradient(800px 380px at 20% 30%, rgba(255,255,255,.10), transparent 60%);
-      pointer-events:none;
-    }
-    .rent-cta h3{font-size:1.6rem;position:relative;z-index:1}
-    .rent-cta p{max-width:640px;opacity:.95;line-height:1.55;position:relative;z-index:1}
-    .btn-rent{
-      background:rgba(255,255,255,0.14);
-      border:1px solid rgba(255,255,255,0.35);
-      color:#fff;
-      padding:.95rem 1.4rem;border-radius:999px;
-      cursor:pointer;
-      letter-spacing:2px;text-transform:uppercase;font-size:.78rem;
-      display:inline-flex;align-items:center;gap:.55rem;
-      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
-      box-shadow:0 14px 28px rgba(0,0,0,.18);
-      position:relative;z-index:1;
-    }
-    .btn-rent:hover{transform:translateY(-2px);background:rgba(255,255,255,0.22);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+    .rent-cta h3 { font-size: 1.62rem; }
+    .rent-cta p { opacity: 0.92; max-width: 680px; line-height: 1.55; }
 
-    /* =======================
-       CATEGORY HEADERS / TOOLBAR
-    ======================== */
-    .category-header{text-align:center;padding:3.7rem 1rem 2.2rem}
-    .category-header p{
-      color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-weight:900;font-size:.82rem;
-      margin-bottom:.55rem;
+    .btn-rent {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.30);
+      color: white;
+      padding: 0.95rem 1.55rem;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: var(--transition);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.22);
     }
-    .category-header h2{font-size:3rem;margin-bottom:.6rem}
-    .back-link{
-      background:none;border:none;
-      border-bottom:1px solid rgba(197,160,89,.75);
-      cursor:pointer;
-      color:#9a9a9a;
-      padding-bottom:.25rem;
-      transition:.25s ease;
-    }
-    .back-link:hover{color:var(--text);border-bottom-color:var(--gold)}
-    body.sd-mode .back-link{color:rgba(255,255,255,.65);border-bottom-color:rgba(0,212,255,.55)}
-    body.sd-mode .back-link:hover{color:rgba(255,255,255,.9)}
+    .btn-rent:hover { background: rgba(255,255,255,0.24); transform: translateY(-2px); }
 
-    .tools-bar{
-      display:grid;
-      grid-template-columns:1.4fr 1fr;
-      gap:1rem;
-      padding:0 5% 1.2rem;
-      align-items:end;
-      margin:0 auto 1.3rem;
-      width:min(1180px, 100%);
+    /* ==============================
+      CATEGORY HEADERS
+    ============================== */
+    .category-header {
+      text-align: center;
+      padding: 3.6rem 1rem 1.7rem;
+      position: relative;
     }
-    label{display:block;font-weight:900;letter-spacing:1px;color:#666;margin:0 0 .5rem}
-    body.sd-mode label{color:rgba(255,255,255,.65)}
-    .search-input{
-      width:100%;
-      padding:1rem 1.1rem;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,.12);
-      background:rgba(255,255,255,.88);
-      outline:none;
-      transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    .category-header p {
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
     }
-    .search-input:focus{
-      border-color:rgba(197,160,89,.55);
-      box-shadow:0 18px 40px rgba(197,160,89,.16);
-      transform:translateY(-1px);
+    body.sd-mode .category-header p { color: var(--sd-accent2); }
+    .category-header h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3rem);
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+    }
+    body.sd-mode .category-header h2 { color: var(--sd-text); }
+
+    .back-link {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+      margin-top: 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(197,160,89,0.65);
+      transition: var(--transition);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .back-link:hover { color: var(--text-dark); transform: translateY(-1px); }
+    body.sd-mode .back-link { border-bottom-color: rgba(0,212,255,0.65); color: rgba(255,255,255,0.70); }
+    body.sd-mode .back-link:hover { color: rgba(255,255,255,0.92); }
+
+    /* ==============================
+      TOOLS BAR (Search + Chips)
+    ============================== */
+    .tools-bar {
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1rem;
+      padding: 0 0 1.2rem;
+      align-items: end;
+    }
+    .search-wrap label,
+    .filter-wrap label{
+      display:block;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+      color: rgba(0,0,0,0.55);
+    }
+    body.sd-mode .search-wrap label,
+    body.sd-mode .filter-wrap label{
+      color: rgba(255,255,255,0.55);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.95rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.70);
+      outline: none;
+      transition: var(--transition);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+    }
+    .search-input:focus {
+      border-color: rgba(197,160,89,0.45);
+      box-shadow: 0 18px 50px rgba(197,160,89,0.18);
+      background: rgba(255,255,255,0.85);
     }
     body.sd-mode .search-input{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.16);
-      color:rgba(255,255,255,.92);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      box-shadow: var(--sd-shadow);
     }
     body.sd-mode .search-input:focus{
-      border-color:rgba(0,212,255,.28);
-      box-shadow:var(--sd-glow);
+      border-color: rgba(0,212,255,0.22);
+      box-shadow: var(--sd-glow);
     }
 
-    .chips{display:flex;gap:.6rem;flex-wrap:wrap}
-    .chip{
-      border:1px solid rgba(0,0,0,.12);
-      padding:.62rem .95rem;
-      border-radius:999px;
-      cursor:pointer;
-      background:rgba(255,255,255,.92);
-      transition:transform .2s ease, background .25s ease, border-color .25s ease;
-      font-size:.86rem;
-      user-select:none;
+    .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .chip {
+      border: 1px solid rgba(0,0,0,0.12);
+      padding: 0.6rem 0.95rem;
+      border-radius: 999px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.75);
+      transition: var(--transition);
+      font-size: 0.85rem;
+      user-select: none;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.05);
     }
-    .chip:hover{transform:translateY(-1px)}
-    .chip.active{background:var(--text);color:#fff;border-color:var(--text)}
-    body.sd-mode .chip{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:rgba(255,255,255,.88)}
-    body.sd-mode .chip.active{
-      background:linear-gradient(135deg, rgba(138,92,255,.92), rgba(0,212,255,.70));
-      border-color:rgba(255,255,255,.10);
-      color:#0b0d14;font-weight:900
+    .chip:hover{ transform: translateY(-1px); border-color: rgba(197,160,89,0.28); }
+    .chip.active {
+      background: var(--text-dark);
+      color: white;
+      border-color: var(--text-dark);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.14);
+    }
+    body.sd-mode .chip {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      box-shadow: var(--sd-shadow);
+    }
+    body.sd-mode .chip.active {
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      border-color: rgba(255,255,255,0.10);
+      color: #070912;
+      font-weight: 900;
     }
 
+    /* ==============================
+      PRODUCT GRID + CARDS (WOW)
+    ============================== */
+    .products-grid {
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.7rem;
+      padding: 0 0 4rem;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      transition: var(--transition);
+      cursor: pointer;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.05);
+      opacity: 0;
+      transform: translateY(14px);
+      position: relative;
+      isolation: isolate;
+    }
+    .product-card::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(500px 250px at 20% 20%, rgba(197,160,89,0.16), transparent 55%);
+      opacity: 0;
+      transition: var(--transition);
+      pointer-events:none;
+      z-index: 0;
+    }
+    .product-card:hover::before{ opacity: 1; }
+
+    body.sd-mode .product-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
+    }
+    body.sd-mode .product-card::before{
+      background:
+        radial-gradient(500px 250px at 20% 20%, rgba(0,212,255,0.14), transparent 55%);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.14);
+      border-color: rgba(197,160,89,0.22);
+    }
+    body.sd-mode .product-card:hover{
+      border-color: rgba(0,212,255,0.18);
+      box-shadow: var(--sd-glow);
+    }
+
+    .img-container {
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 1.1s ease, filter 1.1s ease;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
+    }
+    .product-card:hover .img-container img {
+      transform: scale(1.06);
+      filter: saturate(1.08) contrast(1.06);
+    }
+
+    .card-chip {
+      position:absolute;
+      top: 14px; left: 14px;
+      z-index: 2;
+      border-radius: 999px;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: var(--text-dark);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.10);
+    }
+    body.sd-mode .card-chip{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.90);
+      box-shadow: var(--sd-shadow);
+    }
+
+    .product-info {
+      padding: 1.1rem 0 1.45rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .product-info h3 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 1.07rem;
+      letter-spacing: 0.4px;
+    }
+    .product-info p {
+      color: var(--gold-accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      margin-top: 7px;
+      letter-spacing: 2px;
+      font-weight: 900;
+    }
+    body.sd-mode .product-info p{ color: var(--sd-accent2); }
+
+    /* Empty state */
     .empty-state{
-      width:min(980px, 92%);
-      margin:1rem auto 2.5rem;
-      padding:1rem 1.15rem;
-      border-radius:16px;
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto 2rem;
       display:none;
-      text-align:center;
-      color:#6a6a6a;
-      background:rgba(255,255,255,.78);
-      border:1px dashed rgba(0,0,0,.15);
+      padding: 1.15rem 1.2rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(0,0,0,0.07);
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(12px);
+      color: var(--text-mid);
+      box-shadow: var(--shadow-card);
+      text-align: center;
     }
     body.sd-mode .empty-state{
-      color:rgba(255,255,255,.70);
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.72);
+      box-shadow: var(--sd-shadow);
     }
 
-    /* =======================
-       PRODUCT GRID / CARDS
-    ======================== */
-    .products-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
-      gap:2rem;
-      padding:0 5% 4.2rem;
-      width:min(1180px, 100%);
-      margin:0 auto;
+    /* ==============================
+      3D SWIPER (Ropones) – upgraded
+    ============================== */
+    .showcase-container {
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+      padding-bottom: 1.5rem;
     }
+    .showcase-container h3 {
+      font-size: 1.85rem;
+      margin-bottom: 0.55rem;
+      color: var(--text-dark);
+    }
+    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
 
-    .product-card{
-      background:rgba(255,255,255,.92);
-      border-radius:var(--radius);
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,.05);
-      box-shadow:0 10px 28px rgba(0,0,0,.08);
-      cursor:pointer;
-      opacity:0;
-      transform:translateY(14px);
-      transition:transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease);
-      position:relative;
+    .hint {
+      color: var(--text-light);
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-    .product-card::after{
+    body.sd-mode .hint { color: rgba(255,255,255,0.65); }
+
+    .swiper-3d-container { width: 100%; padding-top: 18px; padding-bottom: 42px; }
+
+    .swiper-slide-3d {
+      background-position: center;
+      background-size: cover;
+      width: 290px;
+      height: 470px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.18);
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      transform: translateZ(0);
+      position: relative;
+      isolation: isolate;
+    }
+    .swiper-slide-3d::after{
       content:"";
-      position:absolute;inset:-1px;
-      border-radius:var(--radius);
-      padding:1px;
-      background:linear-gradient(135deg, rgba(197,160,89,.32), rgba(255,255,255,.20), rgba(197,160,89,.18));
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.12) 100%);
       pointer-events:none;
-      opacity:.0;
-      transition:opacity .55s var(--ease);
+      opacity: 0.55;
     }
-    .product-card:hover{
-      transform:translateY(-7px);
-      box-shadow:0 26px 60px rgba(0,0,0,.12);
-      border-color:rgba(197,160,89,.25);
+    .swiper-slide-3d img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
     }
-    .product-card:hover::after{opacity:.9}
-
-    body.sd-mode .product-card{
-      background:var(--sd-card);
-      border-color:var(--sd-border);
-      box-shadow:var(--sd-shadow);
-    }
-    body.sd-mode .product-card:hover{border-color:rgba(0,212,255,.18);box-shadow:var(--sd-glow)}
-
-    .img-container{height:500px;overflow:hidden;position:relative}
-    .img-container::before{
-      content:"";
-      position:absolute;inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.10) 70%, rgba(0,0,0,0.22));
-      opacity:.55;
-      pointer-events:none;
-      transition:opacity .55s var(--ease);
-      z-index:1;
-    }
-    .product-card:hover .img-container::before{opacity:.28}
-    .img-container img{
-      width:100%;height:100%;
-      object-fit:cover;
-      object-position:top center;
-      display:block;
-      transition:transform 1.25s var(--ease), filter 1.25s var(--ease);
-      transform:scale(1.02);
-    }
-    .product-card:hover .img-container img{transform:scale(1.08);filter:saturate(1.04)}
-
-    .product-info{padding:1.15rem 1rem 1.55rem;text-align:center}
-    .product-info h3{font-family:'Lato',sans-serif;font-weight:500;font-size:1.06rem;letter-spacing:.2px}
-    .product-info p{color:var(--gold);font-size:.78rem;text-transform:uppercase;margin-top:7px;letter-spacing:2px;font-weight:900}
-    body.sd-mode .product-info p{color:rgba(0,212,255,.75)}
-    body.sd-mode .product-info h3{color:rgba(255,255,255,.92)}
-
-    /* animación entrada */
-    .view-section.active-view .product-card{animation:fadeInUp .6s var(--ease) forwards}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-    /* =======================
-       3D SWIPER (NIÑA)
-    ======================== */
-    .showcase-container{
-      padding: 0 0 3rem;
-      text-align:center;
-      overflow:hidden;
-      width:min(1180px, 100%);
-      margin:0 auto 1rem;
-    }
-    .showcase-container h3{font-size:1.85rem;margin-bottom:.8rem}
-    .showcase-container p{color:var(--muted);margin-bottom:12px}
-    body.sd-mode .showcase-container p{color:rgba(255,255,255,.65)}
-
-    .swiper-3d-container{width:100%;padding-top:22px;padding-bottom:48px}
-    .swiper-slide-3d{
-      width:290px;height:460px;
-      border-radius:22px;
-      overflow:hidden;
-      box-shadow:0 18px 55px rgba(0,0,0,.18);
-      border:1px solid rgba(0,0,0,.06);
-      background:#fff;
-      transform:translateZ(0);
-    }
-    .swiper-slide-3d img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-    body.sd-mode .swiper-slide-3d{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.10);
-      box-shadow:var(--sd-shadow);
+    body.sd-mode .swiper-slide-3d {
+      box-shadow: 0 18px 65px rgba(0,0,0,0.70);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
     }
 
-    /* =======================
-       STUDIO HERO (más oscuro + logo negro visible)
-    ======================== */
-    .sd-hero{
-      margin:0 1rem 1rem;
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:var(--sd-shadow);
-      position:relative;
-      min-height:62vh;
-      display:flex;align-items:center;justify-content:center;
-      text-align:center;
+    /* ==============================
+      STUDIO HERO – darker + logo readable
+    ============================== */
+    .sd-hero {
+      margin: 0.9rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--sd-shadow);
+      position: relative;
+      min-height: 66vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
       background:
-        radial-gradient(900px 520px at 18% 12%, rgba(138,92,255,0.28), transparent 62%),
-        radial-gradient(900px 520px at 82% 15%, rgba(0,212,255,0.18), transparent 60%),
-        linear-gradient(180deg, rgba(7,8,12,1), rgba(5,6,9,1));
+        radial-gradient(900px 500px at 18% 15%, rgba(138,92,255,0.30), transparent 60%),
+        radial-gradient(900px 500px at 82% 35%, rgba(0,212,255,0.16), transparent 60%),
+        linear-gradient(180deg, rgba(6,7,12,1), rgba(3,4,8,1));
+      isolation: isolate;
     }
-    /* capa imagen */
-    .sd-hero::after{
-      content:"";
-      position:absolute;inset:0;
-      background-image:url('vestidonegroresaltar.jpeg');
-      background-size:cover;background-position:center;
-      opacity:.18; /* más oscuro */
-      filter:contrast(1.05) saturate(1.05);
-      pointer-events:none;
-    }
-    /* overlay aún más oscuro (para que el fondo sea dark) */
     .sd-hero::before{
       content:"";
-      position:absolute;inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.55));
+      position:absolute; inset:0;
+      background-image: url('vestidonegroresaltar.jpeg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.28;
+      filter: contrast(1.05) saturate(1.05);
+      transform: scale(1.02);
       pointer-events:none;
+      z-index:-2;
+    }
+    .sd-hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.78), rgba(0,0,0,0.62) 55%, rgba(0,0,0,0.82));
+      pointer-events:none;
+      z-index:-1;
     }
 
-    .sd-hero-content{
-      position:relative;
-      padding:3rem 1.8rem;
-      max-width:780px;
-      z-index:1;
-      color:var(--sd-text);
+    .sd-hero-content {
+      position: relative;
+      padding: 3rem 1.8rem;
+      max-width: 840px;
+      color: var(--sd-text);
+      z-index: 1;
     }
-    /* contenedor elegante claro detrás del logo negro */
+
     .sd-logo-wrap{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:.9rem 1.1rem;
-      border-radius:18px;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(255,255,255,.28);
-      box-shadow:0 18px 50px rgba(0,0,0,.35);
-      backdrop-filter:blur(10px);
-      margin-bottom:1.2rem;
+      padding: 1rem 1.25rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 65px rgba(0,0,0,0.55);
     }
-    .sd-logo-wrap img{
-      max-width:220px;
+    .sd-hero-content img{
+      max-width: 240px;
       display:block;
+      /* Fondo más oscuro + halo claro para que un logo negro se “separe” */
+      filter:
+        drop-shadow(0 0 18px rgba(255,255,255,0.22))
+        drop-shadow(0 0 32px rgba(0,212,255,0.10));
     }
 
-    .sd-actions{
-      display:flex;gap:.9rem;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:1.6rem;
+    .sd-actions {
+      display: flex;
+      gap: 0.9rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.7rem;
     }
-    .btn-sd{
-      padding:.95rem 1.45rem;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.06);
-      color:var(--sd-text);
-      cursor:pointer;
-      letter-spacing:2px;text-transform:uppercase;font-size:.78rem;
-      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
-      display:inline-flex;gap:.55rem;align-items:center;
-      box-shadow:0 14px 36px rgba(0,0,0,.42);
+    .btn-sd {
+      padding: 0.95rem 1.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--sd-text);
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      transition: var(--transition);
+      display: inline-flex;
+      gap: .55rem;
+      align-items: center;
+      box-shadow: var(--sd-shadow);
     }
-    .btn-sd:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.26);box-shadow:var(--sd-glow)}
-    .btn-sd.primary{
-      background:linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color:#0b0d14;border-color:rgba(255,255,255,0.08);
-      font-weight:900;
+    .btn-sd:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.26);
+      box-shadow: var(--sd-glow);
     }
-
-    /* =======================
-       CONTACTO (NUEVO, COMPLETO, LIMPIO)
-    ======================== */
-    .contact-footer{
-      margin-top:2rem;
-      padding:4.2rem 5% 2.4rem;
-      position:relative;
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(253,252,248,1));
-      border-top:1px solid rgba(0,0,0,.06);
-    }
-    body.sd-mode .contact-footer{
-      background:linear-gradient(180deg, rgba(8,10,16,1), rgba(6,7,11,1));
-      border-top:1px solid rgba(255,255,255,.10);
+    .btn-sd.primary {
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      color: #070912;
+      border-color: rgba(255,255,255,0.10);
+      font-weight: 900;
     }
 
-    .contact-shell{
-      width:min(1180px, 100%);
-      margin:0 auto;
+    /* ==============================
+      CONTACT – CLEAN + ESTHETIC + MAP TABS
+    ============================== */
+    .contact-footer {
+      position: relative;
+      margin-top: 0.8rem;
+      padding: 4.2rem 0 2.2rem;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      background:
+        radial-gradient(1000px 520px at 15% 5%, rgba(197,160,89,0.12), transparent 60%),
+        radial-gradient(1000px 520px at 85% 20%, rgba(197,160,89,0.08), transparent 60%),
+        rgba(255,255,255,0.40);
+      backdrop-filter: blur(12px);
     }
-    .contact-head{
-      text-align:center;
-      margin-bottom:2.2rem;
-    }
-    .contact-head p{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-weight:900;
-      font-size:.82rem;
-      margin-bottom:.5rem;
-    }
-    body.sd-mode .contact-head p{color:rgba(0,212,255,.75)}
-    .contact-head h2{
-      font-size:2.35rem;
-      margin-bottom:.6rem;
-    }
-    .contact-head .contact-sub{
-      color:#666;
-      max-width:760px;
-      margin:0 auto;
-      line-height:1.55;
-    }
-    body.sd-mode .contact-head .contact-sub{color:rgba(255,255,255,.62)}
-
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1.05fr 1.25fr;
-      gap:1.35rem;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){
-      .contact-grid{grid-template-columns:1fr}
+    body.sd-mode .contact-footer {
+      border-top: 1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(900px 520px at 18% 5%, rgba(138,92,255,0.14), transparent 60%),
+        radial-gradient(900px 520px at 85% 20%, rgba(0,212,255,0.10), transparent 60%),
+        rgba(255,255,255,0.02);
+      backdrop-filter: blur(14px);
     }
 
-    .contact-cards{
+    .contact-grid {
+      width: min(var(--max-w), 92vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 1.4rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      position: relative;
+    }
+    .contact-card .pad { padding: 1.65rem; }
+
+    body.sd-mode .contact-card{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
+    }
+
+    .contact-header {
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-title h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.25rem;
+    }
+    .contact-title p {
+      color: var(--text-mid);
+      line-height: 1.45;
+    }
+    body.sd-mode .contact-title p { color: rgba(255,255,255,0.68); }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.5rem 0.75rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      background: rgba(197,160,89,0.14);
+      border: 1px solid rgba(197,160,89,0.24);
+      color: var(--text-dark);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    body.sd-mode .pill{
+      background: rgba(0,212,255,0.10);
+      border-color: rgba(0,212,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .contact-split {
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:1.05rem;
-    }
-    @media (max-width: 560px){
-      .contact-cards{grid-template-columns:1fr}
+      gap: 1rem;
+      margin-top: 1.1rem;
     }
 
-    .c-card{
-      border-radius:var(--radius);
-      padding:1.25rem 1.2rem;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:var(--shadow-2);
-      position:relative;
+    .loc-card{
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.06);
+      position: relative;
       overflow:hidden;
-      transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease);
     }
-    .c-card::before{
+    .loc-card::before{
       content:"";
-      position:absolute;inset:-1px;
-      background:radial-gradient(420px 220px at 20% 10%, rgba(197,160,89,.18), transparent 62%);
+      position:absolute; inset:-60%;
+      background: radial-gradient(circle at 30% 35%, rgba(197,160,89,0.14), transparent 55%);
+      transform: rotate(18deg);
+      opacity: 0.9;
       pointer-events:none;
-      opacity:.9;
     }
-    .c-card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 28px 70px rgba(0,0,0,.12);
-      border-color:rgba(197,160,89,.25);
+    body.sd-mode .loc-card{
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
     }
-    body.sd-mode .c-card{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.10);
-      box-shadow:var(--sd-shadow);
-    }
-    body.sd-mode .c-card::before{
-      background:radial-gradient(420px 220px at 20% 10%, rgba(0,212,255,.16), transparent 62%);
-    }
-    body.sd-mode .c-card:hover{
-      border-color:rgba(0,212,255,.18);
-      box-shadow:var(--sd-glow);
+    body.sd-mode .loc-card::before{
+      background: radial-gradient(circle at 30% 35%, rgba(0,212,255,0.12), transparent 55%);
     }
 
-    .c-top{
-      display:flex;align-items:center;gap:.85rem;
-      margin-bottom:.8rem;
-      position:relative;z-index:1;
+    .loc-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      position: relative;
+      z-index:1;
+      margin-bottom: 0.75rem;
     }
-    .c-ico{
-      width:44px;height:44px;border-radius:14px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(197,160,89,.12);
-      border:1px solid rgba(197,160,89,.20);
-      color:var(--gold);
-      flex:0 0 auto;
+    .loc-head h4{
+      font-size: 1.05rem;
+      letter-spacing: 0.6px;
+      font-family: 'Cinzel', serif;
     }
-    body.sd-mode .c-ico{
-      background:rgba(0,212,255,.10);
-      border-color:rgba(0,212,255,.18);
-      color:rgba(0,212,255,.9);
+    .loc-tag{
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.55);
+    }
+    body.sd-mode .loc-tag{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
     }
 
-    .c-title{
-      font-family:'Cinzel',serif;
-      font-size:1.02rem;
-      letter-spacing:1px;
-      position:relative;z-index:1;
+    .loc-row{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      margin: 0.65rem 0;
+      position: relative;
+      z-index:1;
     }
+    .loc-row i{
+      width: 22px;
+      color: var(--gold-accent);
+      margin-top: 2px;
+    }
+    body.sd-mode .loc-row i{ color: var(--sd-accent2); }
 
-    .c-body{
-      position:relative;z-index:1;
-      color:#5f5f5f;
-      line-height:1.55;
-      font-size:.95rem;
+    .loc-row .muted{
+      color: var(--text-mid);
+      font-size: 0.92rem;
+      line-height: 1.45;
     }
-    body.sd-mode .c-body{color:rgba(255,255,255,.70)}
-    .c-body a{
-      font-weight:900;
-      letter-spacing:.6px;
-      color:var(--text);
-      text-decoration:underline;
-      text-decoration-thickness:2px;
-      text-underline-offset:3px;
-    }
-    .c-body a:hover{color:var(--gold)}
-    body.sd-mode .c-body a{color:rgba(255,255,255,.92)}
-    body.sd-mode .c-body a:hover{color:rgba(0,212,255,.92)}
+    body.sd-mode .loc-row .muted{ color: rgba(255,255,255,0.70); }
 
-    .c-actions{
-      display:flex;gap:.6rem;flex-wrap:wrap;
-      margin-top:.95rem;
-      position:relative;z-index:1;
+    .loc-actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.95rem;
+      position: relative;
+      z-index:1;
     }
-    .pill-btn{
-      display:inline-flex;align-items:center;gap:.55rem;
-      padding:.75rem .95rem;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,.10);
-      background:rgba(255,255,255,.85);
-      cursor:pointer;
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-      box-shadow:0 12px 26px rgba(0,0,0,.10);
-      font-size:.78rem;
-      text-transform:uppercase;
-      letter-spacing:1.6px;
-      font-weight:900;
+    .mini-btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 0.7rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.70);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: var(--transition);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.06);
+      white-space: nowrap;
     }
-    .pill-btn:hover{transform:translateY(-2px);border-color:rgba(197,160,89,.28);box-shadow:0 18px 40px rgba(197,160,89,.16)}
-    .pill-btn.wa{
-      border-color:rgba(37,211,102,.25);
-      background:rgba(37,211,102,.10);
-      color:#127a3f;
+    .mini-btn:hover{ transform: translateY(-2px); border-color: rgba(197,160,89,0.28); box-shadow: var(--shadow-glow); }
+    body.sd-mode .mini-btn{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      box-shadow: var(--sd-shadow);
     }
-    .pill-btn.wa:hover{box-shadow:0 18px 40px rgba(37,211,102,.14)}
-    body.sd-mode .pill-btn{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.14);
-      color:rgba(255,255,255,.92);
-      box-shadow:var(--sd-shadow);
-    }
-    body.sd-mode .pill-btn:hover{box-shadow:var(--sd-glow);border-color:rgba(0,212,255,.20)}
-    body.sd-mode .pill-btn.wa{background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.22)}
+    body.sd-mode .mini-btn:hover{ border-color: rgba(0,212,255,0.20); box-shadow: var(--sd-glow); }
 
-    .contact-map{
-      border-radius:var(--radius);
+    .mini-btn.whatsapp{
+      border-color: rgba(37,211,102,0.35);
+    }
+    .mini-btn.whatsapp i{ color: #25D366; }
+    body.sd-mode .mini-btn.whatsapp i{ color: #25D366; }
+
+    .map-card{
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
       overflow:hidden;
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:var(--shadow-2);
-      background:rgba(255,255,255,.92);
-      position:relative;
-      min-height:360px;
     }
-    body.sd-mode .contact-map{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.10);
-      box-shadow:var(--sd-shadow);
+    body.sd-mode .map-card{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
     }
-    .contact-map iframe{
-      width:100%;
-      height:100%;
-      min-height:360px;
-      border:0;
-      display:block;
-      filter:saturate(1.05) contrast(1.02);
+
+    .map-tabs{
+      display:flex;
+      gap: 0.6rem;
+      padding: 1rem 1rem 0.8rem;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
+    .tabs-left{
+      display:flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn{
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.70);
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .tab-btn.active{
+      background: var(--text-dark);
+      color: white;
+      border-color: var(--text-dark);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.12);
+    }
+    body.sd-mode .tab-btn{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+    }
+    body.sd-mode .tab-btn.active{
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      color: #070912;
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-glow);
+    }
+
+    .map-frame{
+      width: 100%;
+      height: 380px;
+      border: 0;
+      display:none;
+    }
+    .map-frame.active{ display:block; }
 
     .contact-bottom{
-      text-align:center;
-      margin-top:2.2rem;
-      font-size:.82rem;
-      color:#9a9a9a;
+      width: min(var(--max-w), 92vw);
+      margin: 2.1rem auto 0;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: rgba(0,0,0,0.45);
+      font-size: 0.85rem;
     }
-    body.sd-mode .contact-bottom{color:rgba(255,255,255,.55)}
+    body.sd-mode .contact-bottom{ color: rgba(255,255,255,0.55); }
 
-    /* =======================
-       FLOAT WHATSAPP
-    ======================== */
-    .float-wa{
-      position:fixed;right:18px;bottom:18px;
-      width:58px;height:58px;border-radius:50%;
-      background:#25D366;color:#fff;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 18px 45px rgba(0,0,0,.20);
-      z-index:3500;
-      transition:transform .25s ease;
+    .social-links { display:flex; gap: 0.7rem; }
+    .social-btn {
+      width: 46px; height: 46px;
+      border: 1px solid rgba(0,0,0,0.10);
+      display:flex; align-items:center; justify-content:center;
+      border-radius: 50%;
+      color: var(--text-dark);
+      transition: var(--transition);
+      background: rgba(255,255,255,0.60);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.06);
     }
-    .float-wa:hover{transform:translateY(-4px)}
-    .float-wa::before{
-      content:"";
-      position:absolute;inset:-2px;
-      border-radius:50%;
-      border:3px solid rgba(37,211,102,.55);
-      opacity:.7;
-      animation:pulseRing 2.6s infinite ease-out;
+    .social-btn:hover{ transform: translateY(-2px); border-color: rgba(197,160,89,0.25); box-shadow: var(--shadow-glow); background: rgba(255,255,255,0.78); }
+    body.sd-mode .social-btn{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      box-shadow: var(--sd-shadow);
     }
-    @keyframes pulseRing{
-      0%{transform:scale(1);opacity:.65}
-      80%{transform:scale(1.7);opacity:0}
-      100%{transform:scale(1.7);opacity:0}
-    }
+    body.sd-mode .social-btn:hover{ border-color: rgba(0,212,255,0.20); box-shadow: var(--sd-glow); }
 
-    /* =======================
-       RESPONSIVE
-    ======================== */
-    @media (max-width:980px){
-      nav{padding:1rem 1.4rem}
-      .promo-grid{grid-template-columns:1fr}
-      .tools-bar{grid-template-columns:1fr}
-      .slide-img{height:360px}
-      .hero-content{padding:2.4rem 1.6rem}
-      .hero-content h1{font-size:2.25rem}
-      .img-container{height:420px}
+    /* Floating WhatsApp */
+    .float-wa {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+      z-index: 3500;
+      transition: var(--transition);
     }
-    @media (max-width:768px){
-      .hero-wrapper{margin:.8rem}
-      .sd-hero{margin:.8rem}
-      .swiper-slide-3d{width:245px;height:390px}
-      .img-container{height:380px}
-      .category-header h2{font-size:2.35rem}
-    }
+    .float-wa:hover { transform: translateY(-5px) scale(1.02); }
 
-    /* accesibilidad: reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-      .hero-bg{animation:none!important}
-      .float-wa::before{animation:none!important}
+    /* ==============================
+      REVEAL ANIMATIONS
+    ============================== */
+    .reveal { opacity: 0; transform: translateY(14px); transition: var(--transition-slow); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    .view-section.active-view .product-card { animation: fadeInUp 0.6s ease forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ==============================
+      RESPONSIVE
+    ============================== */
+    @media (max-width: 1100px) {
+      .promo-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .map-frame { height: 330px; }
+      .slide-img { height: 380px; }
+    }
+    @media (max-width: 980px) {
+      .tools-bar { grid-template-columns: 1fr; }
+      .img-container { height: 420px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.1rem; }
+      .hero-wrapper { margin: 0.75rem; }
+      .sd-hero { margin: 0.75rem; }
+      .swiper-slide-3d { width: 240px; height: 390px; }
+      .contact-split { grid-template-columns: 1fr; }
+      .map-frame { height: 300px; }
     }
   </style>
 </head>
 
 <body>
+  <div class="top-progress" id="topProgress"></div>
 
+  <!-- OVERLAY MENU -->
   <div class="overlay-menu" id="overlayMenu" role="menu" aria-hidden="true">
     <ul>
-      <li><a role="menuitem" data-nav="inicio" onclick="navigateTo('inicio')">Inicio</a></li>
-      <li><a role="menuitem" data-nav="nina" onclick="navigateTo('nina')">Colección Niña</a></li>
-      <li><a role="menuitem" data-nav="nino" onclick="navigateTo('nino')">Colección Niño</a></li>
+      <li><a role="menuitem" data-nav="inicio" onclick="navigateTo('inicio')"><span data-i18n="nav_home">Inicio</span></a></li>
+      <li><a role="menuitem" data-nav="nina" onclick="navigateTo('nina')"><span data-i18n="nav_girl">Colección Niña</span></a></li>
+      <li><a role="menuitem" data-nav="nino" onclick="navigateTo('nino')"><span data-i18n="nav_boy">Colección Niño</span></a></li>
       <li><a role="menuitem" data-nav="studio" onclick="navigateTo('studio')">Studio Dominguez</a></li>
-      <li><a role="menuitem" href="#contacto" onclick="closeMenuAndGoToFooter()">Contacto y Ubicación</a></li>
+      <li><a role="menuitem" href="#contacto" onclick="closeMenuAndGoToFooter()"><span data-i18n="nav_contact">Contacto y Ubicación</span></a></li>
       <li>
-        <a role="menuitem" class="menu-cta" href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()">
-          <i class="fab fa-whatsapp"></i> Agendar Cita
+        <a role="menuitem" href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()"
+           style="color: var(--gold-accent); font-size: 1.5rem;">
+          <i class="fab fa-whatsapp"></i> <span data-i18n="nav_book">Agendar Cita</span>
         </a>
       </li>
     </ul>
   </div>
 
+  <!-- NAV -->
   <nav>
-    <div class="logo" onclick="navigateTo('inicio')">Mi Bello Ropón</div>
-    <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal" aria-expanded="false">
-      <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
-    </button>
+    <div class="logo" onclick="navigateTo('inicio')" id="brandLogo">Mi Bello Ropón</div>
+
+    <div class="nav-right">
+      <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">
+        <i class="fa-solid fa-language"></i>
+        <span id="langBtnText">EN</span>
+      </button>
+
+      <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal" aria-expanded="false">
+        <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
+      </button>
+    </div>
   </nav>
 
   <main class="main-container">
 
-    <!-- =======================
-         INICIO
-    ======================== -->
+    <!-- =========================
+      INICIO
+    ========================== -->
     <section id="view-inicio" class="view-section active-view">
       <header class="hero-wrapper">
-        <div class="hero-bg"></div>
+        <div class="hero-bg" id="heroBg"></div>
         <div class="hero-overlay"></div>
-        <div class="hero-glow"></div>
+        <div class="hero-sparkles"></div>
 
         <div class="hero-content">
           <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón"
-               style="max-width: 180px; margin-bottom: 1.5rem; display:block; margin-left:auto; margin-right:auto; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.12));">
+               style="max-width: 185px; margin-bottom: 1.35rem; display: block; margin-left: auto; margin-right: auto;
+               filter: drop-shadow(0 18px 35px rgba(0,0,0,0.12));">
 
           <div class="location-badge">
-            <i class="fas fa-map-marker-alt" style="color:var(--gold);"></i>
-            Monterrey · San Antonio
+            <i class="fas fa-map-marker-alt" style="color:var(--gold-accent);"></i>
+            <span data-i18n="hero_locations">Monterrey · San Antonio</span>
           </div>
 
-          <h1>Momentos que<br/>Perduran</h1>
-          <p class="hero-sub">Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.</p>
+          <h1>
+            <span data-i18n="hero_title_1">Momentos que</span><br />
+            <span data-i18n="hero_title_2">Perduran</span>
+          </h1>
 
-          <div class="mini-tag">
-            <i class="fas fa-plane"></i> ENTREGAS A TODO EL MUNDO
-          </div>
+          <p style="margin-bottom: 1.3rem; color: #555; font-style: italic; line-height: 1.5;">
+            <span data-i18n="hero_subtitle">Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.</span>
+          </p>
 
-          <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-            <button onclick="navigateTo('nina')" class="btn-main btn-ghost">
-              Ver Niña
+          <p style="font-size: 0.85rem; font-weight: 900; color: var(--gold-accent); letter-spacing: 1px; margin-bottom: 1.35rem;">
+            <i class="fas fa-plane"></i> <span data-i18n="hero_shipping">ENTREGAS A TODO EL MUNDO</span>
+          </p>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button onclick="navigateTo('nina')" class="btn-main" style="background: rgba(255,255,255,0.82); color: var(--text-dark); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 16px 35px rgba(0,0,0,0.10);">
+              <span data-i18n="btn_girl">Ver Niña</span>
             </button>
             <button onclick="navigateTo('nino')" class="btn-main">
-              Ver Niño
+              <span data-i18n="btn_boy">Ver Niño</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div class="section-wrap">
-        <div class="section-title">
-          <p>Destacados</p>
-          <h2>Lo más buscado</h2>
-        </div>
-
-        <div class="swiper" id="homeSwiper">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
-              <div class="slide-info">
-                <h3>Ropón Desmontable Exclusivo</h3>
-                <p>Bautizo · Niña</p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Niño" />
-              <div class="slide-info">
-                <h3>Bombacho Ceremonia</h3>
-                <p>Bautizo · Niño</p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
-              <div class="slide-info">
-                <h3>Colección Gala</h3>
-                <p>Renta · Studio</p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <img class="slide-img" loading="lazy" src="principe.jpeg" alt="Traje Príncipe" />
-              <div class="slide-info">
-                <h3>Traje Príncipe</h3>
-                <p>Ceremonia · Niño</p>
-              </div>
-            </div>
-
+      <!-- Destacados -->
+      <section class="band">
+        <div class="wrap">
+          <div class="section-title reveal">
+            <div class="kicker" data-i18n="home_kicker">Destacados</div>
+            <h2 data-i18n="home_title">Lo más buscado</h2>
+            <p class="sub" data-i18n="home_sub">
+              Piezas seleccionadas por su elegancia y detalle. Desliza para ver nuestras favoritas.
+            </p>
           </div>
 
-          <div class="swiper-pagination"></div>
+          <div class="home-swiper-wrap reveal">
+            <div class="swiper" id="homeSwiper">
+              <div class="swiper-wrapper">
 
-          <div class="swiper-nav" aria-label="Controles del carrusel">
-            <button class="nav-btn" id="homePrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="nav-btn" id="homeNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="swiper-slide">
+                  <img class="slide-img" loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
+                  <div class="slide-info">
+                    <h3>Ropón Desmontable Exclusivo</h3>
+                    <p data-i18n="tag_girl_baptism">Bautizo · Niña</p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img class="slide-img" loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Niño" />
+                  <div class="slide-info">
+                    <h3>Bombacho Ceremonia</h3>
+                    <p data-i18n="tag_boy_baptism">Bautizo · Niño</p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img class="slide-img" loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
+                  <div class="slide-info">
+                    <h3>Colección Gala</h3>
+                    <p data-i18n="tag_studio_rent">Renta · Studio</p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img class="slide-img" loading="lazy" src="principe.jpeg" alt="Traje Príncipe" />
+                  <div class="slide-info">
+                    <h3>Traje Príncipe</h3>
+                    <p data-i18n="tag_boy_ceremony">Ceremonia · Niño</p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="swiper-nav-btn swiper-nav-prev" id="homePrev" aria-label="Anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="swiper-nav-btn swiper-nav-next" id="homeNext" aria-label="Siguiente">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
           </div>
         </div>
 
-        <div class="shipping-banner">
+        <div class="shipping-banner reveal">
           <i class="fas fa-globe-americas"></i>
-          <span><strong>Worldwide Shipping:</strong> Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
+          <span>
+            <strong data-i18n="worldwide_strong">Worldwide Shipping:</strong>
+            <span data-i18n="worldwide_text">Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
+          </span>
         </div>
 
         <div class="promo-grid">
-          <div class="promo-card">
+          <div class="promo-card reveal">
             <span class="promo-badge">USA & MX</span>
-            <h3>Atención Binacional</h3>
-            <p>Visítanos en Guadalupe, NL o agenda atención personalizada en San Antonio, TX.</p>
-            <a href="#contacto" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
-              Ver ubicaciones <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            <h3 data-i18n="promo1_title">Atención Binacional</h3>
+            <p data-i18n="promo1_text">Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.</p>
+            <a href="#contacto" onclick="closeMenuAndGoToFooter()"><span data-i18n="promo_link">Ver ubicaciones</span></a>
           </div>
 
-          <div class="promo-card">
+          <div class="promo-card reveal">
             <span class="promo-badge">Sets</span>
-            <h3>Kits Completos</h3>
-            <p>Ropón, vela, zapatos y accesorios: todo en un solo lugar, con asesoría.</p>
-            <a onclick="navigateTo('nina')">Ver Colección <i class="fa-solid fa-arrow-right"></i></a>
+            <h3 data-i18n="promo2_title">Kits Completos</h3>
+            <p data-i18n="promo2_text">Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.</p>
+            <a onclick="navigateTo('nina')"><span data-i18n="promo_link2">Ver Colección</span></a>
           </div>
 
-          <div class="promo-card">
-            <span class="promo-badge">Nuevo</span>
-            <h3>Temporada 2024</h3>
-            <p>Modelos elegantes para Bautizo y Primera Comunión. Calidad que se nota.</p>
-            <a onclick="navigateTo('nino')">Ver Niño <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="promo-card reveal">
+            <span class="promo-badge" data-i18n="promo3_badge">Nuevo</span>
+            <h3 data-i18n="promo3_title">Temporada 2024</h3>
+            <p data-i18n="promo3_text">Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.</p>
+            <a onclick="navigateTo('nino')"><span data-i18n="promo_link3">Ver Niño</span></a>
           </div>
         </div>
 
-        <div class="rent-cta">
+        <div class="rent-cta reveal">
           <div>
-            <h3>¿Buscas renta de vestidos?</h3>
-            <p>
-              Vive una experiencia nocturna y sofisticada con catálogo exclusivo en
-              <strong>Studio Dominguez</strong>.
-            </p>
+            <h3 data-i18n="rent_title">¿Buscas renta de vestidos?</h3>
+            <p data-i18n="rent_text">Descubre una experiencia más nocturna y sofisticada con catálogo exclusivo en <strong>Studio Dominguez</strong>.</p>
           </div>
           <button class="btn-rent" onclick="navigateTo('studio')" aria-label="Ir a renta de vestidos - Studio Dominguez">
-            <i class="fa-solid fa-moon"></i> Renta de vestidos
+            <i class="fa-solid fa-moon"></i> <span data-i18n="rent_btn">Renta de vestidos</span>
           </button>
         </div>
-      </div>
+      </section>
     </section>
 
-    <!-- =======================
-         NIÑA
-    ======================== -->
+    <!-- =========================
+      NIÑA
+    ========================== -->
     <section id="view-nina" class="view-section">
       <div class="category-header">
-        <p>Delicadeza y Gracia</p>
-        <h2>Colección Niña</h2>
-        <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
+        <p data-i18n="girl_kicker">Delicadeza y Gracia</p>
+        <h2 data-i18n="girl_title">Colección Niña</h2>
+        <button onclick="navigateTo('inicio')" class="back-link">← <span data-i18n="back_home">Volver al inicio</span></button>
       </div>
 
-      <div class="showcase-container section-wrap">
-        <h3>Galería: Ropones Desmontables</h3>
-        <p>Desliza para ver la colección</p>
+      <div class="showcase-container reveal">
+        <h3 data-i18n="girl_gallery_title">Galería: Ropones Desmontables</h3>
+        <p class="hint" data-i18n="girl_gallery_hint">Desliza para ver la colección</p>
 
         <div class="swiper swiper-3d-container" id="roponesSwiper">
           <div class="swiper-wrapper">
@@ -1252,228 +1768,301 @@
         </div>
       </div>
 
-      <div class="tools-bar">
+      <div class="tools-bar reveal">
         <div class="search-wrap">
-          <label for="searchNina">Buscar</label>
-          <input id="searchNina" class="search-input" type="text" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
+          <label for="searchNina" data-i18n="search_label">Buscar</label>
+          <input id="searchNina" class="search-input" type="text" data-i18n-ph="search_girl_ph" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
         </div>
         <div class="filter-wrap">
-          <label>Filtrar por</label>
+          <label data-i18n="filter_label">Filtrar por</label>
           <div class="chips" id="chipsNina">
-            <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)">Todo</div>
-            <div class="chip" onclick="setFilter('nina','Ropones', this)">Ropones</div>
-            <div class="chip" onclick="setFilter('nina','Batitas', this)">Batitas</div>
-            <div class="chip" onclick="setFilter('nina','Española', this)">Línea Española</div>
+            <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)"><span data-i18n="chip_all">Todo</span></div>
+            <div class="chip" onclick="setFilter('nina','Ropones', this)"><span data-i18n="chip_ropones">Ropones</span></div>
+            <div class="chip" onclick="setFilter('nina','Batitas', this)"><span data-i18n="chip_batitas">Batitas</span></div>
+            <div class="chip" onclick="setFilter('nina','Española', this)"><span data-i18n="chip_spanish">Línea Española</span></div>
           </div>
         </div>
       </div>
 
-      <div class="empty-state" id="emptyNina">No encontramos productos con esa búsqueda/filtro.</div>
+      <div class="empty-state" id="emptyNina"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
 
       <div class="products-grid" id="gridNina">
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón 1" /></div>
           <div class="product-info"><h3>Ropón Desmontable 01</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón 2" /></div>
           <div class="product-info"><h3>Ropón Desmontable 02</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón 3" /></div>
           <div class="product-info"><h3>Ropón Desmontable 03</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón 4" /></div>
           <div class="product-info"><h3>Ropón Desmontable 04</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón 5" /></div>
           <div class="product-info"><h3>Ropón Desmontable 05</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable6.jpeg" alt="Ropón 6" /></div>
           <div class="product-info"><h3>Ropón Desmontable 06</h3><p>Ropones</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontable7.jpeg" alt="Ropón 7" /></div>
           <div class="product-info"><h3>Ropón Desmontable 07</h3><p>Ropones</p></div>
         </article>
 
         <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" /></div>
           <div class="product-info"><h3>Ropón Exclusivo 01</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" /></div>
           <div class="product-info"><h3>Ropón Exclusivo 02</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" /></div>
           <div class="product-info"><h3>Ropón Exclusivo 03</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo4.jpeg" alt="Ropón Exclusivo 4" /></div>
           <div class="product-info"><h3>Ropón Exclusivo 04</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="ropondesmontablexclusivo5.jpeg" alt="Ropón Exclusivo 5" /></div>
           <div class="product-info"><h3>Ropón Exclusivo 05</h3><p>Exclusivos</p></div>
         </article>
 
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="batita1.jpeg" alt="Batita 1" /></div>
           <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="batita2.jpeg" alt="Batita 2" /></div>
           <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="batita3.jpeg" alt="Batita 3" /></div>
           <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="batita4.jpeg" alt="Batita 4" /></div>
           <div class="product-info"><h3>Batita Ceremonia 04</h3><p>Batitas</p></div>
         </article>
 
         <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
           <div class="product-info"><h3>Batita Exclusiva 01</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
           <div class="product-info"><h3>Batita Exclusiva 02</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="batitaexclusiva3.jpeg" alt="Batita Exclusiva 3" /></div>
           <div class="product-info"><h3>Batita Exclusiva 03</h3><p>Exclusivos</p></div>
         </article>
+
         <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
+          <span class="card-chip">EX</span>
           <div class="img-container"><img loading="lazy" src="batitaexclusiva4.jpeg" alt="Batita Exclusiva 4" /></div>
           <div class="product-info"><h3>Batita Exclusiva 04</h3><p>Exclusivos</p></div>
         </article>
 
         <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
+          <span class="card-chip">ES</span>
           <div class="img-container"><img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" /></div>
           <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
         </article>
       </div>
     </section>
 
-    <!-- =======================
-         NIÑO
-    ======================== -->
+    <!-- =========================
+      NIÑO
+    ========================== -->
     <section id="view-nino" class="view-section">
       <div class="category-header">
-        <p>Elegancia y Carácter</p>
-        <h2>Mundo Niño</h2>
-        <button onclick="navigateTo('inicio')" class="back-link">← Volver al inicio</button>
+        <p data-i18n="boy_kicker">Elegancia y Carácter</p>
+        <h2 data-i18n="boy_title">Mundo Niño</h2>
+        <button onclick="navigateTo('inicio')" class="back-link">← <span data-i18n="back_home">Volver al inicio</span></button>
       </div>
 
-      <div class="tools-bar">
+      <div class="tools-bar reveal">
         <div class="search-wrap">
-          <label for="searchNino">Buscar</label>
-          <input id="searchNino" class="search-input" type="text" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
+          <label for="searchNino" data-i18n="search_label">Buscar</label>
+          <input id="searchNino" class="search-input" type="text" data-i18n-ph="search_boy_ph" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
         </div>
         <div class="filter-wrap">
-          <label>Filtrar por</label>
+          <label data-i18n="filter_label">Filtrar por</label>
           <div class="chips" id="chipsNino">
-            <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)">Todo</div>
-            <div class="chip" onclick="setFilter('nino','Ropón', this)">Ropón</div>
-            <div class="chip" onclick="setFilter('nino','Bombacho', this)">Bombacho</div>
-            <div class="chip" onclick="setFilter('nino','Príncipe', this)">Príncipe</div>
-            <div class="chip" onclick="setFilter('nino','Traje', this)">Trajes</div>
+            <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)"><span data-i18n="chip_all">Todo</span></div>
+            <div class="chip" onclick="setFilter('nino','Ropón', this)"><span data-i18n="chip_ropon">Ropón</span></div>
+            <div class="chip" onclick="setFilter('nino','Bombacho', this)"><span data-i18n="chip_bombacho">Bombacho</span></div>
+            <div class="chip" onclick="setFilter('nino','Príncipe', this)"><span data-i18n="chip_prince">Príncipe</span></div>
+            <div class="chip" onclick="setFilter('nino','Traje', this)"><span data-i18n="chip_suits">Trajes</span></div>
           </div>
         </div>
       </div>
 
-      <div class="empty-state" id="emptyNino">No encontramos productos con esa búsqueda/filtro.</div>
+      <div class="empty-state" id="emptyNino"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
 
       <div class="products-grid" id="gridNino">
 
         <article class="product-card" data-category="Ropón" data-name="Ropón Desmontable Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="Ropon%20desmontable%20Niño.jpeg" alt="Ropón Niño" /></div>
           <div class="product-info"><h3>Ropón Desmontable Niño</h3><p>Ropón</p></div>
         </article>
 
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Resaltar" /></div>
           <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bombacho</p></div>
         </article>
 
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniño.jpeg" alt="Bombacho 1" /></div>
           <div class="product-info"><h3>Bombacho Clásico 01</h3><p>Bombacho</p></div>
         </article>
+
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniño2.jpeg" alt="Bombacho 2" /></div>
           <div class="product-info"><h3>Bombacho Clásico 02</h3><p>Bombacho</p></div>
         </article>
+
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniño3.jpeg" alt="Bombacho 3" /></div>
           <div class="product-info"><h3>Bombacho Clásico 03</h3><p>Bombacho</p></div>
         </article>
+
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniño4.jpeg" alt="Bombacho 4" /></div>
           <div class="product-info"><h3>Bombacho Clásico 04</h3><p>Bombacho</p></div>
         </article>
+
         <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
+          <span class="card-chip">MBR</span>
           <div class="img-container"><img loading="lazy" src="bombachoniño5.jpeg" alt="Bombacho 5" /></div>
           <div class="product-info"><h3>Bombacho Clásico 05</h3><p>Bombacho</p></div>
         </article>
 
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe.jpeg" alt="Príncipe 1" /></div>
           <div class="product-info"><h3>Traje Príncipe 01</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe2.jpeg" alt="Príncipe 2" /></div>
           <div class="product-info"><h3>Traje Príncipe 02</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe3.jpeg" alt="Príncipe 3" /></div>
           <div class="product-info"><h3>Traje Príncipe 03</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe4.jpeg" alt="Príncipe 4" /></div>
           <div class="product-info"><h3>Traje Príncipe 04</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe5.jpeg" alt="Príncipe 5" /></div>
           <div class="product-info"><h3>Traje Príncipe 05</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe6.jpeg" alt="Príncipe 6" /></div>
           <div class="product-info"><h3>Traje Príncipe 06</h3><p>Príncipe</p></div>
         </article>
+
         <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
+          <span class="card-chip">PR</span>
           <div class="img-container"><img loading="lazy" src="principe7.jpeg" alt="Príncipe 7" /></div>
           <div class="product-info"><h3>Traje Príncipe 07</h3><p>Príncipe</p></div>
         </article>
 
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño.jpeg" alt="Traje 1" /></div>
           <div class="product-info"><h3>Traje Ceremonia 01</h3><p>Traje</p></div>
         </article>
+
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño2.jpeg" alt="Traje 2" /></div>
           <div class="product-info"><h3>Traje Ceremonia 02</h3><p>Traje</p></div>
         </article>
+
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño3.jpeg" alt="Traje 3" /></div>
           <div class="product-info"><h3>Traje Ceremonia 03</h3><p>Traje</p></div>
         </article>
+
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño4.jpeg" alt="Traje 4" /></div>
           <div class="product-info"><h3>Traje Ceremonia 04</h3><p>Traje</p></div>
         </article>
+
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño5.jpeg" alt="Traje 5" /></div>
           <div class="product-info"><h3>Traje Ceremonia 05</h3><p>Traje</p></div>
         </article>
+
         <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
+          <span class="card-chip">TR</span>
           <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño6.jpeg" alt="Traje 6" /></div>
           <div class="product-info"><h3>Traje Ceremonia 06</h3><p>Traje</p></div>
         </article>
@@ -1481,9 +2070,9 @@
       </div>
     </section>
 
-    <!-- =======================
-         STUDIO
-    ======================== -->
+    <!-- =========================
+      STUDIO
+    ========================== -->
     <section id="view-studio" class="view-section">
       <header class="sd-hero">
         <div class="sd-hero-content">
@@ -1491,212 +2080,542 @@
             <img src="Rentadevestidoslogo.png" alt="Studio Dominguez Logo">
           </div>
 
-          <h1 style="font-size:2.55rem; margin-top:.2rem;">Studio Dominguez</h1>
-          <p style="max-width:720px; margin:.7rem auto 0; color:rgba(255,255,255,.70); line-height:1.55;">
-            Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.
+          <h1 style="font-size: 2.65rem; margin-top:1.1rem;">Studio Dominguez</h1>
+          <p style="max-width: 740px; margin: 0.65rem auto 0; color: rgba(255,255,255,0.72); line-height: 1.6;">
+            <span data-i18n="studio_sub">Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.</span>
           </p>
 
           <div class="sd-actions">
             <button class="btn-sd primary" onclick="document.getElementById('studioCatalog').scrollIntoView({behavior:'smooth'})">
-              <i class="fa-solid fa-shirt"></i> Ver vestidos
+              <i class="fa-solid fa-shirt"></i> <span data-i18n="studio_btn_see">Ver vestidos</span>
             </button>
             <a class="btn-sd" href="https://wa.me/528180932362" target="_blank" style="text-decoration:none;">
-              <i class="fab fa-whatsapp"></i> Agendar Cita
+              <i class="fab fa-whatsapp"></i> <span data-i18n="studio_btn_book">Agendar Cita</span>
             </a>
             <button class="btn-sd" onclick="navigateTo('inicio')">
-              <i class="fa-solid fa-arrow-left"></i> Volver
+              <i class="fa-solid fa-arrow-left"></i> <span data-i18n="studio_btn_back">Volver</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div class="section-wrap" id="studioCatalog">
-        <div class="section-title" style="padding-top: 1.2rem;">
-          <p>Catálogo Completo</p>
-          <h2>Vestidos en renta</h2>
-        </div>
-
-        <div class="tools-bar">
-          <div class="search-wrap">
-            <label for="searchStudio">Buscar</label>
-            <input id="searchStudio" class="search-input" type="text" placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
+      <div class="band alt" id="studioCatalog">
+        <div class="wrap">
+          <div class="section-title reveal" style="padding-top: 0.4rem;">
+            <div class="kicker" data-i18n="studio_kicker">Catálogo Completo</div>
+            <h2 data-i18n="studio_title">Vestidos en renta</h2>
+            <p class="sub" data-i18n="studio_sub2">Filtra por color o busca por estilo. Agenda por WhatsApp.</p>
           </div>
 
-          <div class="filter-wrap">
-            <label>Filtrar por Color</label>
-            <div class="chips" id="chipsStudio">
-              <div class="chip active" onclick="setFilter('studio','all', this)">Todo</div>
-              <div class="chip" onclick="setFilter('studio','Negro', this)">Negro</div>
-              <div class="chip" onclick="setFilter('studio','Azul', this)">Azul</div>
-              <div class="chip" onclick="setFilter('studio','Rojo', this)">Rojo</div>
-              <div class="chip" onclick="setFilter('studio','Claros', this)">Claros/Beige</div>
+          <div class="tools-bar reveal">
+            <div class="search-wrap">
+              <label for="searchStudio" data-i18n="search_label">Buscar</label>
+              <input id="searchStudio" class="search-input" type="text" data-i18n-ph="search_studio_ph" placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
+            </div>
+
+            <div class="filter-wrap">
+              <label data-i18n="filter_color_label">Filtrar por Color</label>
+              <div class="chips" id="chipsStudio">
+                <div class="chip active" onclick="setFilter('studio','all', this)"><span data-i18n="chip_all">Todo</span></div>
+                <div class="chip" onclick="setFilter('studio','Negro', this)"><span data-i18n="chip_black">Negro</span></div>
+                <div class="chip" onclick="setFilter('studio','Azul', this)"><span data-i18n="chip_blue">Azul</span></div>
+                <div class="chip" onclick="setFilter('studio','Rojo', this)"><span data-i18n="chip_red">Rojo</span></div>
+                <div class="chip" onclick="setFilter('studio','Claros', this)"><span data-i18n="chip_light">Claros/Beige</span></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="empty-state" id="emptyStudio">No encontramos vestidos con esa búsqueda/filtro.</div>
+          <div class="empty-state" id="emptyStudio"><span data-i18n="empty_state">No encontramos vestidos con esa búsqueda/filtro.</span></div>
 
-        <div class="products-grid" id="gridStudio">
-          <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
-            <div class="img-container"><img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" /></div>
-            <div class="product-info"><h3>Modelo Noche Profunda</h3><p>Negro</p></div>
-          </article>
-          <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
-            <div class="img-container"><img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
-            <div class="product-info"><h3>Modelo Gala Dark</h3><p>Negro</p></div>
-          </article>
-          <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
-            <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
-            <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
-          </article>
-          <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
-            <div class="img-container"><img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
-            <div class="product-info"><h3>Modelo Midnight Blue</h3><p>Azul</p></div>
-          </article>
-          <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
-            <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
-            <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
-          </article>
-          <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Scarlet">
-            <div class="img-container"><img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
-            <div class="product-info"><h3>Modelo Scarlet</h3><p>Rojo</p></div>
-          </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
-            <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
-            <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
-          </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Beige">
-            <div class="img-container"><img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
-            <div class="product-info"><h3>Modelo Champagne</h3><p>Claros</p></div>
-          </article>
-          <article class="product-card" data-category="Claros" data-name="Vestido Crema">
-            <div class="img-container"><img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
-            <div class="product-info"><h3>Modelo Crema Suave</h3><p>Claros</p></div>
-          </article>
+          <div class="products-grid" id="gridStudio">
+            <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" /></div>
+              <div class="product-info"><h3>Modelo Noche Profunda</h3><p>Negro</p></div>
+            </article>
+
+            <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
+              <div class="product-info"><h3>Modelo Gala Dark</h3><p>Negro</p></div>
+            </article>
+
+            <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
+              <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
+            </article>
+
+            <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
+              <div class="product-info"><h3>Modelo Midnight Blue</h3><p>Azul</p></div>
+            </article>
+
+            <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
+              <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
+            </article>
+
+            <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Scarlet">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
+              <div class="product-info"><h3>Modelo Scarlet</h3><p>Rojo</p></div>
+            </article>
+
+            <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
+              <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
+            </article>
+
+            <article class="product-card" data-category="Claros" data-name="Vestido Beige">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
+              <div class="product-info"><h3>Modelo Champagne</h3><p>Claros</p></div>
+            </article>
+
+            <article class="product-card" data-category="Claros" data-name="Vestido Crema">
+              <span class="card-chip">SD</span>
+              <div class="img-container"><img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
+              <div class="product-info"><h3>Modelo Crema Suave</h3><p>Claros</p></div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- =======================
-       CONTACTO (COMPLETO)
-  ======================== -->
+  <!-- =========================
+    CONTACTO (NUEVO COMPLETO)
+  ========================== -->
   <footer id="contacto" class="contact-footer">
-    <div class="contact-shell">
+    <div class="contact-grid">
+      <!-- Left: contact info -->
+      <div class="contact-card reveal">
+        <div class="pad">
+          <div class="contact-header">
+            <div class="contact-title">
+              <h3 data-i18n="contact_title">Contáctanos</h3>
+              <p data-i18n="contact_sub">Dos ubicaciones, atención personalizada y envíos internacionales.</p>
+            </div>
+            <div class="pill">
+              <i class="fa-solid fa-globe"></i>
+              <span data-i18n="contact_pill">Worldwide</span>
+            </div>
+          </div>
 
-      <div class="contact-head">
-        <p>Contacto y ubicación</p>
-        <h2>Visítanos / Agenda tu cita</h2>
-        <div class="contact-sub">
-          Atención en Monterrey y San Antonio. Horarios claros, contacto directo y mapa para llegar sin complicaciones.
+          <div class="contact-split">
+            <!-- Monterrey -->
+            <div class="loc-card">
+              <div class="loc-head">
+                <h4><span data-i18n="mx_title">Monterrey</span></h4>
+                <span class="loc-tag">MX</span>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="muted">
+                  <strong data-i18n="label_address">Dirección:</strong><br>
+                  Sta. Genoveva 1201, La Purísima,<br>
+                  67129 Guadalupe, N.L.
+                </div>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-phone"></i>
+                <div class="muted">
+                  <strong data-i18n="label_phone">Teléfono:</strong><br>
+                  <a href="tel:+528180932362" style="font-weight:900; text-decoration: underline;">81 8093 2362</a>
+                </div>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-clock"></i>
+                <div class="muted">
+                  <strong data-i18n="label_hours">Horario:</strong><br>
+                  <span data-i18n="mx_hours">Lunes a Sábado 9:00 am – 8:00 pm · Domingo 9:00 am – 6:00 pm</span>
+                </div>
+              </div>
+
+              <div class="loc-actions">
+                <a class="mini-btn whatsapp" href="https://wa.me/528180932362" target="_blank">
+                  <i class="fab fa-whatsapp"></i> <span data-i18n="btn_whatsapp">WhatsApp</span>
+                </a>
+                <a class="mini-btn" href="tel:+528180932362">
+                  <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Llamar</span>
+                </a>
+                <a class="mini-btn" href="https://www.google.com/maps?q=Sta.+Genoveva+1201,+La+Pur%C3%ADsima,+67129+Guadalupe,+N.L." target="_blank">
+                  <i class="fa-solid fa-location-arrow"></i> <span data-i18n="btn_directions">Ruta</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- San Antonio -->
+            <div class="loc-card">
+              <div class="loc-head">
+                <h4><span data-i18n="us_title">San Antonio</span></h4>
+                <span class="loc-tag">US</span>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="muted">
+                  <strong data-i18n="label_address">Dirección:</strong><br>
+                  522 NW Loop 410<br>
+                  San Antonio, TX 78216<br>
+                  <span data-i18n="us_country">Estados Unidos</span><br>
+                  <strong>Local W2</strong>
+                </div>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-phone"></i>
+                <div class="muted">
+                  <strong data-i18n="label_phone">Teléfono:</strong><br>
+                  <a href="tel:+12107177607" style="font-weight:900; text-decoration: underline;">+1 (210) 717-7607</a>
+                </div>
+              </div>
+
+              <div class="loc-row">
+                <i class="fas fa-clock"></i>
+                <div class="muted">
+                  <strong data-i18n="label_hours">Horario:</strong><br>
+                  <span data-i18n="us_hours">Lunes a Domingo 10:00 am – 8:00 pm</span>
+                </div>
+              </div>
+
+              <div class="loc-actions">
+                <a class="mini-btn" href="tel:+12107177607">
+                  <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Llamar</span>
+                </a>
+                <a class="mini-btn" href="https://www.google.com/maps?q=522+NW+Loop+410,+San+Antonio,+TX+78216" target="_blank">
+                  <i class="fa-solid fa-location-arrow"></i> <span data-i18n="btn_directions">Ruta</span>
+                </a>
+                <a class="mini-btn" href="mailto:contacto@mibelloropon.com" onclick="return false;" title="(Opcional) agrega tu email real si quieres">
+                  <i class="fa-solid fa-envelope"></i> <span data-i18n="btn_email">Email</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem; display:flex; justify-content: space-between; gap:1rem; align-items:center; flex-wrap:wrap;">
+            <div class="social-links">
+              <a href="https://www.instagram.com/studio.vdominguez?igsh=bXNwZGtlNml2dG4w" target="_blank" class="social-btn" aria-label="Instagram Studio Dominguez">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://wa.me/528180932362" target="_blank" class="social-btn" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:10px; color: rgba(0,0,0,0.55); font-weight:900; letter-spacing:1px;">
+              <i class="fas fa-plane" style="color: var(--gold-accent);"></i>
+              <span data-i18n="contact_shipping_note">Envíos internacionales disponibles</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="contact-grid">
-        <!-- izquierda: cards -->
-        <div class="contact-cards">
-
-          <div class="c-card">
-            <div class="c-top">
-              <div class="c-ico"><i class="fa-solid fa-phone"></i></div>
-              <div class="c-title">Monterrey (WhatsApp)</div>
-            </div>
-            <div class="c-body">
-              <div><strong>81 8093 2362</strong></div>
-              <div style="margin-top:.35rem;">Citas, cotizaciones y envíos internacionales.</div>
-
-              <div class="c-actions">
-                <a class="pill-btn wa" href="https://wa.me/528180932362" target="_blank" aria-label="WhatsApp Monterrey">
-                  <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a class="pill-btn" href="tel:+528180932362" aria-label="Llamar Monterrey">
-                  <i class="fa-solid fa-phone"></i> Llamar
-                </a>
-              </div>
-            </div>
+      <!-- Right: map -->
+      <div class="map-card reveal">
+        <div class="map-tabs">
+          <div class="tabs-left">
+            <button class="tab-btn active" id="tabMx" onclick="setMapTab('mx')"><span data-i18n="tab_mx">Monterrey</span></button>
+            <button class="tab-btn" id="tabUs" onclick="setMapTab('us')"><span data-i18n="tab_us">San Antonio</span></button>
           </div>
-
-          <div class="c-card">
-            <div class="c-top">
-              <div class="c-ico"><i class="fa-solid fa-phone-volume"></i></div>
-              <div class="c-title">San Antonio</div>
-            </div>
-            <div class="c-body">
-              <div><strong>+1 (210) 717-7607</strong></div>
-              <div style="margin-top:.35rem;">Atención personalizada.</div>
-
-              <div class="c-actions">
-                <a class="pill-btn" href="tel:+12107177607" aria-label="Llamar San Antonio">
-                  <i class="fa-solid fa-phone"></i> Llamar
-                </a>
-              </div>
-            </div>
+          <div class="pill">
+            <i class="fa-solid fa-map"></i>
+            <span data-i18n="map_pill">Mapa</span>
           </div>
-
-          <div class="c-card">
-            <div class="c-top">
-              <div class="c-ico"><i class="fa-solid fa-location-dot"></i></div>
-              <div class="c-title">Dirección Monterrey</div>
-            </div>
-            <div class="c-body">
-              Sta. Genoveva 1201, La Purísima, 67129 Guadalupe, N.L.
-              <div class="c-actions">
-                <a class="pill-btn" target="_blank"
-                   href="https://www.google.com/maps/search/?api=1&query=Sta.%20Genoveva%201201%2C%20La%20Pur%C3%ADsima%2C%2067129%20Guadalupe%2C%20N.L."
-                   aria-label="Abrir en Google Maps">
-                  <i class="fa-solid fa-map"></i> Abrir Maps
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="c-card">
-            <div class="c-top">
-              <div class="c-ico"><i class="fa-regular fa-clock"></i></div>
-              <div class="c-title">Horarios</div>
-            </div>
-            <div class="c-body">
-              <div><strong>Lunes a Sábado:</strong> 9:00 am – 8:00 pm</div>
-              <div style="margin-top:.25rem;"><strong>Domingo:</strong> 9:00 am – 6:00 pm</div>
-              <div style="margin-top:.55rem; opacity:.92;">*Horario local.</div>
-            </div>
-          </div>
-
         </div>
 
-        <!-- derecha: mapa -->
-        <div class="contact-map" aria-label="Mapa de ubicación Monterrey">
-          <iframe
-            loading="lazy"
-            allowfullscreen
-            title="Mapa ubicación - Sta. Genoveva 1201, Guadalupe, N.L."
-            src="https://www.google.com/maps?q=Sta.%20Genoveva%201201%2C%20La%20Pur%C3%ADsima%2C%2067129%20Guadalupe%2C%20N.L.&output=embed&hl=es">
-          </iframe>
-        </div>
+        <iframe class="map-frame active" id="mapMx"
+          loading="lazy" allowfullscreen
+          src="https://www.google.com/maps?q=Sta+Genoveva+1201+La+Pur%C3%ADsima+Guadalupe+Nuevo+Leon&output=embed"
+          title="Mapa Monterrey"></iframe>
+
+        <iframe class="map-frame" id="mapUs"
+          loading="lazy" allowfullscreen
+          src="https://www.google.com/maps?q=522+NW+Loop+410+San+Antonio+TX+78216&output=embed"
+          title="Mapa San Antonio"></iframe>
       </div>
+    </div>
 
-      <div class="contact-bottom">
-        © 2024 Mi Bello Ropón / Studio Dominguez. Todos los derechos reservados.
+    <div class="contact-bottom">
+      <div>© 2024 Mi Bello Ropón / Studio Dominguez. <span data-i18n="rights">Todos los derechos reservados.</span></div>
+      <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+        <span><strong data-i18n="support">Soporte</strong>:</span>
+        <a href="https://wa.me/528180932362" target="_blank" style="text-decoration: underline; font-weight:900;">WhatsApp</a>
       </div>
     </div>
   </footer>
 
   <a class="float-wa" href="https://wa.me/528180932362" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp" style="font-size:1.65rem;"></i>
+    <i class="fab fa-whatsapp" style="font-size: 1.7rem;"></i>
   </a>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
-    // =========================
-    // STATE
-    // =========================
-    const state = { currentView: 'inicio', filters: { nina: 'all', nino: 'all', studio: 'all' } };
+    /* ==============================
+      STATE
+    ============================== */
+    const state = {
+      currentView: 'inicio',
+      filters: { nina: 'all', nino: 'all', studio: 'all' },
+      lang: localStorage.getItem('mbr_lang') || 'es'
+    };
 
-    // =========================
-    // MENU
-    // =========================
+    /* ==============================
+      I18N (ES/EN) – Simple + Clean
+      (Traduce textos clave: menú, hero, secciones, contacto, labels, placeholders)
+    ============================== */
+    const i18n = {
+      es: {
+        nav_home: "Inicio",
+        nav_girl: "Colección Niña",
+        nav_boy: "Colección Niño",
+        nav_contact: "Contacto y Ubicación",
+        nav_book: "Agendar Cita",
+
+        hero_locations: "Monterrey · San Antonio",
+        hero_title_1: "Momentos que",
+        hero_title_2: "Perduran",
+        hero_subtitle: "Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.",
+        hero_shipping: "ENTREGAS A TODO EL MUNDO",
+        btn_girl: "Ver Niña",
+        btn_boy: "Ver Niño",
+
+        home_kicker: "Destacados",
+        home_title: "Lo más buscado",
+        home_sub: "Piezas seleccionadas por su elegancia y detalle. Desliza para ver nuestras favoritas.",
+
+        tag_girl_baptism: "Bautizo · Niña",
+        tag_boy_baptism: "Bautizo · Niño",
+        tag_studio_rent: "Renta · Studio",
+        tag_boy_ceremony: "Ceremonia · Niño",
+
+        worldwide_strong: "Worldwide Shipping:",
+        worldwide_text: "Envíos internacionales disponibles. Cotiza por WhatsApp.",
+
+        promo1_title: "Atención Binacional",
+        promo1_text: "Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.",
+        promo2_title: "Kits Completos",
+        promo2_text: "Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.",
+        promo3_badge: "Nuevo",
+        promo3_title: "Temporada 2024",
+        promo3_text: "Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.",
+        promo_link: "Ver ubicaciones",
+        promo_link2: "Ver Colección",
+        promo_link3: "Ver Niño",
+
+        rent_title: "¿Buscas renta de vestidos?",
+        rent_text: "Descubre una experiencia más nocturna y sofisticada con catálogo exclusivo en <strong>Studio Dominguez</strong>.",
+        rent_btn: "Renta de vestidos",
+
+        girl_kicker: "Delicadeza y Gracia",
+        girl_title: "Colección Niña",
+        girl_gallery_title: "Galería: Ropones Desmontables",
+        girl_gallery_hint: "Desliza para ver la colección",
+
+        boy_kicker: "Elegancia y Carácter",
+        boy_title: "Mundo Niño",
+
+        back_home: "Volver al inicio",
+
+        search_label: "Buscar",
+        filter_label: "Filtrar por",
+        filter_color_label: "Filtrar por Color",
+        chip_all: "Todo",
+        chip_ropones: "Ropones",
+        chip_batitas: "Batitas",
+        chip_spanish: "Línea Española",
+        chip_ropon: "Ropón",
+        chip_bombacho: "Bombacho",
+        chip_prince: "Príncipe",
+        chip_suits: "Trajes",
+        chip_black: "Negro",
+        chip_blue: "Azul",
+        chip_red: "Rojo",
+        chip_light: "Claros/Beige",
+
+        empty_state: "No encontramos productos con esa búsqueda/filtro.",
+        search_girl_ph: "Ej: ropón, batita...",
+        search_boy_ph: "Ej: traje, bombacho, principe...",
+        search_studio_ph: "Ej: azul, largo, noche...",
+
+        studio_sub: "Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.",
+        studio_btn_see: "Ver vestidos",
+        studio_btn_book: "Agendar Cita",
+        studio_btn_back: "Volver",
+        studio_kicker: "Catálogo Completo",
+        studio_title: "Vestidos en renta",
+        studio_sub2: "Filtra por color o busca por estilo. Agenda por WhatsApp.",
+
+        contact_title: "Contáctanos",
+        contact_sub: "Dos ubicaciones, atención personalizada y envíos internacionales.",
+        contact_pill: "Worldwide",
+
+        mx_title: "Monterrey",
+        us_title: "San Antonio",
+        label_address: "Dirección:",
+        label_phone: "Teléfono:",
+        label_hours: "Horario:",
+        mx_hours: "Lunes a Sábado 9:00 am – 8:00 pm · Domingo 9:00 am – 6:00 pm",
+        us_hours: "Lunes a Domingo 10:00 am – 8:00 pm",
+        us_country: "Estados Unidos",
+
+        btn_whatsapp: "WhatsApp",
+        btn_call: "Llamar",
+        btn_directions: "Ruta",
+        btn_email: "Email",
+
+        contact_shipping_note: "Envíos internacionales disponibles",
+        tab_mx: "Monterrey",
+        tab_us: "San Antonio",
+        map_pill: "Mapa",
+
+        rights: "Todos los derechos reservados.",
+        support: "Soporte"
+      },
+      en: {
+        nav_home: "Home",
+        nav_girl: "Girls Collection",
+        nav_boy: "Boys Collection",
+        nav_contact: "Contact & Locations",
+        nav_book: "Book Appointment",
+
+        hero_locations: "Monterrey · San Antonio",
+        hero_title_1: "Moments that",
+        hero_title_2: "Last Forever",
+        hero_subtitle: "Specialists in Baptism, First Communion & Dress Rentals.",
+        hero_shipping: "WORLDWIDE SHIPPING",
+        btn_girl: "View Girls",
+        btn_boy: "View Boys",
+
+        home_kicker: "Featured",
+        home_title: "Most Wanted",
+        home_sub: "Selected pieces for their elegance and detail. Swipe to see our favorites.",
+
+        tag_girl_baptism: "Baptism · Girl",
+        tag_boy_baptism: "Baptism · Boy",
+        tag_studio_rent: "Rental · Studio",
+        tag_boy_ceremony: "Ceremony · Boy",
+
+        worldwide_strong: "Worldwide Shipping:",
+        worldwide_text: "International shipping available. Quote via WhatsApp.",
+
+        promo1_title: "Binational Service",
+        promo1_text: "Visit us in Guadalupe, NL or San Antonio, TX.",
+        promo2_title: "Complete Kits",
+        promo2_text: "Everything you need: gown, candle, shoes and accessories in one place.",
+        promo3_badge: "New",
+        promo3_title: "Season 2024",
+        promo3_text: "New models for Baptism and First Communion. Elegance you can see.",
+        promo_link: "See locations",
+        promo_link2: "See collection",
+        promo_link3: "See boys",
+
+        rent_title: "Looking for dress rentals?",
+        rent_text: "Discover a more sophisticated, night-style experience with an exclusive catalog at <strong>Studio Dominguez</strong>.",
+        rent_btn: "Dress rentals",
+
+        girl_kicker: "Delicacy & Grace",
+        girl_title: "Girls Collection",
+        girl_gallery_title: "Gallery: Convertible Gowns",
+        girl_gallery_hint: "Swipe to explore the collection",
+
+        boy_kicker: "Elegance & Character",
+        boy_title: "Boys World",
+
+        back_home: "Back to home",
+
+        search_label: "Search",
+        filter_label: "Filter by",
+        filter_color_label: "Filter by Color",
+        chip_all: "All",
+        chip_ropones: "Gowns",
+        chip_batitas: "Baptism Sets",
+        chip_spanish: "Spanish Line",
+        chip_ropon: "Gown",
+        chip_bombacho: "Outfit",
+        chip_prince: "Prince",
+        chip_suits: "Suits",
+        chip_black: "Black",
+        chip_blue: "Blue",
+        chip_red: "Red",
+        chip_light: "Light/Beige",
+
+        empty_state: "No products match your search/filter.",
+        search_girl_ph: "Ex: gown, baptism set...",
+        search_boy_ph: "Ex: suit, outfit, prince...",
+        search_studio_ph: "Ex: blue, long, night...",
+
+        studio_sub: "Exclusive dress rentals. Night-time elegance for your most important events.",
+        studio_btn_see: "See dresses",
+        studio_btn_book: "Book",
+        studio_btn_back: "Back",
+        studio_kicker: "Full Catalog",
+        studio_title: "Dresses for rent",
+        studio_sub2: "Filter by color or search by style. Book via WhatsApp.",
+
+        contact_title: "Contact",
+        contact_sub: "Two locations, personalized service, and worldwide shipping.",
+        contact_pill: "Worldwide",
+
+        mx_title: "Monterrey",
+        us_title: "San Antonio",
+        label_address: "Address:",
+        label_phone: "Phone:",
+        label_hours: "Hours:",
+        mx_hours: "Mon–Sat 9:00 am – 8:00 pm · Sun 9:00 am – 6:00 pm",
+        us_hours: "Mon–Sun 10:00 am – 8:00 pm",
+        us_country: "United States",
+
+        btn_whatsapp: "WhatsApp",
+        btn_call: "Call",
+        btn_directions: "Directions",
+        btn_email: "Email",
+
+        contact_shipping_note: "International shipping available",
+        tab_mx: "Monterrey",
+        tab_us: "San Antonio",
+        map_pill: "Map",
+
+        rights: "All rights reserved.",
+        support: "Support"
+      }
+    };
+
+    function applyLanguage(lang) {
+      state.lang = lang;
+      localStorage.setItem('mbr_lang', lang);
+
+      // Update text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = i18n[lang][key];
+        if (val !== undefined) el.innerHTML = val; // allow <strong> in some strings
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        const val = i18n[lang][key];
+        if (val !== undefined) el.setAttribute('placeholder', val);
+      });
+
+      // Button label
+      document.getElementById('langBtnText').textContent = (lang === 'es') ? 'EN' : 'ES';
+    }
+
+    /* ==============================
+      MENU
+    ============================== */
     function toggleMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
@@ -1706,28 +2625,21 @@
       menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
       if (isOpen) { const firstLink = menu.querySelector('a'); if (firstLink) firstLink.focus(); }
     }
-
     function closeMenu() {
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
       if (menu.classList.contains('active')) {
-        menu.classList.remove('active');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        menu.setAttribute('aria-hidden', 'true');
+        menu.classList.remove('active'); burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-hidden', 'true');
       }
     }
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         const menu = document.getElementById('overlayMenu');
         if (menu.classList.contains('active')) { closeMenu(); document.getElementById('burgerBtn').focus(); }
       }
     });
-
-    document.getElementById('overlayMenu').addEventListener('click', (e) => {
-      if (e.target.id === 'overlayMenu') closeMenu();
-    });
+    document.getElementById('overlayMenu').addEventListener('click', (e) => { if (e.target.id === 'overlayMenu') closeMenu(); });
 
     function closeMenuAndGoToFooter() {
       closeMenu();
@@ -1744,40 +2656,35 @@
     function setThemeForView(viewName) {
       const isStudio = (viewName === 'studio');
       document.body.classList.toggle('sd-mode', isStudio);
-      const logo = document.querySelector('.logo');
+
+      const logo = document.getElementById('brandLogo');
       if (!logo) return;
       logo.textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
     }
 
-    // =========================
-    // SPA NAVIGATION
-    // =========================
+    /* ==============================
+      SPA NAVIGATION
+    ============================== */
     function navigateTo(viewName) {
       closeMenu();
       const views = document.querySelectorAll('.view-section');
       views.forEach(v => v.classList.remove('active-view'));
-
       const target = document.getElementById('view-' + viewName);
       if (target) {
         target.classList.add('active-view');
         state.currentView = viewName;
         setActiveMenuLink(viewName);
         setThemeForView(viewName);
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') {
-          applyFilters(viewName);
-        }
+        if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') { applyFilters(viewName); }
       }
     }
 
-    // =========================
-    // FILTERS + SEARCH
-    // =========================
+    /* ==============================
+      FILTERS + SEARCH
+    ============================== */
     function setFilter(view, category, el) {
       state.filters[view] = category;
-
       const chipsWrap =
         view === 'nina' ? document.getElementById('chipsNina') :
         view === 'nino' ? document.getElementById('chipsNino') :
@@ -1806,16 +2713,16 @@
 
       const query = (searchInput.value || '').trim().toLowerCase();
       const selected = state.filters[view];
-      const cards = Array.from(grid.querySelectorAll('.product-card'));
 
+      const cards = Array.from(grid.querySelectorAll('.product-card'));
       let visibleCount = 0;
+
       cards.forEach(card => {
         const name = (card.getAttribute('data-name') || '').toLowerCase();
         const category = (card.getAttribute('data-category') || '');
         const matchQuery = !query || name.includes(query) || category.toLowerCase().includes(query);
         const matchFilter = (selected === 'all') || (category === selected);
         const show = matchQuery && matchFilter;
-
         card.style.display = show ? '' : 'none';
         if (show) visibleCount++;
       });
@@ -1823,46 +2730,109 @@
       empty.style.display = visibleCount === 0 ? 'block' : 'none';
     }
 
-    // =========================
-    // SWIPER INIT (HOME)
-    // =========================
+    /* ==============================
+      SWIPER INIT (home + 3D)
+    ============================== */
     const swiperHome = new Swiper('#homeSwiper', {
       loop: true,
-      centeredSlides: true,
-      grabCursor: true,
-      slidesPerView: 1.15,
       spaceBetween: 16,
+      slidesPerView: 1,
+      grabCursor: true,
       speed: 900,
+      effect: 'creative',
+      creativeEffect: {
+        prev: { shadow: true, translate: ['-8%', 0, -120], rotate: [0, 0, -2] },
+        next: { shadow: true, translate: ['8%', 0, -120], rotate: [0, 0, 2] },
+      },
+      pagination: { el: '.swiper-pagination', clickable: true },
       autoplay: { delay: 3200, disableOnInteraction: false },
-      effect: 'coverflow',
-      coverflowEffect: { rotate: 18, stretch: 0, depth: 160, modifier: 1.15, slideShadows: true },
-      pagination: { el: '#homeSwiper .swiper-pagination', clickable: true },
       navigation: { nextEl: '#homeNext', prevEl: '#homePrev' },
-      breakpoints: {
-        768: { slidesPerView: 2, spaceBetween: 18 },
-        1100:{ slidesPerView: 3, spaceBetween: 20 }
-      }
+      breakpoints: { 768: { slidesPerView: 2 }, 1100: { slidesPerView: 3 } }
     });
 
-    // =========================
-    // SWIPER INIT (3D NIÑA)
-    // =========================
     const common3dProps = {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
       slidesPerView: 'auto',
       speed: 900,
-      coverflowEffect: { rotate: 28, stretch: 0, depth: 150, modifier: 1.05, slideShadows: true },
-      pagination: false,
+      coverflowEffect: {
+        rotate: 26,
+        stretch: 0,
+        depth: 160,
+        modifier: 1,
+        slideShadows: true
+      },
+      pagination: false
     };
     new Swiper('#roponesSwiper', { ...common3dProps, initialSlide: 2 });
 
-    // =========================
-    // INITIAL
-    // =========================
+    /* ==============================
+      CONTACT MAP TABS
+    ============================== */
+    function setMapTab(which){
+      const tabMx = document.getElementById('tabMx');
+      const tabUs = document.getElementById('tabUs');
+      const mapMx = document.getElementById('mapMx');
+      const mapUs = document.getElementById('mapUs');
+
+      if(which === 'mx'){
+        tabMx.classList.add('active'); tabUs.classList.remove('active');
+        mapMx.classList.add('active'); mapUs.classList.remove('active');
+      } else {
+        tabUs.classList.add('active'); tabMx.classList.remove('active');
+        mapUs.classList.add('active'); mapMx.classList.remove('active');
+      }
+    }
+
+    /* ==============================
+      WOW: Progress bar + Parallax
+    ============================== */
+    const topProgress = document.getElementById('topProgress');
+    const heroBg = document.getElementById('heroBg');
+
+    function onScroll(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      topProgress.style.width = progress + '%';
+
+      // Parallax suave solo en INICIO
+      if(state.currentView === 'inicio' && heroBg){
+        const y = Math.min(scrollTop, 260);
+        heroBg.style.transform = `scale(1.06) translateY(${y * 0.12}px)`;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ==============================
+      Reveal on scroll (IntersectionObserver)
+    ============================== */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* ==============================
+      Language toggle button
+    ============================== */
+    const langBtn = document.getElementById('langBtn');
+    langBtn.addEventListener('click', () => {
+      const next = (state.lang === 'es') ? 'en' : 'es';
+      applyLanguage(next);
+    });
+
+    /* ==============================
+      Initial state
+    ============================== */
     setActiveMenuLink('inicio');
     setThemeForView('inicio');
+    applyLanguage(state.lang);
   </script>
 </body>
 </html>
