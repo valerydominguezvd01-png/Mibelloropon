@@ -3,1589 +3,1280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0d14" />
   <title>Mi Bello Ropón | Monterrey & San Antonio</title>
 
-  <!-- Fonts + Icons -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQK03KRCZ5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQK03KRCZ5');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
+  <!-- Marca JS temprano para animaciones sin “ocultar” si JS falla -->
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
   <style>
-    /* ==============================
-      CONFIG BASE & PALETAS
-    ============================== */
-    :root {
-      --bg-body: #fbfaf6;
-      --bg-card: rgba(255,255,255,0.86);
-      --bg-card-solid: #ffffff;
-      --gold-accent: #c5a059;
-      --gold-soft: rgba(197,160,89,0.14);
+    /* =========================
+       BASE + PALETA PREMIUM
+    ========================== */
+    :root{
+      --bg-body: #fdfcf8;
+      --bg-card: rgba(255,255,255,0.92);
       --text-dark: #2f2f2f;
-      --text-mid: #555555;
-      --text-light: #777777;
+      --text-light: rgba(47,47,47,0.70);
 
-      --overlay-bg: rgba(252, 251, 246, 0.96);
+      --gold: #c5a059;
+      --gold2: #e6dace;
+      --line: rgba(0,0,0,0.08);
 
-      --shadow-card: 0 16px 45px rgba(33, 33, 33, 0.08);
-      --shadow-soft: 0 10px 35px rgba(0, 0, 0, 0.08);
-      --shadow-glow: 0 22px 80px rgba(197, 160, 89, 0.20);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --shadow: 0 18px 55px rgba(0,0,0,0.10);
+      --shadow-soft: 0 12px 35px rgba(0,0,0,0.08);
+      --shadow-gold: 0 18px 55px rgba(197,160,89,0.18);
 
-      --transition: 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-      --transition-slow: 0.75s cubic-bezier(0.25, 1, 0.5, 1);
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --t: 0.55s var(--ease);
 
-      --max-w: 1200px;
-
-      /* Studio Dominguez (Night theme) */
+      /* Studio (Night) */
       --sd-bg: #070912;
-      --sd-bg2: #05060c;
+      --sd-bg2: #0b0d18;
       --sd-card: rgba(255,255,255,0.06);
       --sd-border: rgba(255,255,255,0.10);
       --sd-text: rgba(255,255,255,0.92);
-      --sd-muted: rgba(255,255,255,0.62);
+      --sd-muted: rgba(255,255,255,0.65);
       --sd-accent: #8a5cff;
       --sd-accent2: #00d4ff;
-      --sd-glow: 0 18px 70px rgba(138,92,255,0.20);
-      --sd-shadow: 0 18px 55px rgba(0,0,0,0.55);
+      --sd-shadow: 0 18px 70px rgba(0,0,0,0.55);
+      --sd-glow: 0 18px 60px rgba(138,92,255,0.18);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Lato', sans-serif;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Lato',sans-serif;
+      background: var(--bg-body);
       color: var(--text-dark);
-      overflow-x: hidden;
+      overflow-x:hidden;
+    }
+    h1,h2,h3{font-family:'Cinzel',serif;letter-spacing:1px}
+    a{color:inherit;text-decoration:none;transition:.25s ease}
+    button{font-family:inherit}
+    ul{list-style:none}
 
-      /* Fondo elegante con textura (SVG noise) + degradados suaves */
+    /* Textura suave + halos */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
       background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(197,160,89,0.16), transparent 55%),
-        radial-gradient(900px 500px at 85% 15%, rgba(197,160,89,0.10), transparent 55%),
-        linear-gradient(180deg, #fbfaf6, #f6f3ea 55%, #fbfaf6 100%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
-      background-blend-mode: normal, normal, normal, multiply;
+        radial-gradient(900px 450px at 15% 10%, rgba(197,160,89,0.20), transparent 60%),
+        radial-gradient(850px 450px at 85% 20%, rgba(197,160,89,0.12), transparent 60%),
+        radial-gradient(900px 520px at 40% 110%, rgba(0,0,0,0.035), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0 2px, transparent 2px 10px);
+      pointer-events:none;
+      z-index:-2;
     }
 
-    body.sd-mode {
-      background:
-        radial-gradient(1100px 650px at 18% 10%, rgba(138,92,255,0.22), transparent 55%),
-        radial-gradient(900px 500px at 85% 15%, rgba(0,212,255,0.14), transparent 55%),
-        linear-gradient(180deg, var(--sd-bg), var(--sd-bg2) 60%, var(--sd-bg)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      background-blend-mode: normal, normal, normal, multiply;
-      color: var(--sd-text);
-    }
-
-    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
-    a { text-decoration: none; color: inherit; transition: var(--transition); cursor: pointer; }
-    button { font-family: inherit; }
-    ul { list-style: none; }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-    }
-
-    /* ==============================
-      TOP PROGRESS BAR
-    ============================== */
-    .top-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      z-index: 4000;
-      background: linear-gradient(90deg, var(--gold-accent), rgba(197,160,89,0.2));
-      box-shadow: 0 6px 20px rgba(197,160,89,0.30);
-      transition: width 0.08s linear;
-    }
-    body.sd-mode .top-progress {
-      background: linear-gradient(90deg, var(--sd-accent), var(--sd-accent2));
-      box-shadow: 0 10px 30px rgba(138,92,255,0.22);
-    }
-
-    /* ==============================
-      NAV
-    ============================== */
-    nav {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      padding: 1.05rem 1.6rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 3000;
-
-      background: rgba(252, 251, 246, 0.78);
+    /* =========================
+       NAV
+    ========================== */
+    nav{
+      position:fixed; top:0; left:0; width:100%;
+      padding: 1.05rem 2.2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      z-index:3000;
+      background: rgba(253,252,248,0.84);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: background var(--transition), border-color var(--transition);
+      border-bottom: 1px solid var(--line);
+      transition: background .35s ease, border-color .35s ease;
     }
-    body.sd-mode nav {
-      background: rgba(7, 9, 18, 0.72);
+    .nav-right{display:flex; align-items:center; gap: .85rem}
+
+    .logo{
+      font-size:1.25rem;
+      font-weight:700;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      cursor:pointer;
+      user-select:none;
+      display:flex;
+      align-items:center;
+      gap:.65rem;
+    }
+    .logo .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--gold), #f1e7da);
+      box-shadow: 0 10px 24px rgba(197,160,89,0.35);
+    }
+
+    .lang-btn{
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.80);
+      padding: .55rem .85rem;
+      border-radius: 999px;
+      cursor:pointer;
+      display:flex; align-items:center; gap:.55rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      transition: var(--t);
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size:.80rem;
+    }
+    .lang-btn:hover{ transform: translateY(-2px); border-color: rgba(0,0,0,0.18) }
+
+    .burger-btn{
+      cursor:pointer; width:40px; height:28px;
+      position:relative; background:transparent; border:none; padding:0;
+    }
+    .burger-line{
+      display:block; width:100%; height:2px;
+      background: var(--text-dark);
+      position:absolute; border-radius:2px;
+      transition: var(--t);
+    }
+    .burger-line:nth-child(1){top:0}
+    .burger-line:nth-child(2){top:13px;width:70%;right:0}
+    .burger-line:nth-child(3){top:26px}
+    .burger-btn.open .burger-line:nth-child(1){transform:rotate(45deg); top:13px; background: var(--gold)}
+    .burger-btn.open .burger-line:nth-child(2){opacity:0}
+    .burger-btn.open .burger-line:nth-child(3){transform:rotate(-45deg); top:13px; background: var(--gold)}
+
+    /* Studio nav */
+    body.sd-mode nav{
+      background: rgba(7,9,18,0.72);
       border-bottom: 1px solid rgba(255,255,255,0.10);
     }
-
-    .nav-right {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo {
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo::before{
-      content:"";
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(197,160,89,0.65));
-      box-shadow: 0 10px 25px rgba(197,160,89,0.20);
-    }
-    body.sd-mode .logo { color: rgba(255,255,255,0.92); }
-    body.sd-mode .logo::before {
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(0,212,255,0.65));
-      box-shadow: 0 12px 35px rgba(0,212,255,0.18);
-    }
-
-    .lang-toggle {
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.75);
-      padding: 0.55rem 0.85rem;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-dark);
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-    }
-    .lang-toggle:hover { transform: translateY(-1px); border-color: rgba(197,160,89,0.35); box-shadow: var(--shadow-soft); }
-    body.sd-mode .lang-toggle {
-      border-color: rgba(255,255,255,0.14);
+    body.sd-mode .burger-line{background: rgba(255,255,255,0.90)}
+    body.sd-mode .logo{color: rgba(255,255,255,0.92)}
+    body.sd-mode .lang-btn{
       background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.14);
       color: rgba(255,255,255,0.92);
       box-shadow: var(--sd-shadow);
     }
-    body.sd-mode .lang-toggle:hover {
-      box-shadow: var(--sd-glow);
-      border-color: rgba(0,212,255,0.22);
-    }
-
-    .burger-btn {
-      cursor: pointer;
-      width: 40px;
-      height: 28px;
-      position: relative;
-      z-index: 3001;
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    .burger-line {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: var(--text-dark);
-      position: absolute;
-      transition: var(--transition-slow);
-      border-radius: 2px;
-    }
-    .burger-line:nth-child(1) { top: 0; }
-    .burger-line:nth-child(2) { top: 13px; width: 70%; right: 0; }
-    .burger-line:nth-child(3) { top: 26px; }
-
-    body.sd-mode .burger-line { background: rgba(255,255,255,0.90); }
-
-    .burger-btn.open .burger-line:nth-child(1) { transform: rotate(45deg); top: 13px; background: var(--gold-accent); }
-    .burger-btn.open .burger-line:nth-child(2) { opacity: 0; }
-    .burger-btn.open .burger-line:nth-child(3) { transform: rotate(-45deg); top: 13px; background: var(--gold-accent); }
     body.sd-mode .burger-btn.open .burger-line:nth-child(1),
-    body.sd-mode .burger-btn.open .burger-line:nth-child(3) { background: var(--sd-accent2); }
+    body.sd-mode .burger-btn.open .burger-line:nth-child(3){ background: var(--sd-accent2) }
 
-    /* ==============================
-      OVERLAY MENU (WOW)
-    ============================== */
-    .overlay-menu {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100vh;
-      background: var(--overlay-bg);
-      z-index: 2999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease, background var(--transition);
-      overflow: hidden;
+    /* =========================
+       OVERLAY MENU
+    ========================== */
+    .overlay-menu{
+      position:fixed; inset:0;
+      z-index:2999;
+      background: rgba(253,252,248,0.93);
+      backdrop-filter: blur(18px);
+      opacity:0; pointer-events:none;
+      transition: opacity .45s ease, background .35s ease;
+      display:flex; align-items:center; justify-content:center;
     }
-    .overlay-menu::before{
-      content:"";
-      position:absolute; inset:-40%;
+    .overlay-menu.active{opacity:1; pointer-events:auto}
+    body.sd-mode .overlay-menu{background: rgba(7,9,18,0.92)}
+
+    .menu-card{
+      width:min(840px, 92vw);
+      border-radius: 26px;
       background:
-        radial-gradient(900px 500px at 20% 30%, rgba(197,160,89,0.20), transparent 60%),
-        radial-gradient(900px 500px at 80% 70%, rgba(197,160,89,0.12), transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    body.sd-mode .overlay-menu {
-      background: rgba(7, 9, 18, 0.95);
-    }
-    body.sd-mode .overlay-menu::before{
-      background:
-        radial-gradient(900px 500px at 20% 30%, rgba(138,92,255,0.20), transparent 60%),
-        radial-gradient(900px 500px at 80% 70%, rgba(0,212,255,0.12), transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-    }
-
-    .overlay-menu.active { opacity: 1; pointer-events: all; }
-
-    .overlay-menu ul { position: relative; z-index: 2; }
-    .overlay-menu li { margin: 1.1rem 0; overflow: hidden; text-align: center; }
-
-    .overlay-menu a {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      color: var(--text-dark);
-      display: inline-block;
-      transform: translateY(130%);
-      transition: transform 0.65s ease, color 0.25s ease;
-      letter-spacing: 2px;
-      text-shadow: 0 10px 45px rgba(0,0,0,0.08);
-    }
-    body.sd-mode .overlay-menu a { color: rgba(255,255,255,0.92); text-shadow: 0 16px 55px rgba(0,0,0,0.40); }
-    .overlay-menu.active a { transform: translateY(0); }
-    .overlay-menu a.active-link { color: var(--gold-accent); }
-    body.sd-mode .overlay-menu a.active-link { color: var(--sd-accent2); }
-
-    /* ==============================
-      MAIN (SPA)
-    ============================== */
-    .main-container { position: relative; min-height: 100vh; padding-top: 82px; }
-    .view-section { display: none; opacity: 0; animation: fadeView 0.85s ease forwards; }
-    .view-section.active-view { display: block; }
-    @keyframes fadeView {
-      from { opacity: 0; transform: translateY(18px); filter: blur(2px); }
-      to { opacity: 1; transform: translateY(0); filter: blur(0); }
-    }
-
-    /* Utility container */
-    .wrap {
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto;
-    }
-
-    /* ==============================
-      SECTION SPACING + DIVIDERS
-    ============================== */
-    .band {
-      position: relative;
-      padding: 3.2rem 0;
-    }
-    .band.tight { padding: 2.2rem 0; }
-    .band::before{
-      content:"";
-      position:absolute; left:0; right:0; top:-1px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
-    }
-    body.sd-mode .band::before{
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .band.alt{
-      background:
-        radial-gradient(900px 450px at 20% 10%, rgba(197,160,89,0.12), transparent 55%),
-        radial-gradient(900px 450px at 80% 40%, rgba(197,160,89,0.08), transparent 60%),
-        rgba(255,255,255,0.38);
-      backdrop-filter: blur(10px);
-    }
-    body.sd-mode .band.alt{
-      background:
-        radial-gradient(900px 450px at 20% 10%, rgba(138,92,255,0.14), transparent 55%),
-        radial-gradient(900px 450px at 80% 40%, rgba(0,212,255,0.10), transparent 60%),
-        rgba(255,255,255,0.02);
-      backdrop-filter: blur(14px);
-    }
-
-    /* ==============================
-      HERO (INICIO) – WOW
-    ============================== */
-    .hero-wrapper {
-      height: calc(100vh - 82px);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      margin: 0.9rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-soft);
-      isolation: isolate;
-    }
-    .hero-bg {
-      position: absolute;
-      top: -10%; left: 0;
-      width: 100%;
-      height: 130%;
-      background-image: url('ropondesmontable.jpeg'); /* IMAGEN PORTADA */
-      background-size: cover;
-      background-position: top center;
-      z-index: -3;
-      filter: saturate(1.05) contrast(1.02);
-      transform: scale(1.06);
-      will-change: transform;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(900px 520px at 30% 25%, rgba(255,255,255,0.74), transparent 60%),
-        radial-gradient(900px 520px at 75% 15%, rgba(197,160,89,0.22), transparent 58%),
-        linear-gradient(180deg, rgba(252,251,246,0.65), rgba(252,251,246,0.88) 70%, rgba(252,251,246,0.95));
-      backdrop-filter: blur(2px);
-    }
-    .hero-sparkles{
-      position:absolute; inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(12px 12px at 12% 20%, rgba(197,160,89,0.30), transparent 60%),
-        radial-gradient(10px 10px at 85% 30%, rgba(197,160,89,0.24), transparent 62%),
-        radial-gradient(8px 8px at 65% 78%, rgba(197,160,89,0.22), transparent 65%),
-        radial-gradient(9px 9px at 25% 75%, rgba(197,160,89,0.18), transparent 62%);
-      opacity: 0.85;
-      animation: floatSparkles 8s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes floatSparkles{
-      0%,100%{ transform: translateY(0); }
-      50%{ transform: translateY(-10px); }
-    }
-
-    .hero-content {
-      position: relative;
-      background: rgba(255,255,255,0.70);
-      backdrop-filter: blur(14px);
-      padding: 2.6rem 2.3rem;
-      max-width: 720px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.75);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.14);
-    }
-    .hero-content::before{
-      content:"";
-      position:absolute; inset:-1px;
-      border-radius: 18px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(197,160,89,0.45), rgba(255,255,255,0.35), rgba(197,160,89,0.25));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events:none;
-      opacity: 0.85;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(2.1rem, 4vw, 3.05rem);
-      margin-bottom: 0.75rem;
-      color: var(--text-dark);
-      line-height: 1.05;
-      letter-spacing: 1.5px;
-      animation: riseIn 0.9s var(--transition-slow) both;
-    }
-    @keyframes riseIn {
-      from{ opacity:0; transform: translateY(14px); filter: blur(2px); }
-      to{ opacity:1; transform: translateY(0); filter: blur(0); }
-    }
-
-    .location-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 1.8px;
-      color: var(--text-dark);
-      margin-bottom: 1.2rem;
-      font-weight: 800;
+        radial-gradient(900px 420px at 20% 10%, rgba(197,160,89,0.16), transparent 55%),
+        rgba(255,255,255,0.78);
       border: 1px solid rgba(0,0,0,0.08);
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
+      padding: 2.2rem 1.6rem;
+      position:relative;
+      overflow:hidden;
+    }
+    body.sd-mode .menu-card{
+      background:
+        radial-gradient(900px 420px at 20% 10%, rgba(138,92,255,0.26), transparent 58%),
+        rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: var(--sd-shadow);
+      color: rgba(255,255,255,0.92);
+    }
+    .menu-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    @media (max-width: 720px){
+      .menu-grid{grid-template-columns:1fr}
     }
 
-    .btn-main {
-      padding: 0.95rem 2.2rem;
-      background: var(--text-dark);
-      color: white;
-      text-transform: uppercase;
+    .menu-title{
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .menu-title h2{
+      font-size: 1.75rem;
+    }
+    .menu-title .hint{
+      font-size: .85rem;
       letter-spacing: 2px;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
-      border-radius: 999px;
-      box-shadow: 0 16px 35px rgba(0,0,0,0.14);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-main::after{
-      content:"";
-      position:absolute; inset:-60%;
-      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.22), transparent 55%);
-      transform: rotate(25deg);
-      transition: var(--transition);
-      opacity: 0;
-    }
-    .btn-main:hover { background: var(--gold-accent); border-color: rgba(197,160,89,0.55); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
-    .btn-main:hover::after{ opacity:1; }
-
-    /* ==============================
-      TITLES
-    ============================== */
-    .section-title {
-      text-align: center;
-      padding: 0 1rem 1.2rem;
-    }
-    .section-title .kicker {
-      color: var(--gold-accent);
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      color: rgba(47,47,47,0.60);
     }
-    .section-title .kicker::before,
-    .section-title .kicker::after{
-      content:"";
-      width: 34px; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.9), transparent);
-    }
-    body.sd-mode .section-title .kicker { color: var(--sd-accent2); }
-    body.sd-mode .section-title .kicker::before,
-    body.sd-mode .section-title .kicker::after{
-      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
-    }
+    body.sd-mode .menu-title .hint{ color: rgba(255,255,255,0.55) }
 
-    .section-title h2 {
-      font-size: clamp(1.9rem, 3.2vw, 2.55rem);
-      margin-top: 0.55rem;
-      margin-bottom: 0.35rem;
-      letter-spacing: 1px;
+    .menu-link{
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.70);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: var(--t);
+      display:flex; align-items:center; justify-content:space-between; gap: 1rem;
+      cursor:pointer;
     }
-    .section-title p.sub {
-      color: var(--text-mid);
-      max-width: 720px;
-      margin: 0.4rem auto 0;
-      line-height: 1.55;
-      font-size: 0.98rem;
-    }
-    body.sd-mode .section-title p.sub { color: rgba(255,255,255,0.70); }
-
-    /* ==============================
-      SWIPER HOME – EFFECTS + UI
-    ============================== */
-    .swiper { width: 100%; padding: 0.75rem 0 1.1rem; }
-    .home-swiper-wrap{
-      position: relative;
-    }
-    .swiper-slide {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,0,0,0.05);
-      transform: translateZ(0);
-    }
-    body.sd-mode .swiper-slide {
+    .menu-link:hover{ transform: translateY(-3px); box-shadow: var(--shadow-gold); border-color: rgba(197,160,89,0.38) }
+    body.sd-mode .menu-link{
       background: rgba(255,255,255,0.05);
       border-color: rgba(255,255,255,0.10);
       box-shadow: var(--sd-shadow);
     }
+    body.sd-mode .menu-link:hover{
+      border-color: rgba(0,212,255,0.35);
+      box-shadow: var(--sd-glow);
+    }
+    .menu-link .left{
+      display:flex; align-items:center; gap:.8rem;
+    }
+    .menu-ic{
+      width:42px;height:42px;border-radius: 14px;
+      display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg, rgba(197,160,89,0.20), rgba(255,255,255,0.8));
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    body.sd-mode .menu-ic{
+      background: linear-gradient(135deg, rgba(138,92,255,0.30), rgba(0,212,255,0.08));
+      border-color: rgba(255,255,255,0.10);
+    }
 
-    .slide-img {
-      height: 460px;
+    .menu-wa{
+      margin-top: 1.2rem;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .menu-wa a{
+      display:inline-flex; align-items:center; gap:.7rem;
+      padding: .95rem 1.25rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(37,211,102,0.95), rgba(37,211,102,0.78));
+      color: white;
+      font-weight:900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 14px 35px rgba(37,211,102,0.25);
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: var(--t);
+    }
+    .menu-wa a:hover{ transform: translateY(-2px); filter: brightness(1.02) }
+
+    /* =========================
+       SPA / LAYOUT
+    ========================== */
+    .main-container{ padding-top: 78px; min-height: 100vh; }
+    .view-section{ display:none; opacity:0; animation: fadeView .75s ease forwards; }
+    .view-section.active-view{ display:block; }
+    @keyframes fadeView{
+      from{ opacity:0; transform: translateY(18px) }
+      to{ opacity:1; transform: translateY(0) }
+    }
+
+    .band{
+      padding: 4.2rem 0;
+      position:relative;
+    }
+    .band.alt{
+      background:
+        radial-gradient(900px 420px at 12% 10%, rgba(197,160,89,0.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.78));
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    body.sd-mode .band.alt{
+      background:
+        radial-gradient(900px 420px at 12% 10%, rgba(138,92,255,0.22), transparent 62%),
+        linear-gradient(180deg, rgba(7,9,18,1), rgba(11,13,24,1));
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: var(--sd-text);
+    }
+
+    .wrap{
+      width:min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    .divider{
+      width: min(820px, 90vw);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.65), transparent);
+      margin: 2.4rem auto 0;
+      opacity: .65;
+    }
+    body.sd-mode .divider{
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.45), transparent);
+    }
+
+    /* Reveal (solo si JS está activo) */
+    .reveal{ }
+    .js .reveal{ opacity:0; transform: translateY(18px); transition: var(--t); }
+    .js .reveal.in{ opacity:1; transform:none; }
+
+    /* =========================
+       HERO INICIO
+    ========================== */
+    .hero-wrapper{
+      height: calc(100vh - 78px);
+      margin: 1rem;
+      border-radius: 28px;
+      position:relative;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      isolation:isolate;
+    }
+    .hero-bg{
+      position:absolute; inset:-2%;
+      background-image: url('ropondesmontable.jpeg');
+      background-size: cover;
+      background-position: top center;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.03);
+      animation: heroZoom 12s var(--ease) infinite alternate;
+      z-index:-3;
+    }
+    @keyframes heroZoom{
+      from{ transform: scale(1.03) translateY(0) }
+      to{ transform: scale(1.08) translateY(-8px) }
+    }
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(800px 380px at 25% 20%, rgba(255,255,255,0.65), transparent 55%),
+        radial-gradient(900px 420px at 75% 30%, rgba(197,160,89,0.20), transparent 60%),
+        linear-gradient(180deg, rgba(253,252,248,0.62), rgba(253,252,248,0.78));
+      z-index:-2;
+    }
+    .hero-grain{
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0 2px, transparent 2px 10px);
+      opacity:.35;
+      z-index:-1;
+      pointer-events:none;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-content{
+      width:min(760px, 92vw);
+      padding: 3rem 2.2rem;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: 22px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.14);
+      backdrop-filter: blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-content::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(197,160,89,0.40), transparent 35%, rgba(197,160,89,0.28));
+      opacity:.45;
+      pointer-events:none;
+      mask: linear-gradient(#000, transparent 60%);
+    }
+
+    .location-badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.82rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:900;
+      padding: .45rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.90);
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      margin: 1.2rem 0 1.2rem;
+    }
+
+    .hero-content h1{
+      font-size: 2.9rem;
+      line-height: 1.05;
+    }
+    .hero-sub{
+      margin-top: .95rem;
+      color: rgba(47,47,47,0.70);
+      font-style: italic;
+    }
+    .hero-ship{
+      margin-top: 1.25rem;
+      font-size: .85rem;
+      font-weight: 900;
+      letter-spacing:1px;
+      color: var(--gold);
+    }
+
+    .btn-row{
+      display:flex; gap: .9rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 1.6rem;
+    }
+    .btn-main{
+      padding: 1rem 1.7rem;
+      border-radius: 999px;
+      cursor:pointer;
+      border: 1px solid transparent;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 900;
+      display:inline-flex; align-items:center; gap:.6rem;
+      transition: var(--t);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.10);
+      background: var(--text-dark);
+      color: white;
+    }
+    .btn-main:hover{ transform: translateY(-2px); background: var(--gold); border-color: rgba(197,160,89,0.65) }
+    .btn-ghost{
+      background: rgba(255,255,255,0.90);
+      color: var(--text-dark);
+      border-color: rgba(0,0,0,0.10);
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,1); border-color: rgba(197,160,89,0.55) }
+
+    /* =========================
+       TITULOS
+    ========================== */
+    .section-title{
+      text-align:center;
+      margin-bottom: 1.6rem;
+    }
+    .kicker{
+      font-size: .85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 900;
+      margin-bottom:.4rem;
+    }
+    .section-title h2{
+      font-size: 2.35rem;
+    }
+    .section-title .sub{
+      margin-top:.65rem;
+      color: rgba(47,47,47,0.65);
+      max-width: 720px;
+      margin-left:auto;margin-right:auto;
+      line-height:1.6;
+    }
+    body.sd-mode .section-title .sub{ color: rgba(255,255,255,0.65) }
+
+    /* =========================
+       SWIPER (HOME)
+    ========================== */
+    .swiper{
       width: 100%;
+      padding: 1.1rem 0 2.2rem;
+    }
+    .swiper-slide{
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.92);
+      box-shadow: var(--shadow-gold);
+      border: 1px solid rgba(0,0,0,0.06);
+      transform: translateZ(0);
+    }
+    .slide-img{
+      width:100%;
+      height: 460px;
       object-fit: cover;
       object-position: top center;
-      display: block;
-      transform: scale(1.02);
-      transition: transform 1.0s ease;
-      filter: saturate(1.05) contrast(1.03);
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
     }
-    .swiper-slide:hover .slide-img { transform: scale(1.06); }
-
-    .slide-info {
-      padding: 1.2rem 1.25rem 1.35rem;
-      text-align: center;
-      position: relative;
+    .slide-info{
+      padding: 1.15rem 1.25rem 1.35rem;
+      text-align:center;
+      position:relative;
     }
     .slide-info::before{
       content:"";
-      position:absolute; left: 12%; right: 12%; top: 0;
+      position:absolute; left:0; right:0; top:0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.60), transparent);
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.55), transparent);
+      opacity:.8;
     }
-    body.sd-mode .slide-info::before{
-      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.55), transparent);
+    .slide-info h3{
+      font-family:'Lato',sans-serif;
+      font-weight: 600;
+      letter-spacing:.5px;
+      font-size: 1.06rem;
     }
-    .slide-info h3 { font-family: 'Lato', sans-serif; font-weight: 500; font-size: 1.06rem; }
-    .slide-info p { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 6px; letter-spacing: 2px; font-weight: 800; }
-    body.sd-mode .slide-info p { color: var(--sd-accent2); }
+    .slide-info p{
+      margin-top:.45rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: .80rem;
+      font-weight: 900;
+    }
+    .swiper-pagination-bullet{ opacity:.4 }
+    .swiper-pagination-bullet-active{ opacity:1; transform: scale(1.1); background: var(--gold) !important }
 
-    .swiper-pagination-bullets .swiper-pagination-bullet{
-      width: 7px; height: 7px;
-      background: rgba(0,0,0,0.25);
-      opacity: 1;
-      transition: var(--transition);
-    }
-    .swiper-pagination-bullets .swiper-pagination-bullet-active{
-      width: 18px;
-      border-radius: 999px;
-      background: var(--gold-accent);
-      box-shadow: 0 10px 26px rgba(197,160,89,0.35);
-    }
-    body.sd-mode .swiper-pagination-bullets .swiper-pagination-bullet{
-      background: rgba(255,255,255,0.22);
-    }
-    body.sd-mode .swiper-pagination-bullets .swiper-pagination-bullet-active{
-      background: linear-gradient(90deg, var(--sd-accent), var(--sd-accent2));
-      box-shadow: 0 12px 30px rgba(0,212,255,0.18);
-    }
-
-    .swiper-nav-btn{
-      position:absolute;
-      top: 50%;
-      transform: translateY(-50%);
+    .swiper-button-next, .swiper-button-prev{
       width: 44px; height: 44px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(10px);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer;
-      z-index: 10;
-      transition: var(--transition);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+      backdrop-filter: blur(12px);
+      transition: var(--t);
     }
-    .swiper-nav-btn:hover{ transform: translateY(-50%) scale(1.04); border-color: rgba(197,160,89,0.35); box-shadow: var(--shadow-glow); }
-    .swiper-nav-btn i{ color: var(--text-dark); font-size: 1.05rem; }
-    body.sd-mode .swiper-nav-btn{
-      border-color: rgba(255,255,255,0.14);
+    .swiper-button-next:hover, .swiper-button-prev:hover{
+      transform: translateY(-2px);
+      border-color: rgba(197,160,89,0.45);
+    }
+    .swiper-button-next::after, .swiper-button-prev::after{
+      font-size: 16px;
+      font-weight: 900;
+      color: rgba(47,47,47,0.75);
+    }
+
+    /* =========================
+       BANNERS + PROMOS
+    ========================== */
+    .shipping-banner{
+      margin-top: 1.4rem;
+      border-radius: 16px;
+      padding: .9rem 1rem;
+      display:flex; align-items:center; justify-content:center; gap:.7rem;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-soft);
+      color: rgba(47,47,47,0.78);
+      text-align:center;
+    }
+    .promo-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(220px,1fr));
+      gap: 1.15rem;
+      margin-top: 1.8rem;
+    }
+    .promo-card{
+      position:relative;
+      border-radius: 22px;
+      padding: 1.55rem 1.45rem;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+      transition: var(--t);
+    }
+    .promo-card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(500px 200px at 20% 10%, rgba(197,160,89,0.18), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .promo-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-gold); border-color: rgba(197,160,89,0.30) }
+
+    .promo-badge{
+      position:absolute; top: 14px; right:14px;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      background: rgba(47,47,47,0.92);
+      color:white;
+    }
+    .promo-card h3{ font-size: 1.25rem; margin-top:.4rem }
+    .promo-card p{ margin-top:.7rem; color: rgba(47,47,47,0.70); line-height: 1.6 }
+    .promo-card a{
+      display:inline-flex; gap:.5rem; align-items:center;
+      margin-top: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: rgba(47,47,47,0.78);
+      border-bottom: 1px solid rgba(197,160,89,0.55);
+      padding-bottom: .2rem;
+    }
+    .promo-card a:hover{ color: var(--gold) }
+
+    .rent-cta{
+      margin-top: 2.1rem;
+      border-radius: 26px;
+      padding: 1.9rem 1.7rem;
+      background:
+        radial-gradient(800px 320px at 20% 10%, rgba(255,255,255,0.12), transparent 60%),
+        linear-gradient(135deg, rgba(47,47,47,0.96), rgba(197,160,89,0.62));
+      color:white;
+      box-shadow: var(--shadow);
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 1.2rem;
+      flex-wrap:wrap;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .rent-cta h3{ font-size: 1.55rem }
+    .rent-cta p{ color: rgba(255,255,255,0.82); line-height: 1.6; max-width: 620px }
+    .btn-rent{
+      padding: .95rem 1.35rem;
+      border-radius: 999px;
+      cursor:pointer;
+      border: 1px solid rgba(255,255,255,0.30);
+      background: rgba(255,255,255,0.12);
+      color:white;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: .78rem;
+      display:inline-flex; align-items:center; gap:.6rem;
+      transition: var(--t);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.22);
+    }
+    .btn-rent:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.20) }
+
+    /* =========================
+       GRID PRODUCTOS
+    ========================== */
+    .tools-bar{
+      display:grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 1rem;
+      margin-top: 1.6rem;
+      align-items:end;
+    }
+    .search-wrap label, .filter-wrap label{
+      display:block;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: rgba(47,47,47,0.55);
+      margin-bottom: .55rem;
+    }
+    body.sd-mode .search-wrap label,
+    body.sd-mode .filter-wrap label{ color: rgba(255,255,255,0.55) }
+
+    .search-input{
+      width:100%;
+      padding: .95rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.85);
+      outline:none;
+      transition: var(--t);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+    }
+    .search-input:focus{ border-color: rgba(197,160,89,0.45); box-shadow: 0 18px 55px rgba(197,160,89,0.14) }
+
+    .chips{
+      display:flex; gap:.55rem; flex-wrap:wrap;
+    }
+    .chip{
+      padding: .62rem .95rem;
+      border-radius: 999px;
+      cursor:pointer;
+      user-select:none;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.10);
+      font-weight: 900;
+      font-size: .84rem;
+      transition: var(--t);
+    }
+    .chip:hover{ transform: translateY(-1px); border-color: rgba(197,160,89,0.35) }
+    .chip.active{
+      background: rgba(47,47,47,0.95);
+      color:white;
+      border-color: rgba(47,47,47,0.95);
+    }
+
+    .products-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.55rem;
+      margin-top: 1.8rem;
+    }
+    .product-card{
+      border-radius: 24px;
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.86);
+      box-shadow: var(--shadow-soft);
+      cursor:pointer;
+      transition: var(--t);
+      position:relative;
+    }
+    .product-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-gold); border-color: rgba(197,160,89,0.28) }
+    .card-chip{
+      position:absolute;
+      top: 14px; left:14px;
+      z-index: 2;
+      padding: .35rem .6rem;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .img-container{
+      height: 500px;
+      overflow:hidden;
+      position:relative;
+      background: linear-gradient(135deg, rgba(0,0,0,0.04), rgba(197,160,89,0.08));
+    }
+    .img-container img{
+      width:100%; height:100%;
+      object-fit: cover;
+      object-position: top center;
+      display:block;
+      transition: transform 1.05s var(--ease);
+    }
+    .product-card:hover .img-container img{ transform: scale(1.03) }
+
+    .product-info{
+      padding: 1.1rem 1.1rem 1.35rem;
+      text-align:center;
+    }
+    .product-info h3{
+      font-family:'Lato',sans-serif;
+      font-weight: 700;
+      letter-spacing:.4px;
+      font-size: 1.03rem;
+    }
+    .product-info p{
+      margin-top:.45rem;
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing:2px;
+      text-transform: uppercase;
+      font-size: .80rem;
+    }
+
+    .empty-state{
+      display:none;
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border-radius: 16px;
+      border: 1px dashed rgba(0,0,0,0.16);
+      background: rgba(255,255,255,0.72);
+      text-align:center;
+      color: rgba(47,47,47,0.70);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+
+    /* =========================
+       HEADERS DE CATEGORIA
+    ========================== */
+    .category-header{
+      padding: 4.2rem 1rem 1.8rem;
+      text-align:center;
+      position:relative;
+    }
+    .category-header p{
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: .55rem;
+    }
+    .category-header h2{ font-size: 3rem }
+    .back-link{
+      margin-top: 1.2rem;
+      background: transparent;
+      border: none;
+      cursor:pointer;
+      color: rgba(47,47,47,0.55);
+      border-bottom: 1px solid rgba(197,160,89,0.55);
+      padding-bottom: .25rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .back-link:hover{ color: var(--gold) }
+
+    /* =========================
+       SHOWCASE 3D (NIÑA)
+    ========================== */
+    .showcase-container{ text-align:center; margin-top: 0.4rem }
+    .showcase-container h3{
+      font-size: 1.8rem;
+      margin-bottom: .55rem;
+    }
+    .showcase-container .hint{
+      color: rgba(47,47,47,0.65);
+      margin-bottom: 1rem;
+    }
+    .swiper-3d-container{ padding-top: 20px; padding-bottom: 40px }
+    .swiper-slide-3d{
+      width: 280px;
+      height: 450px;
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.16);
+      background: white;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .swiper-slide-3d img{
+      width:100%; height:100%;
+      object-fit: cover;
+      object-position: top center;
+      display:block;
+    }
+
+    /* =========================
+       STUDIO DOMINGUEZ (CORREGIDO)
+    ========================== */
+    body.sd-mode{
+      background: var(--sd-bg);
+      color: var(--sd-text);
+    }
+    body.sd-mode::before{
+      background:
+        radial-gradient(900px 450px at 15% 10%, rgba(138,92,255,0.22), transparent 60%),
+        radial-gradient(850px 450px at 85% 20%, rgba(0,212,255,0.12), transparent 60%),
+        radial-gradient(900px 520px at 40% 110%, rgba(255,255,255,0.03), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 10px);
+      opacity: .9;
+    }
+
+    .sd-hero{
+      margin: 1rem;
+      border-radius: 28px;
+      overflow:hidden;
+      min-height: 70vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      box-shadow: var(--sd-shadow);
+      background: linear-gradient(180deg, rgba(7,9,18,1), rgba(11,13,24,1));
+      isolation:isolate;
+    }
+    /* Capas de fondo rotativo (crossfade) */
+    .sd-bg{
+      position:absolute; inset:0;
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.06);
+      transition: opacity 1.2s ease;
+      opacity: 1;
+      z-index:-3;
+    }
+    .sd-bg.bg2{ opacity: 0; z-index:-4; }
+    .sd-vignette{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 520px at 50% 30%, rgba(0,0,0,0.35), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.72), rgba(0,0,0,0.82));
+      z-index:-2;
+    }
+    .sd-grain{
+      position:absolute; inset:0;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 10px);
+      opacity:.35;
+      pointer-events:none;
+      z-index:-1;
+      mix-blend-mode: overlay;
+    }
+
+    .sd-hero-content{
+      width:min(900px, 92vw);
+      padding: 3.2rem 2rem;
+      position:relative;
+    }
+    .sd-logo-wrap{
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+    .sd-logo-wrap img{
+      max-width: 78%;
+      height:auto;
+      display:block;
+      /* Logo negro = sin drop-shadow blanco fuerte; usamos sombra sutil oscura */
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55));
+    }
+
+    .sd-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap: .9rem;
+      margin-top: 1.7rem;
+    }
+    .btn-sd{
+      padding: .95rem 1.35rem;
+      border-radius: 999px;
+      cursor:pointer;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.92);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: .78rem;
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      transition: var(--t);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.35);
+    }
+    .btn-sd:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.26); box-shadow: var(--sd-glow) }
+    .btn-sd.primary{
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      color: #05060b;
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    /* Studio cards + tools */
+    body.sd-mode .search-input{
       background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.92);
       box-shadow: var(--sd-shadow);
     }
-    body.sd-mode .swiper-nav-btn i{ color: rgba(255,255,255,0.88); }
-    body.sd-mode .swiper-nav-btn:hover{ box-shadow: var(--sd-glow); border-color: rgba(0,212,255,0.22); }
-
-    .swiper-nav-prev{ left: 10px; }
-    .swiper-nav-next{ right: 10px; }
-
-    /* ==============================
-      SHIPPING + PROMOS + CTA
-    ============================== */
-    .shipping-banner {
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,0,0,0.06);
-      text-align: center;
-      padding: 0.95rem 1rem;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      color: var(--text-mid);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 1.6rem auto 0;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-card);
-      width: min(var(--max-w), 92vw);
+    body.sd-mode .search-input::placeholder{ color: rgba(255,255,255,0.55) }
+    body.sd-mode .chip{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.88);
     }
-    body.sd-mode .shipping-banner{
-      background: rgba(255,255,255,0.04);
+    body.sd-mode .chip.active{
+      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
+      color: #05060b;
       border-color: rgba(255,255,255,0.10);
+    }
+    body.sd-mode .product-card{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: var(--sd-shadow);
+    }
+    body.sd-mode .product-info h3{ color: rgba(255,255,255,0.92) }
+    body.sd-mode .product-info p{ color: rgba(0,212,255,0.70) }
+    body.sd-mode .card-chip{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+    }
+    body.sd-mode .empty-state{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.16);
       color: rgba(255,255,255,0.70);
       box-shadow: var(--sd-shadow);
     }
 
-    .promo-grid {
-      width: min(var(--max-w), 92vw);
-      margin: 1.7rem auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 1.1rem;
+    /* =========================
+       FOOTER / CONTACTO (2 LOCACIONES)
+    ========================== */
+    .contact-footer{
+      margin-top: 1rem;
+      padding: 4.5rem 0 2.2rem;
+      background: rgba(255,255,255,0.88);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      position:relative;
+      overflow:hidden;
     }
-    .promo-card {
-      background: rgba(255,255,255,0.66);
-      backdrop-filter: blur(14px);
-      border-radius: var(--radius-lg);
-      padding: 1.6rem;
-      box-shadow: var(--shadow-card);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.06);
-      transition: var(--transition);
-      min-height: 160px;
-    }
-    .promo-card::after{
+    .contact-footer::before{
       content:"";
-      position:absolute; inset:-60%;
-      background: radial-gradient(circle at 30% 35%, rgba(197,160,89,0.18), transparent 55%);
-      transform: rotate(18deg);
-      opacity: 0.0;
-      transition: var(--transition);
+      position:absolute; inset:-1px;
+      background: radial-gradient(900px 420px at 20% 0%, rgba(197,160,89,0.14), transparent 60%);
       pointer-events:none;
-    }
-    .promo-card:hover{
-      transform: translateY(-5px);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.12);
-      border-color: rgba(197,160,89,0.25);
-    }
-    .promo-card:hover::after{ opacity: 1; }
-
-    body.sd-mode .promo-card {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .promo-card:hover{
-      border-color: rgba(0,212,255,0.18);
-      box-shadow: var(--sd-glow);
+      opacity:.85;
     }
 
-    .promo-badge {
-      position: absolute;
-      top: 14px; right: 14px;
-      font-size: 0.72rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: white;
-      background: var(--text-dark);
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
+    .footer-title{
+      text-align:center;
+      margin-bottom: 2.2rem;
+      position:relative;
+      z-index:1;
     }
-    body.sd-mode .promo-badge{
-      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color: #070912;
-      font-weight: 900;
+    .footer-title h2{
+      font-size: 2.35rem;
     }
-
-    .promo-card h3 { font-size: 1.12rem; margin-bottom: 0.5rem; }
-    .promo-card p { color: var(--text-mid); line-height: 1.5; }
-    body.sd-mode .promo-card p { color: rgba(255,255,255,0.70); }
-
-    .promo-card a{
-      display:inline-flex;
-      margin-top: 0.9rem;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      gap: 10px;
-      align-items: center;
-    }
-    .promo-card a::after{ content:"→"; transition: var(--transition); }
-    .promo-card a:hover::after{ transform: translateX(4px); }
-    body.sd-mode .promo-card a{ color: var(--sd-accent2); }
-
-    .rent-cta {
-      width: min(var(--max-w), 92vw);
-      margin: 1.9rem auto 0;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      position: relative;
-      box-shadow: var(--shadow-soft);
-      background:
-        radial-gradient(800px 450px at 20% 30%, rgba(255,255,255,0.20), transparent 60%),
-        linear-gradient(135deg, rgba(58,58,58,0.96), rgba(197,160,89,0.75));
-      color: white;
-      padding: 2.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-    .rent-cta h3 { font-size: 1.62rem; }
-    .rent-cta p { opacity: 0.92; max-width: 680px; line-height: 1.55; }
-
-    .btn-rent {
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.30);
-      color: white;
-      padding: 0.95rem 1.55rem;
-      border-radius: 999px;
-      cursor: pointer;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      transition: var(--transition);
-      box-shadow: 0 18px 55px rgba(0,0,0,0.22);
-    }
-    .btn-rent:hover { background: rgba(255,255,255,0.24); transform: translateY(-2px); }
-
-    /* ==============================
-      CATEGORY HEADERS
-    ============================== */
-    .category-header {
-      text-align: center;
-      padding: 3.6rem 1rem 1.7rem;
-      position: relative;
-    }
-    .category-header p {
-      color: var(--gold-accent);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-    }
-    body.sd-mode .category-header p { color: var(--sd-accent2); }
-    .category-header h2 {
-      font-size: clamp(2.2rem, 3.8vw, 3rem);
-      color: var(--text-dark);
-      margin-bottom: 0.8rem;
-    }
-    body.sd-mode .category-header h2 { color: var(--sd-text); }
-
-    .back-link {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #999;
-      margin-top: 0.75rem;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid rgba(197,160,89,0.65);
-      transition: var(--transition);
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .back-link:hover { color: var(--text-dark); transform: translateY(-1px); }
-    body.sd-mode .back-link { border-bottom-color: rgba(0,212,255,0.65); color: rgba(255,255,255,0.70); }
-    body.sd-mode .back-link:hover { color: rgba(255,255,255,0.92); }
-
-    /* ==============================
-      TOOLS BAR (Search + Chips)
-    ============================== */
-    .tools-bar {
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1rem;
-      padding: 0 0 1.2rem;
-      align-items: end;
-    }
-    .search-wrap label,
-    .filter-wrap label{
-      display:block;
-      font-weight: 900;
-      letter-spacing: 2px;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      margin-bottom: 0.55rem;
-      color: rgba(0,0,0,0.55);
-    }
-    body.sd-mode .search-wrap label,
-    body.sd-mode .filter-wrap label{
-      color: rgba(255,255,255,0.55);
+    .footer-title p{
+      margin-top:.6rem;
+      color: rgba(47,47,47,0.65);
+      max-width: 760px;
+      margin-left:auto;margin-right:auto;
+      line-height:1.6;
     }
 
-    .search-input {
-      width: 100%;
-      padding: 0.95rem 1.05rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.70);
-      outline: none;
-      transition: var(--transition);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.06);
-    }
-    .search-input:focus {
-      border-color: rgba(197,160,89,0.45);
-      box-shadow: 0 18px 50px rgba(197,160,89,0.18);
-      background: rgba(255,255,255,0.85);
-    }
-    body.sd-mode .search-input{
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.92);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .search-input:focus{
-      border-color: rgba(0,212,255,0.22);
-      box-shadow: var(--sd-glow);
-    }
-
-    .chips { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .chip {
-      border: 1px solid rgba(0,0,0,0.12);
-      padding: 0.6rem 0.95rem;
-      border-radius: 999px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.75);
-      transition: var(--transition);
-      font-size: 0.85rem;
-      user-select: none;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.05);
-    }
-    .chip:hover{ transform: translateY(-1px); border-color: rgba(197,160,89,0.28); }
-    .chip.active {
-      background: var(--text-dark);
-      color: white;
-      border-color: var(--text-dark);
-      box-shadow: 0 20px 55px rgba(0,0,0,0.14);
-    }
-    body.sd-mode .chip {
-      border-color: rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.88);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .chip.active {
-      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      border-color: rgba(255,255,255,0.10);
-      color: #070912;
-      font-weight: 900;
-    }
-
-    /* ==============================
-      PRODUCT GRID + CARDS (WOW)
-    ============================== */
-    .products-grid {
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.7rem;
-      padding: 0 0 4rem;
-    }
-
-    .product-card {
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(14px);
-      transition: var(--transition);
-      cursor: pointer;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      border: 1px solid rgba(0,0,0,0.05);
-      opacity: 0;
-      transform: translateY(14px);
-      position: relative;
-      isolation: isolate;
-    }
-    .product-card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(500px 250px at 20% 20%, rgba(197,160,89,0.16), transparent 55%);
-      opacity: 0;
-      transition: var(--transition);
-      pointer-events:none;
-      z-index: 0;
-    }
-    .product-card:hover::before{ opacity: 1; }
-
-    body.sd-mode .product-card {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .product-card::before{
-      background:
-        radial-gradient(500px 250px at 20% 20%, rgba(0,212,255,0.14), transparent 55%);
-    }
-
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 80px rgba(0,0,0,0.14);
-      border-color: rgba(197,160,89,0.22);
-    }
-    body.sd-mode .product-card:hover{
-      border-color: rgba(0,212,255,0.18);
-      box-shadow: var(--sd-glow);
-    }
-
-    .img-container {
-      height: 500px;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-    }
-    .img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transition: transform 1.1s ease, filter 1.1s ease;
-      display: block;
-      filter: saturate(1.05) contrast(1.03);
-    }
-    .product-card:hover .img-container img {
-      transform: scale(1.06);
-      filter: saturate(1.08) contrast(1.06);
-    }
-
-    .card-chip {
-      position:absolute;
-      top: 14px; left: 14px;
-      z-index: 2;
-      border-radius: 999px;
-      padding: 0.45rem 0.65rem;
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0,0,0,0.08);
-      color: var(--text-dark);
-      box-shadow: 0 14px 35px rgba(0,0,0,0.10);
-    }
-    body.sd-mode .card-chip{
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.90);
-      box-shadow: var(--sd-shadow);
-    }
-
-    .product-info {
-      padding: 1.1rem 0 1.45rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .product-info h3 {
-      font-family: 'Lato', sans-serif;
-      font-weight: 500;
-      font-size: 1.07rem;
-      letter-spacing: 0.4px;
-    }
-    .product-info p {
-      color: var(--gold-accent);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      margin-top: 7px;
-      letter-spacing: 2px;
-      font-weight: 900;
-    }
-    body.sd-mode .product-info p{ color: var(--sd-accent2); }
-
-    /* Empty state */
-    .empty-state{
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto 2rem;
-      display:none;
-      padding: 1.15rem 1.2rem;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(0,0,0,0.07);
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(12px);
-      color: var(--text-mid);
-      box-shadow: var(--shadow-card);
-      text-align: center;
-    }
-    body.sd-mode .empty-state{
-      border-color: rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
-      color: rgba(255,255,255,0.72);
-      box-shadow: var(--sd-shadow);
-    }
-
-    /* ==============================
-      3D SWIPER (Ropones) – upgraded
-    ============================== */
-    .showcase-container {
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto;
-      text-align: center;
-      overflow: hidden;
-      padding-bottom: 1.5rem;
-    }
-    .showcase-container h3 {
-      font-size: 1.85rem;
-      margin-bottom: 0.55rem;
-      color: var(--text-dark);
-    }
-    body.sd-mode .showcase-container h3 { color: var(--sd-text); }
-
-    .hint {
-      color: var(--text-light);
-      margin-bottom: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    body.sd-mode .hint { color: rgba(255,255,255,0.65); }
-
-    .swiper-3d-container { width: 100%; padding-top: 18px; padding-bottom: 42px; }
-
-    .swiper-slide-3d {
-      background-position: center;
-      background-size: cover;
-      width: 290px;
-      height: 470px;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 18px 55px rgba(0,0,0,0.18);
-      background-color: #fff;
-      border: 1px solid rgba(0,0,0,0.06);
-      transform: translateZ(0);
-      position: relative;
-      isolation: isolate;
-    }
-    .swiper-slide-3d::after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.12) 100%);
-      pointer-events:none;
-      opacity: 0.55;
-    }
-    .swiper-slide-3d img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      filter: saturate(1.05) contrast(1.03);
-    }
-    body.sd-mode .swiper-slide-3d {
-      box-shadow: 0 18px 65px rgba(0,0,0,0.70);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-    }
-
-    /* ==============================
-      STUDIO HERO – darker + logo readable
-    ============================== */
-    .sd-hero {
-      margin: 0.9rem;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--sd-shadow);
-      position: relative;
-      min-height: 66vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-
-      background:
-        radial-gradient(900px 500px at 18% 15%, rgba(138,92,255,0.30), transparent 60%),
-        radial-gradient(900px 500px at 82% 35%, rgba(0,212,255,0.16), transparent 60%),
-        linear-gradient(180deg, rgba(6,7,12,1), rgba(3,4,8,1));
-      isolation: isolate;
-    }
-    .sd-hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background-image: url('vestidonegroresaltar.jpeg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.28;
-      filter: contrast(1.05) saturate(1.05);
-      transform: scale(1.02);
-      pointer-events:none;
-      z-index:-2;
-    }
-    .sd-hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.78), rgba(0,0,0,0.62) 55%, rgba(0,0,0,0.82));
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    .sd-hero-content {
-      position: relative;
-      padding: 3rem 1.8rem;
-      max-width: 840px;
-      color: var(--sd-text);
-      z-index: 1;
-    }
-
-    .sd-logo-wrap{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 1rem 1.25rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 18px 65px rgba(0,0,0,0.55);
-    }
-    .sd-hero-content img{
-      max-width: 240px;
-      display:block;
-      /* Fondo más oscuro + halo claro para que un logo negro se “separe” */
-      filter:
-        drop-shadow(0 0 18px rgba(255,255,255,0.22))
-        drop-shadow(0 0 32px rgba(0,212,255,0.10));
-    }
-
-    .sd-actions {
-      display: flex;
-      gap: 0.9rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 1.7rem;
-    }
-    .btn-sd {
-      padding: 0.95rem 1.45rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--sd-text);
-      cursor: pointer;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      transition: var(--transition);
-      display: inline-flex;
-      gap: .55rem;
-      align-items: center;
-      box-shadow: var(--sd-shadow);
-    }
-    .btn-sd:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.26);
-      box-shadow: var(--sd-glow);
-    }
-    .btn-sd.primary {
-      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color: #070912;
-      border-color: rgba(255,255,255,0.10);
-      font-weight: 900;
-    }
-
-    /* ==============================
-      CONTACT – CLEAN + ESTHETIC + MAP TABS
-    ============================== */
-    .contact-footer {
-      position: relative;
-      margin-top: 0.8rem;
-      padding: 4.2rem 0 2.2rem;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      background:
-        radial-gradient(1000px 520px at 15% 5%, rgba(197,160,89,0.12), transparent 60%),
-        radial-gradient(1000px 520px at 85% 20%, rgba(197,160,89,0.08), transparent 60%),
-        rgba(255,255,255,0.40);
-      backdrop-filter: blur(12px);
-    }
-    body.sd-mode .contact-footer {
-      border-top: 1px solid rgba(255,255,255,0.10);
-      background:
-        radial-gradient(900px 520px at 18% 5%, rgba(138,92,255,0.14), transparent 60%),
-        radial-gradient(900px 520px at 85% 20%, rgba(0,212,255,0.10), transparent 60%),
-        rgba(255,255,255,0.02);
-      backdrop-filter: blur(14px);
-    }
-
-    .contact-grid {
-      width: min(var(--max-w), 92vw);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: 1.4rem;
-      align-items: start;
-    }
-
-    .contact-card {
-      background: rgba(255,255,255,0.70);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      position: relative;
-    }
-    .contact-card .pad { padding: 1.65rem; }
-
-    body.sd-mode .contact-card{
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-shadow);
-    }
-
-    .contact-header {
-      display:flex;
-      align-items:flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-    }
-    .contact-title h3 {
-      font-size: 1.45rem;
-      margin-bottom: 0.25rem;
-    }
-    .contact-title p {
-      color: var(--text-mid);
-      line-height: 1.45;
-    }
-    body.sd-mode .contact-title p { color: rgba(255,255,255,0.68); }
-
-    .pill {
-      border-radius: 999px;
-      padding: 0.5rem 0.75rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      background: rgba(197,160,89,0.14);
-      border: 1px solid rgba(197,160,89,0.24);
-      color: var(--text-dark);
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-    body.sd-mode .pill{
-      background: rgba(0,212,255,0.10);
-      border-color: rgba(0,212,255,0.18);
-      color: rgba(255,255,255,0.92);
-    }
-
-    .contact-split {
+    .locations-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.1rem;
+      gap: 1.2rem;
+      position:relative;
+      z-index:1;
+    }
+    @media (max-width: 980px){
+      .locations-grid{grid-template-columns:1fr}
     }
 
     .loc-card{
-      background: rgba(255,255,255,0.62);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: var(--radius-md);
-      padding: 1.15rem;
-      box-shadow: 0 18px 60px rgba(0,0,0,0.06);
-      position: relative;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .loc-card::before{
-      content:"";
-      position:absolute; inset:-60%;
-      background: radial-gradient(circle at 30% 35%, rgba(197,160,89,0.14), transparent 55%);
-      transform: rotate(18deg);
-      opacity: 0.9;
-      pointer-events:none;
-    }
-    body.sd-mode .loc-card{
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .loc-card::before{
-      background: radial-gradient(circle at 30% 35%, rgba(0,212,255,0.12), transparent 55%);
-    }
-
     .loc-head{
+      padding: 1.4rem 1.4rem 1.1rem;
       display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      position: relative;
-      z-index:1;
-      margin-bottom: 0.75rem;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 1rem;
+      background:
+        radial-gradient(700px 220px at 20% 10%, rgba(197,160,89,0.16), transparent 60%),
+        rgba(255,255,255,0.80);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
-    .loc-head h4{
-      font-size: 1.05rem;
-      letter-spacing: 0.6px;
-      font-family: 'Cinzel', serif;
+    .loc-name{
+      display:flex; align-items:center; gap:.75rem;
+    }
+    .loc-pin{
+      width:42px;height:42px;border-radius: 14px;
+      display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg, rgba(197,160,89,0.24), rgba(255,255,255,0.95));
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+    }
+    .loc-head h3{
+      font-family:'Lato',sans-serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing:.4px;
     }
     .loc-tag{
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border-radius: 999px;
-      padding: 0.35rem 0.55rem;
-      border: 1px solid rgba(0,0,0,0.08);
-      background: rgba(255,255,255,0.55);
-    }
-    body.sd-mode .loc-tag{
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.88);
+      font-size:.72rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:900;
+      color: rgba(47,47,47,0.72);
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.78);
+      padding:.35rem .6rem;
+      border-radius:999px;
+      height: fit-content;
+      margin-top: .1rem;
     }
 
+    .loc-body{
+      padding: 1.2rem 1.4rem 1.4rem;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
     .loc-row{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      margin: 0.65rem 0;
-      position: relative;
-      z-index:1;
+      display:flex; gap:.85rem; align-items:flex-start;
+      color: rgba(47,47,47,0.78);
     }
     .loc-row i{
+      color: var(--gold);
       width: 22px;
-      color: var(--gold-accent);
-      margin-top: 2px;
+      margin-top: 3px;
+      opacity:.95;
     }
-    body.sd-mode .loc-row i{ color: var(--sd-accent2); }
-
-    .loc-row .muted{
-      color: var(--text-mid);
-      font-size: 0.92rem;
-      line-height: 1.45;
-    }
-    body.sd-mode .loc-row .muted{ color: rgba(255,255,255,0.70); }
-
+    .loc-row strong{ color: rgba(47,47,47,0.88) }
     .loc-actions{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-top: 0.95rem;
-      position: relative;
+      display:flex; flex-wrap:wrap; gap:.65rem;
+      margin-top: .25rem;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding: .7rem .95rem;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.82);
+      transition: var(--t);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+    .pill:hover{ transform: translateY(-2px); border-color: rgba(197,160,89,0.35) }
+    .pill.wa{
+      background: linear-gradient(135deg, rgba(37,211,102,0.95), rgba(37,211,102,0.80));
+      border-color: rgba(255,255,255,0.14);
+      color:white;
+      box-shadow: 0 14px 35px rgba(37,211,102,0.25);
+    }
+
+    .loc-map{
+      height: 320px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .loc-map iframe{
+      width:100%; height:100%;
+      border:0;
+      display:block;
+    }
+
+    .footer-bottom{
+      text-align:center;
+      margin-top: 2.6rem;
+      color: rgba(47,47,47,0.55);
+      font-size: .82rem;
+      position:relative;
       z-index:1;
     }
-    .mini-btn{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 0.7rem 0.85rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.70);
-      font-size: 0.75rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: var(--transition);
-      box-shadow: 0 16px 45px rgba(0,0,0,0.06);
-      white-space: nowrap;
-    }
-    .mini-btn:hover{ transform: translateY(-2px); border-color: rgba(197,160,89,0.28); box-shadow: var(--shadow-glow); }
-    body.sd-mode .mini-btn{
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.92);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .mini-btn:hover{ border-color: rgba(0,212,255,0.20); box-shadow: var(--sd-glow); }
-
-    .mini-btn.whatsapp{
-      border-color: rgba(37,211,102,0.35);
-    }
-    .mini-btn.whatsapp i{ color: #25D366; }
-    body.sd-mode .mini-btn.whatsapp i{ color: #25D366; }
-
-    .map-card{
-      background: rgba(255,255,255,0.70);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-card);
-      overflow:hidden;
-    }
-    body.sd-mode .map-card{
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-shadow);
-    }
-
-    .map-tabs{
-      display:flex;
-      gap: 0.6rem;
-      padding: 1rem 1rem 0.8rem;
-      align-items:center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .tabs-left{
-      display:flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    .tab-btn{
-      padding: 0.6rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.70);
-      cursor:pointer;
-      font-weight: 900;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: var(--transition);
-    }
-    .tab-btn.active{
-      background: var(--text-dark);
-      color: white;
-      border-color: var(--text-dark);
-      box-shadow: 0 18px 55px rgba(0,0,0,0.12);
-    }
-    body.sd-mode .tab-btn{
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.88);
-    }
-    body.sd-mode .tab-btn.active{
-      background: linear-gradient(135deg, rgba(138,92,255,0.95), rgba(0,212,255,0.75));
-      color: #070912;
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: var(--sd-glow);
-    }
-
-    .map-frame{
-      width: 100%;
-      height: 380px;
-      border: 0;
-      display:none;
-    }
-    .map-frame.active{ display:block; }
-
-    .contact-bottom{
-      width: min(var(--max-w), 92vw);
-      margin: 2.1rem auto 0;
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      color: rgba(0,0,0,0.45);
-      font-size: 0.85rem;
-    }
-    body.sd-mode .contact-bottom{ color: rgba(255,255,255,0.55); }
-
-    .social-links { display:flex; gap: 0.7rem; }
-    .social-btn {
-      width: 46px; height: 46px;
-      border: 1px solid rgba(0,0,0,0.10);
-      display:flex; align-items:center; justify-content:center;
-      border-radius: 50%;
-      color: var(--text-dark);
-      transition: var(--transition);
-      background: rgba(255,255,255,0.60);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 16px 45px rgba(0,0,0,0.06);
-    }
-    .social-btn:hover{ transform: translateY(-2px); border-color: rgba(197,160,89,0.25); box-shadow: var(--shadow-glow); background: rgba(255,255,255,0.78); }
-    body.sd-mode .social-btn{
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.92);
-      box-shadow: var(--sd-shadow);
-    }
-    body.sd-mode .social-btn:hover{ border-color: rgba(0,212,255,0.20); box-shadow: var(--sd-glow); }
 
     /* Floating WhatsApp */
-    .float-wa {
+    .float-wa{
       position: fixed;
       right: 18px;
       bottom: 18px;
-      width: 58px; height: 58px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       background: #25D366;
       color: white;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.18);
       z-index: 3500;
-      transition: var(--transition);
+      transition: var(--t);
+      border: 1px solid rgba(255,255,255,0.14);
     }
-    .float-wa:hover { transform: translateY(-5px) scale(1.02); }
+    .float-wa:hover{ transform: translateY(-4px) }
 
-    /* ==============================
-      REVEAL ANIMATIONS
-    ============================== */
-    .reveal { opacity: 0; transform: translateY(14px); transition: var(--transition-slow); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-
-    .view-section.active-view .product-card { animation: fadeInUp 0.6s ease forwards; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ==============================
-      RESPONSIVE
-    ============================== */
-    @media (max-width: 1100px) {
-      .promo-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .map-frame { height: 330px; }
-      .slide-img { height: 380px; }
+    /* =========================
+       RESPONSIVE
+    ========================== */
+    @media (max-width: 980px){
+      nav{ padding: .95rem 1.2rem }
+      .hero-content h1{ font-size: 2.35rem }
+      .slide-img{ height: 360px }
+      .promo-grid{ grid-template-columns: 1fr }
+      .tools-bar{ grid-template-columns: 1fr }
+      .img-container{ height: 400px }
     }
-    @media (max-width: 980px) {
-      .tools-bar { grid-template-columns: 1fr; }
-      .img-container { height: 420px; }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.1rem; }
-      .hero-wrapper { margin: 0.75rem; }
-      .sd-hero { margin: 0.75rem; }
-      .swiper-slide-3d { width: 240px; height: 390px; }
-      .contact-split { grid-template-columns: 1fr; }
-      .map-frame { height: 300px; }
+    @media (max-width: 768px){
+      .hero-wrapper{ margin: .8rem }
+      .sd-hero{ margin: .8rem }
+      .swiper-slide-3d{ width: 240px; height: 380px }
+      .loc-map{ height: 280px }
     }
   </style>
 </head>
 
 <body>
-  <div class="top-progress" id="topProgress"></div>
 
   <!-- OVERLAY MENU -->
   <div class="overlay-menu" id="overlayMenu" role="menu" aria-hidden="true">
-    <ul>
-      <li><a role="menuitem" data-nav="inicio" onclick="navigateTo('inicio')"><span data-i18n="nav_home">Inicio</span></a></li>
-      <li><a role="menuitem" data-nav="nina" onclick="navigateTo('nina')"><span data-i18n="nav_girl">Colección Niña</span></a></li>
-      <li><a role="menuitem" data-nav="nino" onclick="navigateTo('nino')"><span data-i18n="nav_boy">Colección Niño</span></a></li>
-      <li><a role="menuitem" data-nav="studio" onclick="navigateTo('studio')">Studio Dominguez</a></li>
-      <li><a role="menuitem" href="#contacto" onclick="closeMenuAndGoToFooter()"><span data-i18n="nav_contact">Contacto y Ubicación</span></a></li>
-      <li>
-        <a role="menuitem" href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()"
-           style="color: var(--gold-accent); font-size: 1.5rem;">
-          <i class="fab fa-whatsapp"></i> <span data-i18n="nav_book">Agendar Cita</span>
+    <div class="menu-card" role="presentation">
+      <div class="menu-title">
+        <h2 data-i18n="menu_title">Menú</h2>
+        <div class="hint" data-i18n="menu_hint">Navega</div>
+      </div>
+
+      <div class="menu-grid">
+        <a class="menu-link" role="menuitem" data-nav="inicio" onclick="navigateTo('inicio')">
+          <div class="left">
+            <div class="menu-ic"><i class="fa-solid fa-house"></i></div>
+            <div>
+              <div style="font-weight:900; letter-spacing:1px" data-i18n="nav_inicio">Inicio</div>
+              <div style="font-size:.88rem; opacity:.75" data-i18n="nav_inicio_sub">Portada</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="opacity:.6"></i>
         </a>
-      </li>
-    </ul>
+
+        <a class="menu-link" role="menuitem" data-nav="nina" onclick="navigateTo('nina')">
+          <div class="left">
+            <div class="menu-ic"><i class="fa-solid fa-seedling"></i></div>
+            <div>
+              <div style="font-weight:900; letter-spacing:1px" data-i18n="nav_nina">Colección Niña</div>
+              <div style="font-size:.88rem; opacity:.75" data-i18n="nav_nina_sub">Bautizo y más</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="opacity:.6"></i>
+        </a>
+
+        <a class="menu-link" role="menuitem" data-nav="nino" onclick="navigateTo('nino')">
+          <div class="left">
+            <div class="menu-ic"><i class="fa-solid fa-crown"></i></div>
+            <div>
+              <div style="font-weight:900; letter-spacing:1px" data-i18n="nav_nino">Colección Niño</div>
+              <div style="font-size:.88rem; opacity:.75" data-i18n="nav_nino_sub">Ceremonia</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="opacity:.6"></i>
+        </a>
+
+        <a class="menu-link" role="menuitem" data-nav="studio" onclick="navigateTo('studio')">
+          <div class="left">
+            <div class="menu-ic"><i class="fa-solid fa-moon"></i></div>
+            <div>
+              <div style="font-weight:900; letter-spacing:1px">Studio Dominguez</div>
+              <div style="font-size:.88rem; opacity:.75" data-i18n="nav_studio_sub">Vestidos nocturnos</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="opacity:.6"></i>
+        </a>
+
+        <a class="menu-link" role="menuitem" onclick="closeMenuAndGoToFooter()">
+          <div class="left">
+            <div class="menu-ic"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div style="font-weight:900; letter-spacing:1px" data-i18n="nav_contact">Contacto y Ubicación</div>
+              <div style="font-size:.88rem; opacity:.75" data-i18n="nav_contact_sub">Direcciones y horarios</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="opacity:.6"></i>
+        </a>
+      </div>
+
+      <div class="menu-wa">
+        <a href="https://wa.me/528180932362" target="_blank" onclick="toggleMenu()">
+          <i class="fab fa-whatsapp"></i> <span data-i18n="menu_book">Agendar Cita</span>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- NAV -->
   <nav>
-    <div class="logo" onclick="navigateTo('inicio')" id="brandLogo">Mi Bello Ropón</div>
+    <div class="logo" onclick="navigateTo('inicio')" aria-label="Ir a inicio">
+      <span class="dot"></span>
+      <span id="brandName">Mi Bello Ropón</span>
+    </div>
 
     <div class="nav-right">
-      <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">
-        <i class="fa-solid fa-language"></i>
-        <span id="langBtnText">EN</span>
+      <button class="lang-btn" id="langBtn" onclick="toggleLanguage()" aria-label="Cambiar idioma">
+        <i class="fa-solid fa-globe"></i>
+        <span id="langLabel">ES</span>
       </button>
 
       <button class="burger-btn" onclick="toggleMenu()" id="burgerBtn" aria-label="Menú principal" aria-expanded="false">
@@ -1596,40 +1287,38 @@
 
   <main class="main-container">
 
-    <!-- =========================
-      INICIO
-    ========================== -->
+    <!-- =======================
+         INICIO
+    ======================== -->
     <section id="view-inicio" class="view-section active-view">
-      <header class="hero-wrapper">
-        <div class="hero-bg" id="heroBg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-sparkles"></div>
 
-        <div class="hero-content">
+      <header class="hero-wrapper">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+
+        <div class="hero-content reveal">
           <img src="mibelloroponlogo.jpeg" alt="Logo Mi Bello Ropón"
-               style="max-width: 185px; margin-bottom: 1.35rem; display: block; margin-left: auto; margin-right: auto;
-               filter: drop-shadow(0 18px 35px rgba(0,0,0,0.12));">
+               style="max-width: 180px; margin: 0 auto 1.2rem; display:block;" />
 
           <div class="location-badge">
-            <i class="fas fa-map-marker-alt" style="color:var(--gold-accent);"></i>
+            <i class="fas fa-map-marker-alt" style="color:var(--gold)"></i>
             <span data-i18n="hero_locations">Monterrey · San Antonio</span>
           </div>
 
-          <h1>
-            <span data-i18n="hero_title_1">Momentos que</span><br />
-            <span data-i18n="hero_title_2">Perduran</span>
-          </h1>
+          <h1><span data-i18n="hero_title_1">Momentos que</span><br/><span data-i18n="hero_title_2">Perduran</span></h1>
 
-          <p style="margin-bottom: 1.3rem; color: #555; font-style: italic; line-height: 1.5;">
-            <span data-i18n="hero_subtitle">Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.</span>
+          <p class="hero-sub">
+            <span data-i18n="hero_sub">Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.</span>
           </p>
 
-          <p style="font-size: 0.85rem; font-weight: 900; color: var(--gold-accent); letter-spacing: 1px; margin-bottom: 1.35rem;">
-            <i class="fas fa-plane"></i> <span data-i18n="hero_shipping">ENTREGAS A TODO EL MUNDO</span>
+          <p class="hero-ship">
+            <i class="fas fa-plane"></i>
+            <span data-i18n="hero_ship">ENTREGAS A TODO EL MUNDO</span>
           </p>
 
-          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <button onclick="navigateTo('nina')" class="btn-main" style="background: rgba(255,255,255,0.82); color: var(--text-dark); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 16px 35px rgba(0,0,0,0.10);">
+          <div class="btn-row">
+            <button onclick="navigateTo('nina')" class="btn-main btn-ghost">
               <span data-i18n="btn_girl">Ver Niña</span>
             </button>
             <button onclick="navigateTo('nino')" class="btn-main">
@@ -1639,448 +1328,393 @@
         </div>
       </header>
 
-      <!-- Destacados -->
-      <section class="band">
+      <div class="band">
         <div class="wrap">
+
           <div class="section-title reveal">
             <div class="kicker" data-i18n="home_kicker">Destacados</div>
             <h2 data-i18n="home_title">Lo más buscado</h2>
             <p class="sub" data-i18n="home_sub">
-              Piezas seleccionadas por su elegancia y detalle. Desliza para ver nuestras favoritas.
+              Selección de piezas favoritas. Desliza para ver más.
             </p>
           </div>
 
-          <div class="home-swiper-wrap reveal">
+          <div class="reveal">
             <div class="swiper" id="homeSwiper">
               <div class="swiper-wrapper">
 
                 <div class="swiper-slide">
-                  <img class="slide-img" loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
+                  <img class="slide-img" loading="lazy" decoding="async" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" />
                   <div class="slide-info">
                     <h3>Ropón Desmontable Exclusivo</h3>
-                    <p data-i18n="tag_girl_baptism">Bautizo · Niña</p>
+                    <p>Bautizo · Niña</p>
                   </div>
                 </div>
 
                 <div class="swiper-slide">
-                  <img class="slide-img" loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Niño" />
+                  <img class="slide-img" loading="lazy" decoding="async" src="bombachoniñoresaltar.jpeg" alt="Bombacho Niño" />
                   <div class="slide-info">
                     <h3>Bombacho Ceremonia</h3>
-                    <p data-i18n="tag_boy_baptism">Bautizo · Niño</p>
+                    <p>Bautizo · Niño</p>
                   </div>
                 </div>
 
                 <div class="swiper-slide">
-                  <img class="slide-img" loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
+                  <img class="slide-img" loading="lazy" decoding="async" src="vestidonegroresaltar.jpeg" alt="Vestido Noche" />
                   <div class="slide-info">
                     <h3>Colección Gala</h3>
-                    <p data-i18n="tag_studio_rent">Renta · Studio</p>
+                    <p>Renta · Studio</p>
                   </div>
                 </div>
 
                 <div class="swiper-slide">
-                  <img class="slide-img" loading="lazy" src="principe.jpeg" alt="Traje Príncipe" />
+                  <img class="slide-img" loading="lazy" decoding="async" src="principe.jpeg" alt="Traje Príncipe" />
                   <div class="slide-info">
                     <h3>Traje Príncipe</h3>
-                    <p data-i18n="tag_boy_ceremony">Ceremonia · Niño</p>
+                    <p>Ceremonia · Niño</p>
                   </div>
                 </div>
 
               </div>
+
               <div class="swiper-pagination"></div>
-            </div>
-
-            <div class="swiper-nav-btn swiper-nav-prev" id="homePrev" aria-label="Anterior">
-              <i class="fa-solid fa-chevron-left"></i>
-            </div>
-            <div class="swiper-nav-btn swiper-nav-next" id="homeNext" aria-label="Siguiente">
-              <i class="fa-solid fa-chevron-right"></i>
+              <div class="swiper-button-prev" aria-label="Anterior"></div>
+              <div class="swiper-button-next" aria-label="Siguiente"></div>
             </div>
           </div>
-        </div>
 
-        <div class="shipping-banner reveal">
-          <i class="fas fa-globe-americas"></i>
-          <span>
-            <strong data-i18n="worldwide_strong">Worldwide Shipping:</strong>
-            <span data-i18n="worldwide_text">Envíos internacionales disponibles. Cotiza por WhatsApp.</span>
-          </span>
-        </div>
-
-        <div class="promo-grid">
-          <div class="promo-card reveal">
-            <span class="promo-badge">USA & MX</span>
-            <h3 data-i18n="promo1_title">Atención Binacional</h3>
-            <p data-i18n="promo1_text">Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.</p>
-            <a href="#contacto" onclick="closeMenuAndGoToFooter()"><span data-i18n="promo_link">Ver ubicaciones</span></a>
+          <div class="shipping-banner reveal">
+            <i class="fas fa-globe-americas"></i>
+            <span><strong data-i18n="ship_strong">Worldwide Shipping:</strong> <span data-i18n="ship_text">Envíos internacionales disponibles. Cotiza por WhatsApp.</span></span>
           </div>
 
-          <div class="promo-card reveal">
-            <span class="promo-badge">Sets</span>
-            <h3 data-i18n="promo2_title">Kits Completos</h3>
-            <p data-i18n="promo2_text">Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.</p>
-            <a onclick="navigateTo('nina')"><span data-i18n="promo_link2">Ver Colección</span></a>
+          <div class="promo-grid">
+            <div class="promo-card reveal">
+              <span class="promo-badge">USA & MX</span>
+              <h3 data-i18n="promo1_title">Atención Binacional</h3>
+              <p data-i18n="promo1_text">Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.</p>
+              <a href="#contacto" onclick="closeMenuAndGoToFooter()"><span data-i18n="promo_cta">Ver ubicaciones</span> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="promo-card reveal">
+              <span class="promo-badge" data-i18n="promo2_badge">Sets</span>
+              <h3 data-i18n="promo2_title">Kits Completos</h3>
+              <p data-i18n="promo2_text">Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.</p>
+              <a onclick="navigateTo('nina')"><span data-i18n="promo_cta2">Ver colección</span> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="promo-card reveal">
+              <span class="promo-badge" data-i18n="promo3_badge">Nuevo</span>
+              <h3 data-i18n="promo3_title">Temporada 2024</h3>
+              <p data-i18n="promo3_text">Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.</p>
+              <a onclick="navigateTo('nino')"><span data-i18n="promo_cta3">Ver niño</span> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
           </div>
 
-          <div class="promo-card reveal">
-            <span class="promo-badge" data-i18n="promo3_badge">Nuevo</span>
-            <h3 data-i18n="promo3_title">Temporada 2024</h3>
-            <p data-i18n="promo3_text">Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.</p>
-            <a onclick="navigateTo('nino')"><span data-i18n="promo_link3">Ver Niño</span></a>
+          <div class="rent-cta reveal">
+            <div>
+              <h3 data-i18n="rent_title">¿Buscas renta de vestidos?</h3>
+              <p data-i18n="rent_text">
+                Descubre una experiencia nocturna y sofisticada con catálogo exclusivo en <strong>Studio Dominguez</strong>.
+              </p>
+            </div>
+            <button class="btn-rent" onclick="navigateTo('studio')" aria-label="Ir a renta de vestidos">
+              <i class="fa-solid fa-moon"></i> <span data-i18n="rent_btn">Renta de vestidos</span>
+            </button>
           </div>
-        </div>
 
-        <div class="rent-cta reveal">
-          <div>
-            <h3 data-i18n="rent_title">¿Buscas renta de vestidos?</h3>
-            <p data-i18n="rent_text">Descubre una experiencia más nocturna y sofisticada con catálogo exclusivo en <strong>Studio Dominguez</strong>.</p>
-          </div>
-          <button class="btn-rent" onclick="navigateTo('studio')" aria-label="Ir a renta de vestidos - Studio Dominguez">
-            <i class="fa-solid fa-moon"></i> <span data-i18n="rent_btn">Renta de vestidos</span>
-          </button>
+          <div class="divider"></div>
         </div>
-      </section>
+      </div>
     </section>
 
-    <!-- =========================
-      NIÑA
-    ========================== -->
+    <!-- =======================
+         NIÑA
+    ======================== -->
     <section id="view-nina" class="view-section">
       <div class="category-header">
         <p data-i18n="girl_kicker">Delicadeza y Gracia</p>
         <h2 data-i18n="girl_title">Colección Niña</h2>
-        <button onclick="navigateTo('inicio')" class="back-link">← <span data-i18n="back_home">Volver al inicio</span></button>
+        <button onclick="navigateTo('inicio')" class="back-link" data-i18n="back_home">← Volver al inicio</button>
       </div>
 
-      <div class="showcase-container reveal">
-        <h3 data-i18n="girl_gallery_title">Galería: Ropones Desmontables</h3>
-        <p class="hint" data-i18n="girl_gallery_hint">Desliza para ver la colección</p>
+      <div class="band">
+        <div class="wrap">
 
-        <div class="swiper swiper-3d-container" id="roponesSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable.jpeg" alt="Ropón 1"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable2.jpeg" alt="Ropón 2"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable3.jpeg" alt="Ropón 3"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable4.jpeg" alt="Ropón 4"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontable5.jpeg" alt="Ropón 5"></div>
-            <div class="swiper-slide swiper-slide-3d"><img src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo"></div>
+          <div class="showcase-container reveal">
+            <h3 data-i18n="girl_gallery_title">Galería: Ropones Desmontables</h3>
+            <div class="hint" data-i18n="girl_gallery_hint">Desliza para ver la colección</div>
+
+            <div class="swiper swiper-3d-container" id="roponesSwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontable.jpeg" alt="Ropón 1"></div>
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontable2.jpeg" alt="Ropón 2"></div>
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontable3.jpeg" alt="Ropón 3"></div>
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontable4.jpeg" alt="Ropón 4"></div>
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontable5.jpeg" alt="Ropón 5"></div>
+                <div class="swiper-slide swiper-slide-3d"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo"></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="tools-bar reveal">
-        <div class="search-wrap">
-          <label for="searchNina" data-i18n="search_label">Buscar</label>
-          <input id="searchNina" class="search-input" type="text" data-i18n-ph="search_girl_ph" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
-        </div>
-        <div class="filter-wrap">
-          <label data-i18n="filter_label">Filtrar por</label>
-          <div class="chips" id="chipsNina">
-            <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)"><span data-i18n="chip_all">Todo</span></div>
-            <div class="chip" onclick="setFilter('nina','Ropones', this)"><span data-i18n="chip_ropones">Ropones</span></div>
-            <div class="chip" onclick="setFilter('nina','Batitas', this)"><span data-i18n="chip_batitas">Batitas</span></div>
-            <div class="chip" onclick="setFilter('nina','Española', this)"><span data-i18n="chip_spanish">Línea Española</span></div>
+          <div class="tools-bar reveal">
+            <div class="search-wrap">
+              <label for="searchNina" data-i18n="search_label">Buscar</label>
+              <input id="searchNina" class="search-input" type="text" data-i18n-ph="search_girl_ph" placeholder="Ej: ropón, batita..." oninput="applyFilters('nina')" />
+            </div>
+            <div class="filter-wrap">
+              <label data-i18n="filter_label">Filtrar por</label>
+              <div class="chips" id="chipsNina">
+                <div class="chip active" data-filter="all" onclick="setFilter('nina','all', this)"><span data-i18n="chip_all">Todo</span></div>
+                <div class="chip" onclick="setFilter('nina','Ropones', this)"><span data-i18n="chip_ropones">Ropones</span></div>
+                <div class="chip" onclick="setFilter('nina','Batitas', this)"><span data-i18n="chip_batitas">Batitas</span></div>
+                <div class="chip" onclick="setFilter('nina','Española', this)"><span data-i18n="chip_spanish">Línea Española</span></div>
+              </div>
+            </div>
           </div>
+
+          <div class="empty-state" id="emptyNina"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
+
+          <div class="products-grid" id="gridNina">
+
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable.jpeg" alt="Ropón 1" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 01</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable2.jpeg" alt="Ropón 2" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 02</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable3.jpeg" alt="Ropón 3" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 03</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable4.jpeg" alt="Ropón 4" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 04</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable5.jpeg" alt="Ropón 5" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 05</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable6.jpeg" alt="Ropón 6" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 06</h3><p>Ropones</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Desmontable">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontable7.jpeg" alt="Ropón 7" /></div>
+              <div class="product-info"><h3>Ropón Desmontable 07</h3><p>Ropones</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Exclusivo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" /></div>
+              <div class="product-info"><h3>Ropón Exclusivo 01</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Exclusivo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" /></div>
+              <div class="product-info"><h3>Ropón Exclusivo 02</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Exclusivo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" /></div>
+              <div class="product-info"><h3>Ropón Exclusivo 03</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Exclusivo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo4.jpeg" alt="Ropón Exclusivo 4" /></div>
+              <div class="product-info"><h3>Ropón Exclusivo 04</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Ropones" data-name="Ropón Exclusivo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="ropondesmontableexclusivo5.jpeg" alt="Ropón Exclusivo 5" /></div>
+              <div class="product-info"><h3>Ropón Exclusivo 05</h3><p>Exclusivos</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Ceremonia">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batita1.jpeg" alt="Batita 1" /></div>
+              <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Ceremonia">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batita2.jpeg" alt="Batita 2" /></div>
+              <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Ceremonia">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batita3.jpeg" alt="Batita 3" /></div>
+              <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Ceremonia">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batita4.jpeg" alt="Batita 4" /></div>
+              <div class="product-info"><h3>Batita Ceremonia 04</h3><p>Batitas</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Exclusiva">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
+              <div class="product-info"><h3>Batita Exclusiva 01</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Exclusiva">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
+              <div class="product-info"><h3>Batita Exclusiva 02</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Exclusiva">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batitaexclusiva3.jpeg" alt="Batita Exclusiva 3" /></div>
+              <div class="product-info"><h3>Batita Exclusiva 03</h3><p>Exclusivos</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Batitas" data-name="Batita Exclusiva">
+              <div class="img-container"><img loading="lazy" decoding="async" src="batitaexclusiva4.jpeg" alt="Batita Exclusiva 4" /></div>
+              <div class="product-info"><h3>Batita Exclusiva 04</h3><p>Exclusivos</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Española" data-name="Vestido Línea Española">
+              <div class="img-container"><img loading="lazy" decoding="async" src="lineaespañola.jpeg" alt="Línea Española" /></div>
+              <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
+            </article>
+          </div>
+
+          <div class="divider"></div>
         </div>
-      </div>
-
-      <div class="empty-state" id="emptyNina"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
-
-      <div class="products-grid" id="gridNina">
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable.jpeg" alt="Ropón 1" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 01</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable2.jpeg" alt="Ropón 2" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 02</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable3.jpeg" alt="Ropón 3" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 03</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable4.jpeg" alt="Ropón 4" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 04</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable5.jpeg" alt="Ropón 5" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 05</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable6.jpeg" alt="Ropón 6" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 06</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Desmontable">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontable7.jpeg" alt="Ropón 7" /></div>
-          <div class="product-info"><h3>Ropón Desmontable 07</h3><p>Ropones</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo.jpeg" alt="Ropón Exclusivo" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 01</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo2.jpeg" alt="Ropón Exclusivo 2" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 02</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo3.jpeg" alt="Ropón Exclusivo 3" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 03</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontableexclusivo4.jpeg" alt="Ropón Exclusivo 4" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 04</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Ropones" data-name="Ropón Exclusivo">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="ropondesmontablexclusivo5.jpeg" alt="Ropón Exclusivo 5" /></div>
-          <div class="product-info"><h3>Ropón Exclusivo 05</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="batita1.jpeg" alt="Batita 1" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 01</h3><p>Batitas</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="batita2.jpeg" alt="Batita 2" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 02</h3><p>Batitas</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="batita3.jpeg" alt="Batita 3" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 03</h3><p>Batitas</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Ceremonia">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="batita4.jpeg" alt="Batita 4" /></div>
-          <div class="product-info"><h3>Batita Ceremonia 04</h3><p>Batitas</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva.jpeg" alt="Batita Exclusiva" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 01</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva2.jpeg" alt="Batita Exclusiva 2" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 02</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva3.jpeg" alt="Batita Exclusiva 3" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 03</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Batitas" data-name="Batita Exclusiva">
-          <span class="card-chip">EX</span>
-          <div class="img-container"><img loading="lazy" src="batitaexclusiva4.jpeg" alt="Batita Exclusiva 4" /></div>
-          <div class="product-info"><h3>Batita Exclusiva 04</h3><p>Exclusivos</p></div>
-        </article>
-
-        <article class="product-card" data-category="Española" data-name="Vestido Línea Española">
-          <span class="card-chip">ES</span>
-          <div class="img-container"><img loading="lazy" src="lineaespañola.jpeg" alt="Línea Española" /></div>
-          <div class="product-info"><h3>Vestido Importación</h3><p>Línea Española</p></div>
-        </article>
       </div>
     </section>
 
-    <!-- =========================
-      NIÑO
-    ========================== -->
+    <!-- =======================
+         NIÑO
+    ======================== -->
     <section id="view-nino" class="view-section">
       <div class="category-header">
         <p data-i18n="boy_kicker">Elegancia y Carácter</p>
         <h2 data-i18n="boy_title">Mundo Niño</h2>
-        <button onclick="navigateTo('inicio')" class="back-link">← <span data-i18n="back_home">Volver al inicio</span></button>
+        <button onclick="navigateTo('inicio')" class="back-link" data-i18n="back_home">← Volver al inicio</button>
       </div>
 
-      <div class="tools-bar reveal">
-        <div class="search-wrap">
-          <label for="searchNino" data-i18n="search_label">Buscar</label>
-          <input id="searchNino" class="search-input" type="text" data-i18n-ph="search_boy_ph" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
-        </div>
-        <div class="filter-wrap">
-          <label data-i18n="filter_label">Filtrar por</label>
-          <div class="chips" id="chipsNino">
-            <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)"><span data-i18n="chip_all">Todo</span></div>
-            <div class="chip" onclick="setFilter('nino','Ropón', this)"><span data-i18n="chip_ropon">Ropón</span></div>
-            <div class="chip" onclick="setFilter('nino','Bombacho', this)"><span data-i18n="chip_bombacho">Bombacho</span></div>
-            <div class="chip" onclick="setFilter('nino','Príncipe', this)"><span data-i18n="chip_prince">Príncipe</span></div>
-            <div class="chip" onclick="setFilter('nino','Traje', this)"><span data-i18n="chip_suits">Trajes</span></div>
+      <div class="band">
+        <div class="wrap">
+
+          <div class="tools-bar reveal">
+            <div class="search-wrap">
+              <label for="searchNino" data-i18n="search_label">Buscar</label>
+              <input id="searchNino" class="search-input" type="text" data-i18n-ph="search_boy_ph" placeholder="Ej: traje, bombacho, principe..." oninput="applyFilters('nino')" />
+            </div>
+            <div class="filter-wrap">
+              <label data-i18n="filter_label">Filtrar por</label>
+              <div class="chips" id="chipsNino">
+                <div class="chip active" data-filter="all" onclick="setFilter('nino','all', this)"><span data-i18n="chip_all">Todo</span></div>
+                <div class="chip" onclick="setFilter('nino','Ropón', this)">Ropón</div>
+                <div class="chip" onclick="setFilter('nino','Bombacho', this)">Bombacho</div>
+                <div class="chip" onclick="setFilter('nino','Príncipe', this)">Príncipe</div>
+                <div class="chip" onclick="setFilter('nino','Traje', this)"><span data-i18n="chip_suits">Trajes</span></div>
+              </div>
+            </div>
           </div>
+
+          <div class="empty-state" id="emptyNino"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
+
+          <div class="products-grid" id="gridNino">
+
+            <article class="product-card reveal" data-category="Ropón" data-name="Ropón Desmontable Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="Ropon%20desmontable%20Niño.jpeg" alt="Ropón Niño" /></div>
+              <div class="product-info"><h3>Ropón Desmontable Niño</h3><p>Ropón</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniñoresaltar.jpeg" alt="Bombacho Resaltar" /></div>
+              <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bombacho</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniño.jpeg" alt="Bombacho 1" /></div>
+              <div class="product-info"><h3>Bombacho Clásico 01</h3><p>Bombacho</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniño2.jpeg" alt="Bombacho 2" /></div>
+              <div class="product-info"><h3>Bombacho Clásico 02</h3><p>Bombacho</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniño3.jpeg" alt="Bombacho 3" /></div>
+              <div class="product-info"><h3>Bombacho Clásico 03</h3><p>Bombacho</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniño4.jpeg" alt="Bombacho 4" /></div>
+              <div class="product-info"><h3>Bombacho Clásico 04</h3><p>Bombacho</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Bombacho" data-name="Bombacho Niño">
+              <div class="img-container"><img loading="lazy" decoding="async" src="bombachoniño5.jpeg" alt="Bombacho 5" /></div>
+              <div class="product-info"><h3>Bombacho Clásico 05</h3><p>Bombacho</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe.jpeg" alt="Príncipe 1" /></div>
+              <div class="product-info"><h3>Traje Príncipe 01</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe2.jpeg" alt="Príncipe 2" /></div>
+              <div class="product-info"><h3>Traje Príncipe 02</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe3.jpeg" alt="Príncipe 3" /></div>
+              <div class="product-info"><h3>Traje Príncipe 03</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe4.jpeg" alt="Príncipe 4" /></div>
+              <div class="product-info"><h3>Traje Príncipe 04</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe5.jpeg" alt="Príncipe 5" /></div>
+              <div class="product-info"><h3>Traje Príncipe 05</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe6.jpeg" alt="Príncipe 6" /></div>
+              <div class="product-info"><h3>Traje Príncipe 06</h3><p>Príncipe</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Príncipe" data-name="Traje Príncipe">
+              <div class="img-container"><img loading="lazy" decoding="async" src="principe7.jpeg" alt="Príncipe 7" /></div>
+              <div class="product-info"><h3>Traje Príncipe 07</h3><p>Príncipe</p></div>
+            </article>
+
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño.jpeg" alt="Traje 1" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 01</h3><p>Traje</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño2.jpeg" alt="Traje 2" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 02</h3><p>Traje</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño3.jpeg" alt="Traje 3" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 03</h3><p>Traje</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño4.jpeg" alt="Traje 4" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 04</h3><p>Traje</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño5.jpeg" alt="Traje 5" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 05</h3><p>Traje</p></div>
+            </article>
+            <article class="product-card reveal" data-category="Traje" data-name="Traje Después de Bautizo">
+              <div class="img-container"><img loading="lazy" decoding="async" src="trajeparadespuesdebautizoniño6.jpeg" alt="Traje 6" /></div>
+              <div class="product-info"><h3>Traje Ceremonia 06</h3><p>Traje</p></div>
+            </article>
+
+          </div>
+
+          <div class="divider"></div>
         </div>
-      </div>
-
-      <div class="empty-state" id="emptyNino"><span data-i18n="empty_state">No encontramos productos con esa búsqueda/filtro.</span></div>
-
-      <div class="products-grid" id="gridNino">
-
-        <article class="product-card" data-category="Ropón" data-name="Ropón Desmontable Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="Ropon%20desmontable%20Niño.jpeg" alt="Ropón Niño" /></div>
-          <div class="product-info"><h3>Ropón Desmontable Niño</h3><p>Ropón</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño Resaltar">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniñoresaltar .jpeg" alt="Bombacho Resaltar" /></div>
-          <div class="product-info"><h3>Bombacho Ceremonia</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniño.jpeg" alt="Bombacho 1" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 01</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniño2.jpeg" alt="Bombacho 2" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 02</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniño3.jpeg" alt="Bombacho 3" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 03</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniño4.jpeg" alt="Bombacho 4" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 04</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Bombacho" data-name="Bombacho Niño">
-          <span class="card-chip">MBR</span>
-          <div class="img-container"><img loading="lazy" src="bombachoniño5.jpeg" alt="Bombacho 5" /></div>
-          <div class="product-info"><h3>Bombacho Clásico 05</h3><p>Bombacho</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe.jpeg" alt="Príncipe 1" /></div>
-          <div class="product-info"><h3>Traje Príncipe 01</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe2.jpeg" alt="Príncipe 2" /></div>
-          <div class="product-info"><h3>Traje Príncipe 02</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe3.jpeg" alt="Príncipe 3" /></div>
-          <div class="product-info"><h3>Traje Príncipe 03</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe4.jpeg" alt="Príncipe 4" /></div>
-          <div class="product-info"><h3>Traje Príncipe 04</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe5.jpeg" alt="Príncipe 5" /></div>
-          <div class="product-info"><h3>Traje Príncipe 05</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe6.jpeg" alt="Príncipe 6" /></div>
-          <div class="product-info"><h3>Traje Príncipe 06</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Príncipe" data-name="Traje Príncipe">
-          <span class="card-chip">PR</span>
-          <div class="img-container"><img loading="lazy" src="principe7.jpeg" alt="Príncipe 7" /></div>
-          <div class="product-info"><h3>Traje Príncipe 07</h3><p>Príncipe</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño.jpeg" alt="Traje 1" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 01</h3><p>Traje</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño2.jpeg" alt="Traje 2" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 02</h3><p>Traje</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño3.jpeg" alt="Traje 3" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 03</h3><p>Traje</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño4.jpeg" alt="Traje 4" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 04</h3><p>Traje</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño5.jpeg" alt="Traje 5" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 05</h3><p>Traje</p></div>
-        </article>
-
-        <article class="product-card" data-category="Traje" data-name="Traje Después de Bautizo">
-          <span class="card-chip">TR</span>
-          <div class="img-container"><img loading="lazy" src="trajeparadespuesdebautizoniño6.jpeg" alt="Traje 6" /></div>
-          <div class="product-info"><h3>Traje Ceremonia 06</h3><p>Traje</p></div>
-        </article>
-
       </div>
     </section>
 
-    <!-- =========================
-      STUDIO
-    ========================== -->
+    <!-- =======================
+         STUDIO DOMINGUEZ (FIX)
+    ======================== -->
     <section id="view-studio" class="view-section">
       <header class="sd-hero">
-        <div class="sd-hero-content">
+        <!-- Fondos rotativos -->
+        <div class="sd-bg bg1" id="sdBg1" aria-hidden="true"></div>
+        <div class="sd-bg bg2" id="sdBg2" aria-hidden="true"></div>
+        <div class="sd-vignette" aria-hidden="true"></div>
+        <div class="sd-grain" aria-hidden="true"></div>
+
+        <div class="sd-hero-content reveal">
           <div class="sd-logo-wrap">
             <img src="Rentadevestidoslogo.png" alt="Studio Dominguez Logo">
           </div>
 
-          <h1 style="font-size: 2.65rem; margin-top:1.1rem;">Studio Dominguez</h1>
+          <h1 style="font-size: 2.65rem; margin-top:1.15rem;">Studio Dominguez</h1>
           <p style="max-width: 740px; margin: 0.65rem auto 0; color: rgba(255,255,255,0.72); line-height: 1.6;">
             <span data-i18n="studio_sub">Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.</span>
           </p>
@@ -2099,8 +1733,10 @@
         </div>
       </header>
 
+      <!-- IMPORTANTE: el catálogo queda en band.alt (oscuro) pero visible -->
       <div class="band alt" id="studioCatalog">
         <div class="wrap">
+
           <div class="section-title reveal" style="padding-top: 0.4rem;">
             <div class="kicker" data-i18n="studio_kicker">Catálogo Completo</div>
             <h2 data-i18n="studio_title">Vestidos en renta</h2>
@@ -2110,7 +1746,8 @@
           <div class="tools-bar reveal">
             <div class="search-wrap">
               <label for="searchStudio" data-i18n="search_label">Buscar</label>
-              <input id="searchStudio" class="search-input" type="text" data-i18n-ph="search_studio_ph" placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
+              <input id="searchStudio" class="search-input" type="text" data-i18n-ph="search_studio_ph"
+                     placeholder="Ej: azul, largo, noche..." oninput="applyFilters('studio')" />
             </div>
 
             <div class="filter-wrap">
@@ -2128,293 +1765,279 @@
           <div class="empty-state" id="emptyStudio"><span data-i18n="empty_state">No encontramos vestidos con esa búsqueda/filtro.</span></div>
 
           <div class="products-grid" id="gridStudio">
-            <article class="product-card" data-category="Negro" data-name="Vestido Noche Profunda">
+            <article class="product-card reveal" data-category="Negro" data-name="Vestido Noche Profunda">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestido negro.jpeg" alt="Vestido Negro" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestido%20negro.jpeg" alt="Vestido Negro" /></div>
               <div class="product-info"><h3>Modelo Noche Profunda</h3><p>Negro</p></div>
             </article>
 
-            <article class="product-card" data-category="Negro" data-name="Vestido Negro Resaltar">
+            <article class="product-card reveal" data-category="Negro" data-name="Vestido Negro Resaltar">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidonegroresaltar.jpeg" alt="Vestido Negro Gala" /></div>
               <div class="product-info"><h3>Modelo Gala Dark</h3><p>Negro</p></div>
             </article>
 
-            <article class="product-card" data-category="Azul" data-name="Vestido Azul Real">
+            <article class="product-card reveal" data-category="Azul" data-name="Vestido Azul Real">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidoazul.jpeg" alt="Vestido Azul" /></div>
               <div class="product-info"><h3>Modelo Azul Real</h3><p>Azul</p></div>
             </article>
 
-            <article class="product-card" data-category="Azul" data-name="Vestido Azul Oscuro">
+            <article class="product-card reveal" data-category="Azul" data-name="Vestido Azul Oscuro">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidoazuloscuro.jpeg" alt="Vestido Azul Oscuro" /></div>
               <div class="product-info"><h3>Modelo Midnight Blue</h3><p>Azul</p></div>
             </article>
 
-            <article class="product-card" data-category="Rojo" data-name="Vestido Carmesí">
+            <article class="product-card reveal" data-category="Rojo" data-name="Vestido Carmesí">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidorojo.jpeg" alt="Vestido Rojo" /></div>
               <div class="product-info"><h3>Modelo Carmesí</h3><p>Rojo</p></div>
             </article>
 
-            <article class="product-card" data-category="Rojo" data-name="Vestido Rojo Scarlet">
+            <article class="product-card reveal" data-category="Rojo" data-name="Vestido Rojo Scarlet">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidorojo2.jpeg" alt="Vestido Rojo 2" /></div>
               <div class="product-info"><h3>Modelo Scarlet</h3><p>Rojo</p></div>
             </article>
 
-            <article class="product-card" data-category="Claros" data-name="Vestido Blanco">
+            <article class="product-card reveal" data-category="Claros" data-name="Vestido Blanco">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidoblanco.jpeg" alt="Vestido Blanco" /></div>
               <div class="product-info"><h3>Modelo White Gala</h3><p>Claros</p></div>
             </article>
 
-            <article class="product-card" data-category="Claros" data-name="Vestido Beige">
+            <article class="product-card reveal" data-category="Claros" data-name="Vestido Beige">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidobeige.jpeg" alt="Vestido Beige" /></div>
               <div class="product-info"><h3>Modelo Champagne</h3><p>Claros</p></div>
             </article>
 
-            <article class="product-card" data-category="Claros" data-name="Vestido Crema">
+            <article class="product-card reveal" data-category="Claros" data-name="Vestido Crema">
               <span class="card-chip">SD</span>
-              <div class="img-container"><img loading="lazy" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
+              <div class="img-container"><img loading="lazy" decoding="async" src="vestidocrema.jpeg" alt="Vestido Crema" /></div>
               <div class="product-info"><h3>Modelo Crema Suave</h3><p>Claros</p></div>
             </article>
           </div>
+
+          <div class="divider"></div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- =========================
-    CONTACTO (NUEVO COMPLETO)
-  ========================== -->
+  <!-- =======================
+       CONTACTO (2 UBICACIONES)
+  ======================== -->
   <footer id="contacto" class="contact-footer">
-    <div class="contact-grid">
-      <!-- Left: contact info -->
-      <div class="contact-card reveal">
-        <div class="pad">
-          <div class="contact-header">
-            <div class="contact-title">
-              <h3 data-i18n="contact_title">Contáctanos</h3>
-              <p data-i18n="contact_sub">Dos ubicaciones, atención personalizada y envíos internacionales.</p>
-            </div>
-            <div class="pill">
-              <i class="fa-solid fa-globe"></i>
-              <span data-i18n="contact_pill">Worldwide</span>
-            </div>
-          </div>
+    <div class="wrap">
 
-          <div class="contact-split">
-            <!-- Monterrey -->
-            <div class="loc-card">
-              <div class="loc-head">
-                <h4><span data-i18n="mx_title">Monterrey</span></h4>
-                <span class="loc-tag">MX</span>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="muted">
-                  <strong data-i18n="label_address">Dirección:</strong><br>
-                  Sta. Genoveva 1201, La Purísima,<br>
-                  67129 Guadalupe, N.L.
-                </div>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-phone"></i>
-                <div class="muted">
-                  <strong data-i18n="label_phone">Teléfono:</strong><br>
-                  <a href="tel:+528180932362" style="font-weight:900; text-decoration: underline;">81 8093 2362</a>
-                </div>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-clock"></i>
-                <div class="muted">
-                  <strong data-i18n="label_hours">Horario:</strong><br>
-                  <span data-i18n="mx_hours">Lunes a Sábado 9:00 am – 8:00 pm · Domingo 9:00 am – 6:00 pm</span>
-                </div>
-              </div>
-
-              <div class="loc-actions">
-                <a class="mini-btn whatsapp" href="https://wa.me/528180932362" target="_blank">
-                  <i class="fab fa-whatsapp"></i> <span data-i18n="btn_whatsapp">WhatsApp</span>
-                </a>
-                <a class="mini-btn" href="tel:+528180932362">
-                  <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Llamar</span>
-                </a>
-                <a class="mini-btn" href="https://www.google.com/maps?q=Sta.+Genoveva+1201,+La+Pur%C3%ADsima,+67129+Guadalupe,+N.L." target="_blank">
-                  <i class="fa-solid fa-location-arrow"></i> <span data-i18n="btn_directions">Ruta</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- San Antonio -->
-            <div class="loc-card">
-              <div class="loc-head">
-                <h4><span data-i18n="us_title">San Antonio</span></h4>
-                <span class="loc-tag">US</span>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="muted">
-                  <strong data-i18n="label_address">Dirección:</strong><br>
-                  522 NW Loop 410<br>
-                  San Antonio, TX 78216<br>
-                  <span data-i18n="us_country">Estados Unidos</span><br>
-                  <strong>Local W2</strong>
-                </div>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-phone"></i>
-                <div class="muted">
-                  <strong data-i18n="label_phone">Teléfono:</strong><br>
-                  <a href="tel:+12107177607" style="font-weight:900; text-decoration: underline;">+1 (210) 717-7607</a>
-                </div>
-              </div>
-
-              <div class="loc-row">
-                <i class="fas fa-clock"></i>
-                <div class="muted">
-                  <strong data-i18n="label_hours">Horario:</strong><br>
-                  <span data-i18n="us_hours">Lunes a Domingo 10:00 am – 8:00 pm</span>
-                </div>
-              </div>
-
-              <div class="loc-actions">
-                <a class="mini-btn" href="tel:+12107177607">
-                  <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Llamar</span>
-                </a>
-                <a class="mini-btn" href="https://www.google.com/maps?q=522+NW+Loop+410,+San+Antonio,+TX+78216" target="_blank">
-                  <i class="fa-solid fa-location-arrow"></i> <span data-i18n="btn_directions">Ruta</span>
-                </a>
-                <a class="mini-btn" href="mailto:contacto@mibelloropon.com" onclick="return false;" title="(Opcional) agrega tu email real si quieres">
-                  <i class="fa-solid fa-envelope"></i> <span data-i18n="btn_email">Email</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top: 1.25rem; display:flex; justify-content: space-between; gap:1rem; align-items:center; flex-wrap:wrap;">
-            <div class="social-links">
-              <a href="https://www.instagram.com/studio.vdominguez?igsh=bXNwZGtlNml2dG4w" target="_blank" class="social-btn" aria-label="Instagram Studio Dominguez">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://wa.me/528180932362" target="_blank" class="social-btn" aria-label="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-              </a>
-            </div>
-
-            <div style="display:flex; align-items:center; gap:10px; color: rgba(0,0,0,0.55); font-weight:900; letter-spacing:1px;">
-              <i class="fas fa-plane" style="color: var(--gold-accent);"></i>
-              <span data-i18n="contact_shipping_note">Envíos internacionales disponibles</span>
-            </div>
-          </div>
-
-        </div>
+      <div class="footer-title reveal">
+        <h2 data-i18n="contact_title">Contacto y Ubicaciones</h2>
+        <p data-i18n="contact_sub">
+          Agenda por WhatsApp o llámanos. Aquí están direcciones, horarios y mapas de ambas sucursales.
+        </p>
       </div>
 
-      <!-- Right: map -->
-      <div class="map-card reveal">
-        <div class="map-tabs">
-          <div class="tabs-left">
-            <button class="tab-btn active" id="tabMx" onclick="setMapTab('mx')"><span data-i18n="tab_mx">Monterrey</span></button>
-            <button class="tab-btn" id="tabUs" onclick="setMapTab('us')"><span data-i18n="tab_us">San Antonio</span></button>
+      <div class="locations-grid">
+
+        <!-- Monterrey -->
+        <div class="loc-card reveal">
+          <div class="loc-head">
+            <div class="loc-name">
+              <div class="loc-pin"><i class="fa-solid fa-location-dot" style="color:var(--gold)"></i></div>
+              <div>
+                <h3 data-i18n="loc_mty_title">Mi Bello Ropón · Monterrey</h3>
+                <div style="margin-top:.2rem; color:rgba(47,47,47,0.65); font-weight:900; letter-spacing:1px">
+                  <span data-i18n="loc_mty_city">Guadalupe, Nuevo León</span>
+                </div>
+              </div>
+            </div>
+            <div class="loc-tag">MX</div>
           </div>
-          <div class="pill">
-            <i class="fa-solid fa-map"></i>
-            <span data-i18n="map_pill">Mapa</span>
+
+          <div class="loc-body">
+            <div class="loc-row">
+              <i class="fa-solid fa-map"></i>
+              <div>
+                <strong data-i18n="address_label">Dirección</strong>
+                <div>Sta. Genoveva 1201, La Purísima, 67129 Guadalupe, N.L.</div>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <strong data-i18n="hours_label">Horario</strong>
+                <div data-i18n="mty_hours">
+                  Lunes a Sábado: 9:00 am – 8:00 pm<br/>
+                  Domingo: 9:00 am – 6:00 pm
+                </div>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <i class="fa-solid fa-phone"></i>
+              <div>
+                <strong data-i18n="phone_label">Teléfono</strong>
+                <div><a href="tel:+528180932362" style="font-weight:900; text-decoration:underline;">81 8093 2362</a></div>
+              </div>
+            </div>
+
+            <div class="loc-actions">
+              <a class="pill wa" href="https://wa.me/528180932362" target="_blank">
+                <i class="fab fa-whatsapp"></i> <span data-i18n="wa_cta">WhatsApp</span>
+              </a>
+              <a class="pill" href="tel:+528180932362">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="call_cta">Llamar</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="loc-map">
+            <iframe loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Sta.%20Genoveva%201201%20La%20Pur%C3%ADsima%2067129%20Guadalupe%20Nuevo%20Le%C3%B3n&output=embed"
+              title="Mapa Monterrey"></iframe>
           </div>
         </div>
 
-        <iframe class="map-frame active" id="mapMx"
-          loading="lazy" allowfullscreen
-          src="https://www.google.com/maps?q=Sta+Genoveva+1201+La+Pur%C3%ADsima+Guadalupe+Nuevo+Leon&output=embed"
-          title="Mapa Monterrey"></iframe>
+        <!-- San Antonio -->
+        <div class="loc-card reveal">
+          <div class="loc-head">
+            <div class="loc-name">
+              <div class="loc-pin"><i class="fa-solid fa-location-dot" style="color:var(--gold)"></i></div>
+              <div>
+                <h3 data-i18n="loc_sat_title">Mi Bello Ropón · San Antonio</h3>
+                <div style="margin-top:.2rem; color:rgba(47,47,47,0.65); font-weight:900; letter-spacing:1px">
+                  <span data-i18n="loc_sat_city">Texas, Estados Unidos</span>
+                </div>
+              </div>
+            </div>
+            <div class="loc-tag">USA</div>
+          </div>
 
-        <iframe class="map-frame" id="mapUs"
-          loading="lazy" allowfullscreen
-          src="https://www.google.com/maps?q=522+NW+Loop+410+San+Antonio+TX+78216&output=embed"
-          title="Mapa San Antonio"></iframe>
-      </div>
-    </div>
+          <div class="loc-body">
+            <div class="loc-row">
+              <i class="fa-solid fa-map"></i>
+              <div>
+                <strong data-i18n="address_label">Dirección</strong>
+                <div>
+                  522 NW Loop 410, San Antonio, TX 78216, Estados Unidos<br/>
+                  <span style="font-weight:900">Local W2</span>
+                </div>
+              </div>
+            </div>
 
-    <div class="contact-bottom">
-      <div>© 2024 Mi Bello Ropón / Studio Dominguez. <span data-i18n="rights">Todos los derechos reservados.</span></div>
-      <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-        <span><strong data-i18n="support">Soporte</strong>:</span>
-        <a href="https://wa.me/528180932362" target="_blank" style="text-decoration: underline; font-weight:900;">WhatsApp</a>
+            <div class="loc-row">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <strong data-i18n="hours_label">Horario</strong>
+                <div data-i18n="sat_hours">
+                  Lunes a Domingo: 10:00 am – 8:00 pm
+                </div>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <i class="fa-solid fa-phone"></i>
+              <div>
+                <strong data-i18n="phone_label">Teléfono</strong>
+                <div><a href="tel:+12107177607" style="font-weight:900; text-decoration:underline;">+1 (210) 717-7607</a></div>
+              </div>
+            </div>
+
+            <div class="loc-actions">
+              <a class="pill" href="tel:+12107177607">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="call_cta">Llamar</span>
+              </a>
+              <a class="pill wa" href="https://wa.me/528180932362" target="_blank">
+                <i class="fab fa-whatsapp"></i> <span data-i18n="wa_cta">WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="loc-map">
+            <iframe loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=522%20NW%20Loop%20410%20San%20Antonio%20TX%2078216%20Local%20W2&output=embed"
+              title="Mapa San Antonio"></iframe>
+          </div>
+        </div>
+
       </div>
+
+      <div class="footer-bottom">
+        © 2024 Mi Bello Ropón / Studio Dominguez. <span data-i18n="rights">Todos los derechos reservados.</span>
+      </div>
+
     </div>
   </footer>
 
+  <!-- Floating WhatsApp -->
   <a class="float-wa" href="https://wa.me/528180932362" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp" style="font-size: 1.7rem;"></i>
+    <i class="fab fa-whatsapp" style="font-size: 1.65rem;"></i>
   </a>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
-    /* ==============================
-      STATE
-    ============================== */
+    /* =========================
+       STATE
+    ========================== */
     const state = {
       currentView: 'inicio',
       filters: { nina: 'all', nino: 'all', studio: 'all' },
-      lang: localStorage.getItem('mbr_lang') || 'es'
+      lang: localStorage.getItem('lang') || 'es'
     };
 
-    /* ==============================
-      I18N (ES/EN) – Simple + Clean
-      (Traduce textos clave: menú, hero, secciones, contacto, labels, placeholders)
-    ============================== */
-    const i18n = {
+    /* =========================
+       I18N
+    ========================== */
+    const I18N = {
       es: {
-        nav_home: "Inicio",
-        nav_girl: "Colección Niña",
-        nav_boy: "Colección Niño",
+        menu_title: "Menú",
+        menu_hint: "Navega",
+        menu_book: "Agendar Cita",
+
+        nav_inicio: "Inicio",
+        nav_inicio_sub: "Portada",
+        nav_nina: "Colección Niña",
+        nav_nina_sub: "Bautizo y más",
+        nav_nino: "Colección Niño",
+        nav_nino_sub: "Ceremonia",
+        nav_studio_sub: "Vestidos nocturnos",
         nav_contact: "Contacto y Ubicación",
-        nav_book: "Agendar Cita",
+        nav_contact_sub: "Direcciones y horarios",
 
         hero_locations: "Monterrey · San Antonio",
         hero_title_1: "Momentos que",
         hero_title_2: "Perduran",
-        hero_subtitle: "Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.",
-        hero_shipping: "ENTREGAS A TODO EL MUNDO",
+        hero_sub: "Especialistas en Bautizo, Primera Comunión y Renta de Vestidos.",
+        hero_ship: "ENTREGAS A TODO EL MUNDO",
         btn_girl: "Ver Niña",
         btn_boy: "Ver Niño",
 
         home_kicker: "Destacados",
         home_title: "Lo más buscado",
-        home_sub: "Piezas seleccionadas por su elegancia y detalle. Desliza para ver nuestras favoritas.",
+        home_sub: "Selección de piezas favoritas. Desliza para ver más.",
 
-        tag_girl_baptism: "Bautizo · Niña",
-        tag_boy_baptism: "Bautizo · Niño",
-        tag_studio_rent: "Renta · Studio",
-        tag_boy_ceremony: "Ceremonia · Niño",
-
-        worldwide_strong: "Worldwide Shipping:",
-        worldwide_text: "Envíos internacionales disponibles. Cotiza por WhatsApp.",
+        ship_strong: "Worldwide Shipping:",
+        ship_text: "Envíos internacionales disponibles. Cotiza por WhatsApp.",
 
         promo1_title: "Atención Binacional",
         promo1_text: "Visítanos en nuestras sucursales de Guadalupe, NL o San Antonio, TX.",
+        promo2_badge: "Sets",
         promo2_title: "Kits Completos",
         promo2_text: "Todo lo que necesitas: Ropón, vela, zapatos y accesorios en un solo lugar.",
         promo3_badge: "Nuevo",
         promo3_title: "Temporada 2024",
         promo3_text: "Nuevos modelos para Bautizo y Primera Comunión. Elegancia que se nota.",
-        promo_link: "Ver ubicaciones",
-        promo_link2: "Ver Colección",
-        promo_link3: "Ver Niño",
+        promo_cta: "Ver ubicaciones",
+        promo_cta2: "Ver colección",
+        promo_cta3: "Ver niño",
 
         rent_title: "¿Buscas renta de vestidos?",
-        rent_text: "Descubre una experiencia más nocturna y sofisticada con catálogo exclusivo en <strong>Studio Dominguez</strong>.",
+        rent_text: "Descubre una experiencia nocturna y sofisticada con catálogo exclusivo en Studio Dominguez.",
         rent_btn: "Renta de vestidos",
 
         girl_kicker: "Delicadeza y Gracia",
@@ -2425,7 +2048,7 @@
         boy_kicker: "Elegancia y Carácter",
         boy_title: "Mundo Niño",
 
-        back_home: "Volver al inicio",
+        back_home: "← Volver al inicio",
 
         search_label: "Buscar",
         filter_label: "Filtrar por",
@@ -2434,9 +2057,6 @@
         chip_ropones: "Ropones",
         chip_batitas: "Batitas",
         chip_spanish: "Línea Española",
-        chip_ropon: "Ropón",
-        chip_bombacho: "Bombacho",
-        chip_prince: "Príncipe",
         chip_suits: "Trajes",
         chip_black: "Negro",
         chip_blue: "Azul",
@@ -2444,8 +2064,9 @@
         chip_light: "Claros/Beige",
 
         empty_state: "No encontramos productos con esa búsqueda/filtro.",
+
         search_girl_ph: "Ej: ropón, batita...",
-        search_boy_ph: "Ej: traje, bombacho, principe...",
+        search_boy_ph: "Ej: traje, bombacho, príncipe...",
         search_studio_ph: "Ej: azul, largo, noche...",
 
         studio_sub: "Renta de vestidos exclusivos. Elegancia nocturna para tus eventos más importantes.",
@@ -2456,106 +2077,103 @@
         studio_title: "Vestidos en renta",
         studio_sub2: "Filtra por color o busca por estilo. Agenda por WhatsApp.",
 
-        contact_title: "Contáctanos",
-        contact_sub: "Dos ubicaciones, atención personalizada y envíos internacionales.",
-        contact_pill: "Worldwide",
+        contact_title: "Contacto y Ubicaciones",
+        contact_sub: "Agenda por WhatsApp o llámanos. Aquí están direcciones, horarios y mapas de ambas sucursales.",
 
-        mx_title: "Monterrey",
-        us_title: "San Antonio",
-        label_address: "Dirección:",
-        label_phone: "Teléfono:",
-        label_hours: "Horario:",
-        mx_hours: "Lunes a Sábado 9:00 am – 8:00 pm · Domingo 9:00 am – 6:00 pm",
-        us_hours: "Lunes a Domingo 10:00 am – 8:00 pm",
-        us_country: "Estados Unidos",
+        loc_mty_title: "Mi Bello Ropón · Monterrey",
+        loc_mty_city: "Guadalupe, Nuevo León",
+        loc_sat_title: "Mi Bello Ropón · San Antonio",
+        loc_sat_city: "Texas, Estados Unidos",
 
-        btn_whatsapp: "WhatsApp",
-        btn_call: "Llamar",
-        btn_directions: "Ruta",
-        btn_email: "Email",
+        address_label: "Dirección",
+        hours_label: "Horario",
+        phone_label: "Teléfono",
 
-        contact_shipping_note: "Envíos internacionales disponibles",
-        tab_mx: "Monterrey",
-        tab_us: "San Antonio",
-        map_pill: "Mapa",
+        mty_hours: "Lunes a Sábado: 9:00 am – 8:00 pm\nDomingo: 9:00 am – 6:00 pm",
+        sat_hours: "Lunes a Domingo: 10:00 am – 8:00 pm",
 
-        rights: "Todos los derechos reservados.",
-        support: "Soporte"
+        wa_cta: "WhatsApp",
+        call_cta: "Llamar",
+
+        rights: "Todos los derechos reservados."
       },
+
       en: {
-        nav_home: "Home",
-        nav_girl: "Girls Collection",
-        nav_boy: "Boys Collection",
+        menu_title: "Menu",
+        menu_hint: "Navigate",
+        menu_book: "Book Appointment",
+
+        nav_inicio: "Home",
+        nav_inicio_sub: "Cover",
+        nav_nina: "Girls Collection",
+        nav_nina_sub: "Baptism & more",
+        nav_nino: "Boys Collection",
+        nav_nino_sub: "Ceremony",
+        nav_studio_sub: "Evening dresses",
         nav_contact: "Contact & Locations",
-        nav_book: "Book Appointment",
+        nav_contact_sub: "Addresses & hours",
 
         hero_locations: "Monterrey · San Antonio",
         hero_title_1: "Moments that",
-        hero_title_2: "Last Forever",
-        hero_subtitle: "Specialists in Baptism, First Communion & Dress Rentals.",
-        hero_shipping: "WORLDWIDE SHIPPING",
-        btn_girl: "View Girls",
-        btn_boy: "View Boys",
+        hero_title_2: "Last",
+        hero_sub: "Specialists in Baptism, First Communion, and Dress Rentals.",
+        hero_ship: "WORLDWIDE SHIPPING",
+        btn_girl: "Girls",
+        btn_boy: "Boys",
 
-        home_kicker: "Featured",
-        home_title: "Most Wanted",
-        home_sub: "Selected pieces for their elegance and detail. Swipe to see our favorites.",
+        home_kicker: "Highlights",
+        home_title: "Most wanted",
+        home_sub: "A curated selection. Swipe to see more.",
 
-        tag_girl_baptism: "Baptism · Girl",
-        tag_boy_baptism: "Baptism · Boy",
-        tag_studio_rent: "Rental · Studio",
-        tag_boy_ceremony: "Ceremony · Boy",
+        ship_strong: "Worldwide Shipping:",
+        ship_text: "International shipping available. Request a quote via WhatsApp.",
 
-        worldwide_strong: "Worldwide Shipping:",
-        worldwide_text: "International shipping available. Quote via WhatsApp.",
-
-        promo1_title: "Binational Service",
+        promo1_title: "Bi-national service",
         promo1_text: "Visit us in Guadalupe, NL or San Antonio, TX.",
+        promo2_badge: "Sets",
         promo2_title: "Complete Kits",
-        promo2_text: "Everything you need: gown, candle, shoes and accessories in one place.",
+        promo2_text: "Everything you need: outfit, candle, shoes, and accessories in one place.",
         promo3_badge: "New",
-        promo3_title: "Season 2024",
-        promo3_text: "New models for Baptism and First Communion. Elegance you can see.",
-        promo_link: "See locations",
-        promo_link2: "See collection",
-        promo_link3: "See boys",
+        promo3_title: "2024 Season",
+        promo3_text: "New Baptism & First Communion styles. Elegance you can see.",
+        promo_cta: "See locations",
+        promo_cta2: "See collection",
+        promo_cta3: "See boys",
 
         rent_title: "Looking for dress rentals?",
-        rent_text: "Discover a more sophisticated, night-style experience with an exclusive catalog at <strong>Studio Dominguez</strong>.",
+        rent_text: "Discover an elegant night experience with an exclusive catalog at Studio Dominguez.",
         rent_btn: "Dress rentals",
 
         girl_kicker: "Delicacy & Grace",
         girl_title: "Girls Collection",
-        girl_gallery_title: "Gallery: Convertible Gowns",
-        girl_gallery_hint: "Swipe to explore the collection",
+        girl_gallery_title: "Gallery: Detachable Gowns",
+        girl_gallery_hint: "Swipe to explore",
 
         boy_kicker: "Elegance & Character",
         boy_title: "Boys World",
 
-        back_home: "Back to home",
+        back_home: "← Back to home",
 
         search_label: "Search",
         filter_label: "Filter by",
         filter_color_label: "Filter by Color",
         chip_all: "All",
         chip_ropones: "Gowns",
-        chip_batitas: "Baptism Sets",
+        chip_batitas: "Little Dresses",
         chip_spanish: "Spanish Line",
-        chip_ropon: "Gown",
-        chip_bombacho: "Outfit",
-        chip_prince: "Prince",
         chip_suits: "Suits",
         chip_black: "Black",
         chip_blue: "Blue",
         chip_red: "Red",
         chip_light: "Light/Beige",
 
-        empty_state: "No products match your search/filter.",
-        search_girl_ph: "Ex: gown, baptism set...",
-        search_boy_ph: "Ex: suit, outfit, prince...",
-        search_studio_ph: "Ex: blue, long, night...",
+        empty_state: "No results found for that search/filter.",
 
-        studio_sub: "Exclusive dress rentals. Night-time elegance for your most important events.",
+        search_girl_ph: "e.g., gown, dress...",
+        search_boy_ph: "e.g., suit, prince...",
+        search_studio_ph: "e.g., blue, long, night...",
+
+        studio_sub: "Exclusive dress rentals. Night elegance for your most important events.",
         studio_btn_see: "See dresses",
         studio_btn_book: "Book",
         studio_btn_back: "Back",
@@ -2563,139 +2181,147 @@
         studio_title: "Dresses for rent",
         studio_sub2: "Filter by color or search by style. Book via WhatsApp.",
 
-        contact_title: "Contact",
-        contact_sub: "Two locations, personalized service, and worldwide shipping.",
-        contact_pill: "Worldwide",
+        contact_title: "Contact & Locations",
+        contact_sub: "Book via WhatsApp or call us. Here are addresses, hours, and maps for both locations.",
 
-        mx_title: "Monterrey",
-        us_title: "San Antonio",
-        label_address: "Address:",
-        label_phone: "Phone:",
-        label_hours: "Hours:",
-        mx_hours: "Mon–Sat 9:00 am – 8:00 pm · Sun 9:00 am – 6:00 pm",
-        us_hours: "Mon–Sun 10:00 am – 8:00 pm",
-        us_country: "United States",
+        loc_mty_title: "Mi Bello Ropón · Monterrey",
+        loc_mty_city: "Guadalupe, Nuevo León",
+        loc_sat_title: "Mi Bello Ropón · San Antonio",
+        loc_sat_city: "Texas, USA",
 
-        btn_whatsapp: "WhatsApp",
-        btn_call: "Call",
-        btn_directions: "Directions",
-        btn_email: "Email",
+        address_label: "Address",
+        hours_label: "Hours",
+        phone_label: "Phone",
 
-        contact_shipping_note: "International shipping available",
-        tab_mx: "Monterrey",
-        tab_us: "San Antonio",
-        map_pill: "Map",
+        mty_hours: "Mon–Sat: 9:00 am – 8:00 pm\nSun: 9:00 am – 6:00 pm",
+        sat_hours: "Mon–Sun: 10:00 am – 8:00 pm",
 
-        rights: "All rights reserved.",
-        support: "Support"
+        wa_cta: "WhatsApp",
+        call_cta: "Call",
+
+        rights: "All rights reserved."
       }
     };
 
-    function applyLanguage(lang) {
-      state.lang = lang;
-      localStorage.setItem('mbr_lang', lang);
+    function applyI18n(){
+      const dict = I18N[state.lang] || I18N.es;
 
-      // Update text nodes
-      document.querySelectorAll('[data-i18n]').forEach(el => {
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
-        const val = i18n[lang][key];
-        if (val !== undefined) el.innerHTML = val; // allow <strong> in some strings
+        if (dict[key] != null){
+          // Soporta saltos de línea en horarios
+          el.innerHTML = String(dict[key]).replace(/\n/g, '<br/>');
+        }
       });
 
-      // Update placeholders
-      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
         const key = el.getAttribute('data-i18n-ph');
-        const val = i18n[lang][key];
-        if (val !== undefined) el.setAttribute('placeholder', val);
+        if (dict[key] != null){
+          el.setAttribute('placeholder', dict[key]);
+        }
       });
 
-      // Button label
-      document.getElementById('langBtnText').textContent = (lang === 'es') ? 'EN' : 'ES';
+      document.documentElement.lang = state.lang;
+      document.getElementById('langLabel').textContent = state.lang.toUpperCase();
     }
 
-    /* ==============================
-      MENU
-    ============================== */
-    function toggleMenu() {
+    function toggleLanguage(){
+      state.lang = (state.lang === 'es') ? 'en' : 'es';
+      localStorage.setItem('lang', state.lang);
+      applyI18n();
+    }
+
+    /* =========================
+       MENU
+    ========================== */
+    function toggleMenu(){
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
       const isOpen = menu.classList.toggle('active');
       burger.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      if (isOpen) { const firstLink = menu.querySelector('a'); if (firstLink) firstLink.focus(); }
+      if (isOpen){
+        const firstLink = menu.querySelector('a,button');
+        if (firstLink) firstLink.focus();
+      }
     }
-    function closeMenu() {
+    function closeMenu(){
       const menu = document.getElementById('overlayMenu');
       const burger = document.getElementById('burgerBtn');
-      if (menu.classList.contains('active')) {
-        menu.classList.remove('active'); burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-hidden', 'true');
+      if (menu.classList.contains('active')){
+        menu.classList.remove('active');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded','false');
+        menu.setAttribute('aria-hidden','true');
       }
     }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape'){
         const menu = document.getElementById('overlayMenu');
-        if (menu.classList.contains('active')) { closeMenu(); document.getElementById('burgerBtn').focus(); }
+        if (menu.classList.contains('active')){
+          closeMenu();
+          document.getElementById('burgerBtn').focus();
+        }
       }
     });
-    document.getElementById('overlayMenu').addEventListener('click', (e) => { if (e.target.id === 'overlayMenu') closeMenu(); });
-
-    function closeMenuAndGoToFooter() {
+    document.getElementById('overlayMenu').addEventListener('click', (e)=>{
+      if (e.target.id === 'overlayMenu') closeMenu();
+    });
+    function closeMenuAndGoToFooter(){
       closeMenu();
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
     }
 
-    function setActiveMenuLink(viewName) {
-      const links = document.querySelectorAll('.overlay-menu a[data-nav]');
-      links.forEach(l => l.classList.remove('active-link'));
-      const active = document.querySelector('.overlay-menu a[data-nav="' + viewName + '"]');
-      if (active) active.classList.add('active-link');
-    }
-
-    function setThemeForView(viewName) {
+    /* =========================
+       THEME
+    ========================== */
+    function setThemeForView(viewName){
       const isStudio = (viewName === 'studio');
       document.body.classList.toggle('sd-mode', isStudio);
-
-      const logo = document.getElementById('brandLogo');
-      if (!logo) return;
-      logo.textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
+      document.getElementById('brandName').textContent = isStudio ? 'Studio Dominguez' : 'Mi Bello Ropón';
     }
 
-    /* ==============================
-      SPA NAVIGATION
-    ============================== */
-    function navigateTo(viewName) {
+    /* =========================
+       SPA NAV
+    ========================== */
+    function navigateTo(viewName){
       closeMenu();
-      const views = document.querySelectorAll('.view-section');
-      views.forEach(v => v.classList.remove('active-view'));
+      document.querySelectorAll('.view-section').forEach(v=>v.classList.remove('active-view'));
       const target = document.getElementById('view-' + viewName);
-      if (target) {
-        target.classList.add('active-view');
-        state.currentView = viewName;
-        setActiveMenuLink(viewName);
-        setThemeForView(viewName);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio') { applyFilters(viewName); }
+      if (!target) return;
+
+      target.classList.add('active-view');
+      state.currentView = viewName;
+      setThemeForView(viewName);
+
+      window.scrollTo({top:0, behavior:'smooth'});
+
+      // Aplica filtros al entrar
+      if (viewName === 'nina' || viewName === 'nino' || viewName === 'studio'){
+        applyFilters(viewName);
       }
+
+      // Reinicia reveal para vista nueva (por si entra directo)
+      requestAnimationFrame(()=> revealNow());
     }
 
-    /* ==============================
-      FILTERS + SEARCH
-    ============================== */
-    function setFilter(view, category, el) {
+    /* =========================
+       FILTERS + SEARCH
+    ========================== */
+    function setFilter(view, category, el){
       state.filters[view] = category;
       const chipsWrap =
         view === 'nina' ? document.getElementById('chipsNina') :
         view === 'nino' ? document.getElementById('chipsNino') :
         document.getElementById('chipsStudio');
 
-      chipsWrap.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chipsWrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
       el.classList.add('active');
       applyFilters(view);
     }
 
-    function applyFilters(view) {
+    function applyFilters(view){
       const grid =
         view === 'nina' ? document.getElementById('gridNina') :
         view === 'nino' ? document.getElementById('gridNino') :
@@ -2717,11 +2343,12 @@
       const cards = Array.from(grid.querySelectorAll('.product-card'));
       let visibleCount = 0;
 
-      cards.forEach(card => {
+      cards.forEach(card=>{
         const name = (card.getAttribute('data-name') || '').toLowerCase();
         const category = (card.getAttribute('data-category') || '');
         const matchQuery = !query || name.includes(query) || category.toLowerCase().includes(query);
         const matchFilter = (selected === 'all') || (category === selected);
+
         const show = matchQuery && matchFilter;
         card.style.display = show ? '' : 'none';
         if (show) visibleCount++;
@@ -2730,24 +2357,29 @@
       empty.style.display = visibleCount === 0 ? 'block' : 'none';
     }
 
-    /* ==============================
-      SWIPER INIT (home + 3D)
-    ============================== */
+    /* =========================
+       SWIPER INIT
+    ========================== */
     const swiperHome = new Swiper('#homeSwiper', {
       loop: true,
-      spaceBetween: 16,
-      slidesPerView: 1,
-      grabCursor: true,
       speed: 900,
-      effect: 'creative',
-      creativeEffect: {
-        prev: { shadow: true, translate: ['-8%', 0, -120], rotate: [0, 0, -2] },
-        next: { shadow: true, translate: ['8%', 0, -120], rotate: [0, 0, 2] },
-      },
-      pagination: { el: '.swiper-pagination', clickable: true },
+      spaceBetween: 18,
+      slidesPerView: 1,
       autoplay: { delay: 3200, disableOnInteraction: false },
-      navigation: { nextEl: '#homeNext', prevEl: '#homePrev' },
-      breakpoints: { 768: { slidesPerView: 2 }, 1100: { slidesPerView: 3 } }
+      pagination: { el: '#homeSwiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '#homeSwiper .swiper-button-next', prevEl: '#homeSwiper .swiper-button-prev' },
+      effect: 'coverflow',
+      coverflowEffect: {
+        rotate: 14,
+        stretch: 0,
+        depth: 120,
+        modifier: 1,
+        slideShadows: false
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1100: { slidesPerView: 3 }
+      }
     });
 
     const common3dProps = {
@@ -2755,84 +2387,96 @@
       grabCursor: true,
       centeredSlides: true,
       slidesPerView: 'auto',
-      speed: 900,
-      coverflowEffect: {
-        rotate: 26,
-        stretch: 0,
-        depth: 160,
-        modifier: 1,
-        slideShadows: true
-      },
-      pagination: false
+      coverflowEffect: { rotate: 30, stretch: 0, depth: 110, modifier: 1, slideShadows: true },
+      pagination: false,
+      speed: 900
     };
     new Swiper('#roponesSwiper', { ...common3dProps, initialSlide: 2 });
 
-    /* ==============================
-      CONTACT MAP TABS
-    ============================== */
-    function setMapTab(which){
-      const tabMx = document.getElementById('tabMx');
-      const tabUs = document.getElementById('tabUs');
-      const mapMx = document.getElementById('mapMx');
-      const mapUs = document.getElementById('mapUs');
+    /* =========================
+       STUDIO BG ROTATOR (FIX + DARK)
+    ========================== */
+    const studioBgImages = [
+      'vestidonegroresaltar.jpeg',
+      'vestido%20negro.jpeg',
+      'vestidoazul.jpeg',
+      'vestidoazuloscuro.jpeg',
+      'vestidorojo.jpeg',
+      'vestidorojo2.jpeg',
+      'vestidobeige.jpeg',
+      'vestidocrema.jpeg',
+      'vestidoblanco.jpeg'
+    ];
 
-      if(which === 'mx'){
-        tabMx.classList.add('active'); tabUs.classList.remove('active');
-        mapMx.classList.add('active'); mapUs.classList.remove('active');
-      } else {
-        tabUs.classList.add('active'); tabMx.classList.remove('active');
-        mapUs.classList.add('active'); mapMx.classList.remove('active');
-      }
-    }
-
-    /* ==============================
-      WOW: Progress bar + Parallax
-    ============================== */
-    const topProgress = document.getElementById('topProgress');
-    const heroBg = document.getElementById('heroBg');
-
-    function onScroll(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      topProgress.style.width = progress + '%';
-
-      // Parallax suave solo en INICIO
-      if(state.currentView === 'inicio' && heroBg){
-        const y = Math.min(scrollTop, 260);
-        heroBg.style.transform = `scale(1.06) translateY(${y * 0.12}px)`;
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    /* ==============================
-      Reveal on scroll (IntersectionObserver)
-    ============================== */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting) e.target.classList.add('in');
+    function preloadImages(urls){
+      urls.forEach(u=>{
+        const img = new Image();
+        img.src = u;
       });
-    }, { threshold: 0.12 });
+    }
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    function startStudioBgRotation(){
+      const bg1 = document.getElementById('sdBg1');
+      const bg2 = document.getElementById('sdBg2');
+      if (!bg1 || !bg2) return;
 
-    /* ==============================
-      Language toggle button
-    ============================== */
-    const langBtn = document.getElementById('langBtn');
-    langBtn.addEventListener('click', () => {
-      const next = (state.lang === 'es') ? 'en' : 'es';
-      applyLanguage(next);
-    });
+      preloadImages(studioBgImages);
 
-    /* ==============================
-      Initial state
-    ============================== */
-    setActiveMenuLink('inicio');
+      let idx = 0;
+      let showingBg1 = true;
+
+      // set inicial
+      bg1.style.backgroundImage = `url('${studioBgImages[idx]}')`;
+      bg2.style.backgroundImage = `url('${studioBgImages[(idx+1) % studioBgImages.length]}')`;
+
+      setInterval(()=>{
+        idx = (idx + 1) % studioBgImages.length;
+        const next = studioBgImages[idx];
+
+        if (showingBg1){
+          bg2.style.backgroundImage = `url('${next}')`;
+          bg2.style.opacity = 1;
+          bg1.style.opacity = 0;
+        } else {
+          bg1.style.backgroundImage = `url('${next}')`;
+          bg1.style.opacity = 1;
+          bg2.style.opacity = 0;
+        }
+        showingBg1 = !showingBg1;
+      }, 5200);
+    }
+
+    /* =========================
+       REVEAL ON SCROLL
+    ========================== */
+    let observer;
+    function revealNow(){
+      const items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)){
+        items.forEach(el=>el.classList.add('in'));
+        return;
+      }
+      if (observer) observer.disconnect();
+
+      observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if (entry.isIntersecting){
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      items.forEach(el=>observer.observe(el));
+    }
+
+    /* =========================
+       INIT
+    ========================== */
+    applyI18n();
     setThemeForView('inicio');
-    applyLanguage(state.lang);
+    revealNow();
+    startStudioBgRotation();
   </script>
 </body>
 </html>
